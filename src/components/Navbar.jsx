@@ -8,6 +8,7 @@ const links = [
   { label: 'Ventajas', href: '#ventajas' },
   { label: 'Cómo funciona', href: '#como-funciona' },
   { label: 'Hardware', href: '#hardware' },
+  { label: 'Kit Digital', href: '#kit-digital' },
   { label: 'Contacto', href: '#contacto' },
 ]
 

@@ -7,6 +7,7 @@ import Ventajas from './components/Ventajas.jsx'
 import ComoFunciona from './components/ComoFunciona.jsx'
 import Hardware from './components/Hardware.jsx'
 import Cobertura from './components/Cobertura.jsx'
+import KitDigital from './components/KitDigital.jsx'
 import Faq from './components/Faq.jsx'
 import Contacto from './components/Contacto.jsx'
 import Footer from './components/Footer.jsx'
@@ -68,6 +69,7 @@ export default function App() {
         <ComoFunciona />
         <Hardware />
         <Cobertura />
+        <KitDigital />
         <Faq />
         <Contacto />
       </main>
