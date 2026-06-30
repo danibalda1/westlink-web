@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { BsCpu, BsPrinter, BsLayers, BsRulers } from 'react-icons/bs'
-import { HiOutlineCube, HiOutlineCheckCircle, HiOutlineChip } from 'react-icons/hi'
+import { BsCpu, BsPrinter, BsLayers, BsRulers, BsPlayCircle, BsImage } from 'react-icons/bs'
+import { HiOutlineCube, HiOutlineCheckCircle, HiOutlineChip, HiOutlinePhotograph, HiOutlineFilm } from 'react-icons/hi'
 import { FaWrench } from 'react-icons/fa'
 
 const tiers = [
@@ -89,11 +89,122 @@ export default function Hardware() {
           </p>
         </motion.div>
 
-        {/* Racks Showcase */}
+        {/* ── VISUAL SHOWCASE ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-16"
+        >
+          <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+            <div className="grid md:grid-cols-2">
+              {/* 3D Rack animation / placeholder */}
+              <div className="relative min-h-[320px] bg-gradient-to-br from-indigo-50 via-white to-violet-50 flex items-center justify-center p-8">
+                {/* Animated 3D-printed rack illustration */}
+                <div className="relative w-48 h-64">
+                  {/* Rack base */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-3 bg-indigo-600/20 rounded-sm" />
+                  {/* Layers printing animation */}
+                  {[0, 1, 2, 3, 4, 5].map((layer) => (
+                    <motion.div
+                      key={layer}
+                      className="absolute left-1/2 -translate-x-1/2 w-32 h-2 rounded-sm"
+                      style={{
+                        background: `linear-gradient(90deg, rgba(79,70,229,${0.3 + layer * 0.1}), rgba(124,58,237,${0.3 + layer * 0.1}))`,
+                        bottom: `${3 + layer * 10}px`,
+                      }}
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={isInView ? {
+                        opacity: 1,
+                        scaleX: 1,
+                        transition: { delay: 0.3 + layer * 0.12, duration: 0.4, ease: 'easeOut' },
+                      } : {}}
+                    />
+                  ))}
+                  {/* Nozzle / print head */}
+                  <motion.div
+                    className="absolute w-4 h-4 bg-indigo-500 rounded-full shadow-lg shadow-indigo-500/30"
+                    style={{ top: '10px', left: '50%', marginLeft: '-8px' }}
+                    animate={{
+                      y: isInView ? [0, 180, 0] : 0,
+                      x: isInView ? [0, 20, -20, 0] : 0,
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  >
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-gradient-to-b from-indigo-400 to-transparent animate-pulse" />
+                  </motion.div>
+                  {/* Label on the animation */}
+                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-gray-400 font-medium uppercase tracking-wider whitespace-nowrap">
+                    Impresión 3D en capas
+                  </span>
+                </div>
+              </div>
+
+              {/* Gallery placeholder */}
+              <div className="p-8 flex flex-col justify-center border-t md:border-t-0 md:border-l border-gray-100">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500">
+                      <HiOutlinePhotograph />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 text-sm">Instalaciones reales</h3>
+                      <p className="text-xs text-gray-400">Próximamente — fotos de racks instalados</p>
+                    </div>
+                  </div>
+
+                  {/* Mock gallery grid */}
+                  <div className="grid grid-cols-3 gap-2">
+                    {[1, 2, 3].map((i) => (
+                      <div
+                        key={i}
+                        className="aspect-square rounded-xl bg-gray-100 border border-dashed border-gray-200 flex items-center justify-center text-gray-300 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-300 transition-all duration-300 cursor-pointer group"
+                      >
+                        <BsImage className="text-lg group-hover:scale-110 transition-transform" />
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-3 pt-2">
+                    <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-500">
+                      <HiOutlineFilm />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 text-sm">Vídeos del proceso</h3>
+                      <p className="text-xs text-gray-400">Diseño, impresión e instalación paso a paso</p>
+                    </div>
+                  </div>
+
+                  {/* Video placeholder */}
+                  <a
+                    href="#contacto"
+                    className="flex items-center gap-3 p-4 rounded-xl border border-dashed border-gray-200 hover:border-indigo-200 hover:bg-indigo-50/30 transition-all duration-300 group cursor-pointer"
+                  >
+                    <div className="w-12 h-9 rounded-lg bg-gray-100 flex items-center justify-center text-gray-300 group-hover:bg-indigo-100 group-hover:text-indigo-400 transition-all">
+                      <BsPlayCircle className="text-lg" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-700 group-hover:text-indigo-600 transition-colors">
+                        Ver demo de instalación
+                      </span>
+                      <span className="text-xs text-gray-400 block">Añade tu vídeo aquí</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Racks Showcase */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
           className="grid sm:grid-cols-3 gap-4 mb-16"
         >
           {[
@@ -135,14 +246,12 @@ export default function Hardware() {
                     : 'border-gray-100 bg-white hover:border-gray-200 hover:shadow-lg'
                 }`}
               >
-                {/* Badge */}
                 {tier.badge && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 gradient-primary text-white text-xs font-bold px-4 py-1.5 rounded-full whitespace-nowrap">
                     {tier.badge}
                   </span>
                 )}
 
-                {/* Icon */}
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5 ${
                   tier.highlight ? 'bg-indigo-50 text-indigo-600' : 'bg-gray-50 text-gray-500'
                 }`}>
@@ -152,7 +261,6 @@ export default function Hardware() {
                 <h3 className="text-lg font-bold text-gray-900 mb-1">{tier.name}</h3>
                 <p className="text-sm text-gray-500 mb-4">{tier.subtitle}</p>
 
-                {/* Price */}
                 <div className="mb-6">
                   <span className="text-4xl font-bold text-gray-900">{tier.price}€</span>
                   <span className="text-sm text-gray-500 block mt-1">{tier.priceNote}</span>

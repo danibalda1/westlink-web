@@ -58,6 +58,23 @@
   50% { box-shadow: 0 0 40px rgba(79, 70, 229, 0.3); }
 }
 
+@keyframes print-layer {
+  0% { transform: scaleX(0); opacity: 0; }
+  60% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0.9; }
+}
+
+@keyframes nozzle-drop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(180px); }
+}
+
+@keyframes nozzle-sway {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(20px); }
+  75% { transform: translateX(-20px); }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
