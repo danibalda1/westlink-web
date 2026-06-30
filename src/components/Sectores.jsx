@@ -8,7 +8,7 @@ const sectores = [
     icon: FaWineBottle,
     title: 'Bodegas y Viñedos',
     subtitle: 'DOCa Rioja',
-    desc: 'Trazabilidad de uva, certificaciones DOP, gestión de pedidos internacionales, control de inventarios. Más de 600 bodegas en La Rioja que necesitan digitalizar sus procesos.',
+    desc: 'Trazabilidad de uva, certificaciones DOP, gestión de pedidos internacionales, control de inventarios. Hay más de 600 bodegas en La Rioja — todas ellas necesitan digitalizar sus procesos.',
     color: 'from-rose-600 to-amber-700',
     bgColor: 'bg-rose-50',
     highlight: true,
@@ -91,8 +91,8 @@ export default function Sectores() {
             ¿Tu sector necesita IA privada?
           </h2>
           <p className="text-lg text-gray-600">
-            Trabajamos con PYMES de toda la zona norte de España. Estos son los sectores donde
-            más impacto generamos.
+            Estamos enfocados en PYMES de toda la zona norte de España. Estos son los sectores donde
+            más impacto podemos generar.
           </p>
         </motion.div>
 

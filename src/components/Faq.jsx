@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: '¿Vale para mi sector?',
-    a: 'Trabajamos con bodegas, gestorías, despachos de abogados, logística, agroalimentario, clínicas y consultorías. Pero si tu sector no está en la lista, háblanos. Seguro que encontramos cómo ayudarte.',
+    a: 'Nos enfocamos en bodegas, gestorías, despachos de abogados, logística, agroalimentario, clínicas y consultorías. Pero si tu sector no está en la lista, háblanos. Seguro que encontramos cómo ayudarte.',
   },
   {
     q: '¿Necesito conocimientos técnicos?',
