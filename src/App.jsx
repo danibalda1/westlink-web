@@ -5,6 +5,7 @@ import QueHacemos from './components/QueHacemos.jsx'
 import Sectores from './components/Sectores.jsx'
 import Ventajas from './components/Ventajas.jsx'
 import ComoFunciona from './components/ComoFunciona.jsx'
+import Hardware from './components/Hardware.jsx'
 import Cobertura from './components/Cobertura.jsx'
 import Faq from './components/Faq.jsx'
 import Contacto from './components/Contacto.jsx'
@@ -65,6 +66,7 @@ export default function App() {
         <Sectores />
         <Ventajas />
         <ComoFunciona />
+        <Hardware />
         <Cobertura />
         <Faq />
         <Contacto />
