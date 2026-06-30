@@ -1,67 +1,109 @@
-import { HiArrowRight } from 'react-icons/hi'
+import { motion } from 'framer-motion'
+import { HiArrowRight, HiShieldCheck } from 'react-icons/hi'
+import { FaWineBottle } from 'react-icons/fa'
+import { BsCpu } from 'react-icons/bs'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background subtle grid */}
-      <div className="absolute inset-0 subtle-grid" />
+    <section className="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-16">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl" />
 
-      {/* Gradient decoration */}
-      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-accent/10 via-primary/5 to-transparent rounded-full blur-3xl" />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px',
+          }}
+        />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-sm font-medium text-primary mb-8 animate-fade-in">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            🇪🇸 Empresa familiar riojana · IA privada para PYMES
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/10 text-white/90 text-sm px-4 py-2 rounded-full mb-8"
+          >
+            <FaWineBottle className="text-accent-light" />
+            <span>Empresa familiar riojana</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+            <BsCpu className="text-primary-light" />
+            <span>IA Privada para PYMES</span>
+          </motion.div>
 
-          {/* Main title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight mb-6 animate-fade-up">
-            Tu empresa merece un{' '}
-            <span className="gradient-text">empleado que nunca duerma</span>
-          </h1>
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+          >
+            Tu empresa merece un
+            <span className="block gradient-warm mt-2">empleado que nunca duerma</span>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10 animate-fade-up" style={{ animationDelay: '0.15s' }}>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
             No vendemos software. Instalamos un trabajador digital en tu empresa.
-            24/7. Sin sueldos. Sin vacaciones. Sin límites.
-          </p>
+            <span className="text-accent-light font-semibold"> 24/7. Sin sueldos. Sin vacaciones. Sin límites.</span>
+            <br />
+            <span className="text-gray-400 text-base">Datos privados, instalación local, cien por cien tuyo.</span>
+          </motion.p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <a
               href="#contacto"
-              className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold text-white gradient-bg rounded-full hover:opacity-90 transition-all duration-200 shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/30"
+              className="gradient-primary text-white px-8 py-4 rounded-2xl text-lg font-semibold flex items-center gap-2 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105 animate-pulse-glow"
             >
-              Solicitar demostración
-              <HiArrowRight className="w-5 h-5" />
+              Quiero mi empleado IA
+              <HiArrowRight className="text-xl" />
             </a>
             <a
-              href="#contacto"
-              className="inline-flex items-center px-8 py-4 text-base font-semibold text-gray-700 bg-white border border-gray-200 rounded-full hover:border-primary/30 hover:text-primary hover:shadow-lg transition-all duration-200"
+              href="#que-hacemos"
+              className="border border-white/20 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
             >
-              Hablar con un especialista
+              <HiShieldCheck className="text-xl text-accent-light" />
+              Cómo funciona
             </a>
-          </div>
+          </motion.div>
 
-          {/* Social proof */}
-          <div className="mt-16 flex items-center justify-center gap-8 text-sm text-gray-400 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              Sin enviar datos a la nube
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              Instalación en 48h
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              Datos 100% privados
-            </span>
-          </div>
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-3xl mx-auto"
+          >
+            {[
+              { value: '24/7', label: 'Disponibilidad total' },
+              { value: '100%', label: 'Datos privados' },
+              { value: '3-6', label: 'Meses payback' },
+              { value: '+70h', label: 'Ahorro semanal' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/5">
+                <div className="text-2xl md:text-3xl font-bold gradient-warm">{stat.value}</div>
+                <div className="text-xs text-gray-400 mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

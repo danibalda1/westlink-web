@@ -1,91 +1,90 @@
 import { motion } from 'framer-motion'
-import { HiClock, HiCurrencyDollar, HiAcademicCap, HiShieldCheck, HiServer, HiLockClosed, HiCog } from 'react-icons/hi'
+import { useRef } from 'react'
+import { useInView } from 'framer-motion'
+import {
+  BsShieldCheck, BsHddNetwork, BsGearWideConnected,
+  BsClockHistory, BsGraphUpArrow, BsPersonCheck, BsCashCoin
+} from 'react-icons/bs'
 
 const ventajas = [
   {
-    icon: HiClock,
-    title: 'Disponible 24/7',
-    desc: 'Tu empleado IA nunca descansa. Atiende, procesa y trabaja a cualquier hora, todos los días del año.',
-    color: 'from-blue-500 to-blue-600',
+    icon: BsShieldCheck,
+    title: 'Tus datos no salen de tu empresa',
+    desc: 'Todo corre en hardware local. Sin nubes externas, sin APIs de terceros, sin riesgos de fuga. Tus secretos comerciales, recetas y datos de clientes están seguros.',
   },
   {
-    icon: HiCurrencyDollar,
-    title: 'Coste muy inferior',
-    desc: 'Por una fracción del coste de un empleado tradicional, tienes a alguien trabajando tiempo completo sin sueldos, seguros ni cargas sociales.',
-    color: 'from-emerald-500 to-emerald-600',
+    icon: BsHddNetwork,
+    title: 'Sin depender de APIs externas',
+    desc: 'No pagas por token, no te cortan el servicio si cambian los precios, no dependes de internet para funcionar. Tu IA funciona aunque se caiga la nube.',
   },
   {
-    icon: HiAcademicCap,
-    title: 'Memoria infinita',
-    desc: 'Nunca olvida un proceso, un procedimiento o una instrucción. Lo que aprende hoy, lo recuerda siempre. Sin necesidad de repetirle las cosas.',
-    color: 'from-violet-500 to-violet-600',
+    icon: BsGearWideConnected,
+    title: 'A medida, no genérico',
+    desc: 'Entrenamos y configuramos el sistema para tu negocio, tu sector, tu forma de trabajar. No compras una herramienta estándar — construimos tu herramienta.',
   },
   {
-    icon: HiCog,
-    title: 'Aprende y mejora',
-    desc: 'Cada interacción lo hace más útil. Se adapta a tu forma de trabajar, a tu vocabulario y a las necesidades específicas de tu negocio.',
-    color: 'from-amber-500 to-amber-600',
+    icon: BsClockHistory,
+    title: 'Disponible 24/7 los 365 días',
+    desc: 'Tu empleado digital nunca duerme, nunca se pone enfermo, nunca pide vacaciones. Procesa trabajo mientras tú descansas.',
   },
   {
-    icon: HiShieldCheck,
-    title: 'Totalmente seguro',
-    desc: 'Implementamos protocolos de seguridad, cifrado y control de acceso. Tu información está protegida en todo momento.',
-    color: 'from-rose-500 to-rose-600',
+    icon: BsGraphUpArrow,
+    title: 'ROI demostrable',
+    desc: '70h/semana recuperadas por técnico. Payback en 3-6 meses. Cada hora invertida en implantación se multiplica por 10 en productividad recuperada.',
   },
   {
-    icon: HiServer,
-    title: 'Instalado en tu empresa',
-    desc: 'Todo corre en hardware que tú controlas. Nada de servidores externos, nada de depender de terceros. Tus datos, tu propiedad.',
-    color: 'from-cyan-500 to-cyan-600',
+    icon: BsPersonCheck,
+    title: 'Tu equipo trabaja mejor',
+    desc: 'Libera a tu gente de tareas repetitivas. Que se dediquen a lo que realmente aporta valor: atención al cliente, estrategia, creatividad.',
   },
   {
-    icon: HiLockClosed,
-    title: 'Datos 100% privados',
-    desc: 'Tu información nunca sale de tus instalaciones. Sin riesgos de filtración, sin cumplir con políticas de datos de terceros.',
-    color: 'from-indigo-500 to-indigo-600',
+    icon: BsCashCoin,
+    title: 'Sin cuotas mensuales abusivas',
+    desc: 'Pago único por implantación. El sistema es tuyo. No pagas suscripción de por vida por algo que ya está instalado y funcionando.',
   },
 ]
 
 export default function Ventajas() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
   return (
-    <section id="ventajas" className="relative py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white">
-      {/* Decorative background */}
-      <div className="absolute inset-0 subtle-grid opacity-50" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ventajas" className="py-20 md:py-28 relative overflow-hidden section-gradient-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-6">
-            ¿Por qué un empleado IA?
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <span className="text-primary font-semibold text-sm tracking-widest uppercase">Ventajas</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 mb-4">
+            IA privada {'>'} IA en la nube
           </h2>
-          <p className="text-lg text-gray-500 leading-relaxed">
-            Siete razones por las que tu empresa debería tener uno. Y ninguna implica
-            despedir a nadie.
+          <p className="text-lg text-gray-600">
+            Mientras otros te venden una suscripción mensual a una IA que vive en servidores ajenos,
+            nosotros te instalamos un sistema que es 100% tuyo.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Ventajas grid */}
+        {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ventajas.map((item, i) => {
-            const Icon = item.icon
+          {ventajas.map((v, i) => {
+            const Icon = v.icon
             return (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group bg-white rounded-2xl p-8 card-shadow card-shadow-hover border border-gray-100 transition-all duration-300"
+                key={v.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="bg-white rounded-2xl p-6 card-shadow border border-gray-100 hover:border-primary/20 transition-all duration-300 hover:shadow-lg"
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <Icon className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary text-xl mb-4">
+                  <Icon />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  {item.desc}
-                </p>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{v.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
               </motion.div>
             )
           })}

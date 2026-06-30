@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2563EB;
-  --color-primary-dark: #1D4ED8;
-  --color-primary-light: #60A5FA;
-  --color-accent: #0EA5E9;
+  --color-primary: #4F46E5;
+  --color-primary-dark: #3730A3;
+  --color-primary-light: #818CF8;
+  --color-accent: #D97706;
+  --color-accent-light: #F59E0B;
+  --color-accent-subtle: #FEF3C7;
   --color-dark: #0F172A;
   --color-gray-50: #F8FAFC;
   --color-gray-100: #F1F5F9;
@@ -16,6 +18,8 @@
   --color-gray-700: #334155;
   --color-gray-800: #1E293B;
   --color-gray-900: #0F172A;
+  --color-wine: #722F37;
+  --color-wine-light: #923D47;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --animate-fade-in: fade-in 0.6s ease-out;
@@ -38,22 +42,45 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(20px, -20px); }
+  66% { transform: translate(-15px, 10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(79, 70, 229, 0.3); }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
-  
+
   body {
     font-family: var(--font-sans);
     color: var(--color-gray-800);
     background-color: white;
     -webkit-font-smoothing: antialiased;
   }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -68,29 +95,78 @@
   }
 
   .card-shadow {
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .card-shadow-hover:hover {
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 20px 40px rgba(79, 70, 229, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
   }
 
+  .gradient-primary {
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  }
+
   .gradient-text {
-    background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%);
+    background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .gradient-bg {
-    background: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%);
+  .gradient-warm {
+    background: linear-gradient(135deg, #4F46E5 0%, #D97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .subtle-grid {
-    background-image: 
-      linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(79, 70, 229, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79, 70, 229, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
+  }
+
+  .animate-float {
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 30s ease-in-out infinite reverse;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(79, 70, 229, 0.08) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.2s;
+    border-radius: 0 0 8px 0;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  .section-gradient-bg {
+    background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 50%, #F8FAFC 100%);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 30%, #312E81 60%, #4F46E5 100%);
   }
 }

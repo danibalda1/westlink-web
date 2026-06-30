@@ -1,96 +1,111 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
+import { FaWineBottle } from 'react-icons/fa'
 
-const navLinks = [
+const links = [
   { label: 'Qué hacemos', href: '#que-hacemos' },
+  { label: 'Sectores', href: '#sectores' },
   { label: 'Ventajas', href: '#ventajas' },
   { label: 'Cómo funciona', href: '#como-funciona' },
-  { label: 'Casos de uso', href: '#casos-de-uso' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Contacto', href: '#contacto' },
 ]
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const close = () => setOpen(false)
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'glass shadow-sm' : 'bg-transparent'
-    }`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'glass shadow-lg border-b border-gray-200/50'
+          : 'bg-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3">
-            <img
-              src="/logo.jpg"
-              alt="Westlink SL"
-              className="h-8 w-auto lg:h-10 rounded"
-            />
-            <span className="text-lg font-semibold text-gray-900 tracking-tight">
-              Westlink
-            </span>
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-shadow">
+              <FaWineBottle className="text-lg" />
+            </div>
+            <div>
+              <span className="text-lg font-bold text-gray-900">Westlink</span>
+              <span className="text-xs text-gray-500 block leading-tight">IA Privada · La Rioja</span>
+            </div>
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+          {/* Desktop */}
+          <div className="hidden md:flex items-center gap-8">
+            {links.map((l) => (
               <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors duration-200"
+                key={l.href}
+                href={l.href}
+                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors relative group"
               >
-                {link.label}
+                {l.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <a
               href="#contacto"
-              className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white gradient-bg rounded-full hover:opacity-90 transition-all duration-200 shadow-lg shadow-primary/20"
+              className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
             >
-              Solicitar demo
+              Solicita información
             </a>
           </div>
 
-          {/* Mobile toggle */}
+          {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2 text-gray-700 hover:text-primary"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Menú"
+            onClick={() => setOpen(!open)}
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           >
-            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            {open ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {isOpen && (
-        <div className="lg:hidden glass border-t border-gray-100">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass border-t border-gray-200/50 overflow-hidden"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={close}
+                  className="block px-4 py-3 rounded-lg text-gray-700 font-medium hover:bg-primary/5 hover:text-primary transition-all"
+                >
+                  {l.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block text-sm font-medium text-gray-600 hover:text-primary py-2 transition-colors"
+                href="#contacto"
+                onClick={close}
+                className="block gradient-primary text-white px-4 py-3 rounded-xl text-center font-semibold mt-3"
               >
-                {link.label}
+                Solicita información
               </a>
-            ))}
-            <a
-              href="#contacto"
-              onClick={() => setIsOpen(false)}
-              className="block text-center px-5 py-3 text-sm font-semibold text-white gradient-bg rounded-full"
-            >
-              Solicitar demo
-            </a>
-          </div>
-        </div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }

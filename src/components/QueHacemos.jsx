@@ -1,64 +1,82 @@
-import { HiChip, HiShieldCheck, HiClock, HiAcademicCap } from 'react-icons/hi'
+import { motion } from 'framer-motion'
+import { BsCpu, BsRobot, BsShieldCheck, BsLightbulb } from 'react-icons/bs'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
 
-const features = [
+const items = [
   {
-    icon: HiChip,
-    title: 'Tu IA, en tu casa',
-    desc: 'Instalamos un servidor de inteligencia artificial dentro de tu empresa. En un Mini PC, un Mac Mini o el equipo que tengas. Todo corre localmente con Docker.',
+    icon: BsCpu,
+    title: 'IA privada en tus instalaciones',
+    desc: 'No enviamos tus datos a la nube de nadie. Todo corre en hardware local controlado por ti. Tus secretos comerciales, procesos y documentos nunca salen de tu red.',
+    color: 'from-indigo-500 to-purple-600',
   },
   {
-    icon: HiShieldCheck,
-    title: 'Datos que no se van',
-    desc: 'Nada de enviar información a servidores externos. Tu documentación, tus clientes, tus procesos — todo se queda donde debe estar: en tu empresa.',
+    icon: BsRobot,
+    title: 'Un empleado virtual, no un chatbot',
+    desc: 'No es un chat bonito. Es un trabajador digital que ejecuta tareas reales: redacta informes, procesa facturas, gestiona inventarios, coordina pedidos. Aprendizaje continuo.',
+    color: 'from-purple-500 to-pink-600',
   },
   {
-    icon: HiClock,
-    title: 'Trabaja 24/7 sin descanso',
-    desc: 'Mientras tu equipo duerme, la IA sigue. Respondiendo emails, redactando presupuestos, preparando documentos. Sin bajas, sin vacaciones, sin horarios.',
+    icon: BsShieldCheck,
+    title: 'Cumplimiento normativo garantizado',
+    desc: 'RGPD, EU AI Act, Verifactu… tu empresa cumple sin esfuerzo. La IA opera dentro de tu perímetro de seguridad. Auditoría, trazabilidad y control total.',
+    color: 'from-emerald-500 to-teal-600',
   },
   {
-    icon: HiAcademicCap,
-    title: 'Aprende tu negocio',
-    desc: 'No es un ChatGPT genérico. La IA aprende tus procedimientos, tu forma de trabajar, tu vocabulario. Se adapta a ti, no al revés.',
+    icon: BsLightbulb,
+    title: 'A medida de tu negocio',
+    desc: 'No hay dos PYMES iguales. Analizamos tus procesos, identificamos tareas automatizables y entrenamos a tu empleado digital para que encaje perfectamente en tu día a día.',
+    color: 'from-amber-500 to-orange-600',
   },
 ]
 
 export default function QueHacemos() {
-  return (
-    <section id="que-hacemos" className="relative py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-6">
-            Tu nuevo{' '}
-            <span className="gradient-text">empleado digital</span>
-          </h2>
-          <p className="text-lg text-gray-500 leading-relaxed">
-            No te traemos un chatGPT de empresa. Te traemos un miembro del equipo
-            que trabaja en silencio, no pide aumento y nunca olvida lo que aprendió.
-          </p>
-        </div>
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-        {/* Features grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => {
-            const Icon = feature.icon
+  return (
+    <section id="que-hacemos" className="py-20 md:py-28 relative overflow-hidden section-gradient-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <span className="text-primary font-semibold text-sm tracking-widest uppercase">Qué hacemos</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 mb-4">
+            Tu empleado digital, instalado y funcionando
+          </h2>
+          <p className="text-lg text-gray-600">
+            En Westlink no te vendemos una suscripción. Te instalamos un sistema de inteligencia artificial
+            que trabaja para ti, con tus datos, en tu red, sin depender de nadie más.
+          </p>
+        </motion.div>
+
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {items.map((item, i) => {
+            const Icon = item.icon
             return (
-              <div
-                key={i}
-                className="group glass-card rounded-2xl p-8 card-shadow card-shadow-hover transition-all duration-300"
-                style={{ animationDelay: `${i * 0.1}s` }}
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group relative bg-white rounded-2xl p-8 card-shadow card-shadow-hover transition-all duration-300 border border-gray-100"
               >
-                <div className="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="w-6 h-6 text-white" />
+                {/* Icon */}
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white text-2xl mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  {feature.desc}
-                </p>
-              </div>
+
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+
+                {/* Hover gradient line */}
+                <div className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r ${item.color} scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
+              </motion.div>
             )
           })}
         </div>

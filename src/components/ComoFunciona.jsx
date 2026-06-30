@@ -1,80 +1,113 @@
-import { HiServer, HiCog, HiAcademicCap, HiPlay } from 'react-icons/hi'
+import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { useInView } from 'framer-motion'
+import { BsSearch, BsGear, BsRocket, BsGraphUpArrow } from 'react-icons/bs'
 
-const steps = [
+const pasos = [
   {
-    icon: HiServer,
+    icon: BsSearch,
     step: '01',
-    title: 'Instalamos el servidor',
-    desc: 'Montamos el hardware y el software en tu oficina. Mini PC, Mac Mini o tu propio equipo. En menos de 48 horas todo está listo y funcionando.',
+    title: 'Analizamos tu negocio',
+    desc: 'Visitamos tu empresa. Observamos cómo trabajas, qué procesos se repiten, dónde pierdes tiempo. Identificamos las tareas que tu empleado digital va a asumir.',
+    color: 'from-indigo-500 to-purple-600',
   },
   {
-    icon: HiCog,
+    icon: BsGear,
     step: '02',
-    title: 'Configuramos la IA',
-    desc: 'Desplegamos los modelos de IA que mejor se adaptan a tu negocio. Ollama, Open WebUI, las herramientas que necesites. Todo en Docker, todo local.',
+    title: 'Configuramos tu IA privada',
+    desc: 'Instalamos el hardware y el software en tus instalaciones. Entrenamos los modelos con tu documentación, tus procesos, tu forma de trabajar. Todo corre en local.',
+    color: 'from-purple-500 to-pink-600',
   },
   {
-    icon: HiAcademicCap,
+    icon: BsRocket,
     step: '03',
-    title: 'Aprende tu negocio',
-    desc: 'Alimentamos la IA con tu documentación, tus procesos y tu conocimiento corporativo. Se entrena para hablar tu idioma y entender tu negocio.',
+    title: 'Formamos a tu equipo',
+    desc: 'Enseñamos a tu gente a trabajar con su nuevo compañero digital. En días, no en meses. Sin jerga técnica. Cada persona sabe exactamente qué puede delegar.',
+    color: 'from-amber-500 to-orange-600',
   },
   {
-    icon: HiPlay,
+    icon: BsGraphUpArrow,
     step: '04',
-    title: 'Empieza a trabajar',
-    desc: 'Desde el día uno tu empleado digital está operativo. Respondiendo emails, generando documentos, automatizando tareas. Y cada día lo hace mejor.',
+    title: 'Resultados desde el día 1',
+    desc: 'Tu empleado digital empieza a trabajar. Tareas que antes llevaban horas se hacen en segundos. Medimos y ajustamos. En tres meses, el ROI es evidente.',
+    color: 'from-emerald-500 to-teal-600',
   },
 ]
 
 export default function ComoFunciona() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
   return (
-    <section id="como-funciona" className="relative py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="como-funciona" className="py-20 md:py-28 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-6">
-            Así de <span className="gradient-text">sencillo</span>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <span className="text-primary font-semibold text-sm tracking-widest uppercase">Cómo funciona</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 mb-4">
+            De la visita a los resultados en 4 pasos
           </h2>
-          <p className="text-lg text-gray-500 leading-relaxed">
-            Cuatro pasos y tu empresa tiene un trabajador digital funcionando.
-            Sin complicaciones, sin humo, sin esperar meses.
+          <p className="text-lg text-gray-600">
+            Nosotros hacemos el trabajo pesado. Tu equipo solo tiene que aprender a usar
+            a su nuevo compañero digital.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Steps */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Connection line (desktop) */}
-          <div className="hidden lg:block absolute top-24 left-[calc(16.66%+24px)] right-[calc(16.66%+24px)] h-0.5 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20" />
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-            {steps.map((item, i) => {
-              const Icon = item.icon
-              return (
-                <div key={i} className="relative text-center">
-                  {/* Number + icon */}
-                  <div className="relative inline-flex items-center justify-center mb-6">
-                    <div className="w-16 h-16 rounded-2xl gradient-bg flex items-center justify-center shadow-xl shadow-primary/20 relative z-10">
-                      <Icon className="w-7 h-7 text-white" />
-                    </div>
+        {/* Timeline */}
+        <div className="max-w-4xl mx-auto">
+          {pasos.map((p, i) => {
+            const Icon = p.icon
+            const isLast = i === pasos.length - 1
+            return (
+              <motion.div
+                key={p.step}
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                className="flex gap-6 relative"
+              >
+                {/* Left column: step number + line */}
+                <div className="flex flex-col items-center">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${p.color} flex items-center justify-center text-white font-bold text-lg shadow-lg shrink-0`}>
+                    {p.step}
                   </div>
-
-                  {/* Step number badge */}
-                  <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary text-xs font-bold mb-4">
-                    {item.step}
-                  </div>
-
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {item.desc}
-                  </p>
+                  {!isLast && (
+                    <div className="w-0.5 h-full bg-gradient-to-b from-gray-200 to-gray-100 my-2" />
+                  )}
                 </div>
-              )
-            })}
-          </div>
+
+                {/* Right column: content */}
+                <div className={`pb-12 ${isLast ? 'pb-0' : ''}`}>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-gray-400 text-sm font-medium">{p.step}</span>
+                    <h3 className="text-xl font-bold text-gray-900">{p.title}</h3>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed">{p.desc}</p>
+                </div>
+              </motion.div>
+            )
+          })}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="#contacto"
+            className="gradient-primary text-white px-8 py-4 rounded-2xl text-lg font-semibold inline-flex items-center gap-2 hover:shadow-xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
+          >
+            Empieza con una visita sin compromiso
+          </a>
+        </motion.div>
       </div>
     </section>
   )
