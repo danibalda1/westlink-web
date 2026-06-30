@@ -1,6 +1,4 @@
-// Vercel Serverless Function — Contact form → Email
-// Uses RESEND_API_KEY (configurada en Vercel env)
-
+// Vercel Serverless Function — Contact form → Email via Resend
 export default async function handler(req, res) {
   // CORS
   const origin = req.headers['origin'] || ''
@@ -8,7 +6,6 @@ export default async function handler(req, res) {
   if (allowed.includes(origin) || origin.endsWith('.vercel.app')) {
     res.setHeader('Access-Control-Allow-Origin', origin)
   } else if (!origin) {
-    // Allow same-origin requests (no Origin header)
     res.setHeader('Access-Control-Allow-Origin', '*')
   }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -21,6 +18,14 @@ export default async function handler(req, res) {
 
   if (!nombre || !email || !mensaje) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' })
+  }
+
+  const resendKey = process.env.RESEND_API_KEY
+
+  // Debug: check if key exists
+  if (!resendKey) {
+    console.error('❌ RESEND_API_KEY not set')
+    return res.status(500).json({ error: 'Email service not configured' })
   }
 
   const subject = `📬 Contacto web — ${nombre}${empresa ? ` (${empresa})` : ''}`
@@ -48,48 +53,59 @@ export default async function handler(req, res) {
   </div>
 </div>`.trim()
 
-  // ── Resend (configurado en Vercel) ──
-  const resendKey = process.env.RESEND_API_KEY
-  if (resendKey) {
-    try {
-      const r = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${resendKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: 'Westlink Web <onboarding@resend.dev>',
-          to: 'daniel@westlinksl.com',
-          reply_to: email,
-          subject,
-          html: emailHtml,
-        }),
-      })
-      if (!r.ok) {
-        const errBody = await r.text()
-        console.error('Resend error:', r.status, errBody)
-        return res.status(500).json({ error: 'Error al enviar: ' + errBody })
-      }
-      return res.status(200).json({ ok: true })
-    } catch (err) {
-      console.error('Resend exception:', err)
-      return res.status(500).json({ error: 'Error al enviar el email' })
-    }
-  }
+  try {
+    console.log('📤 Sending email via Resend...')
 
-  // ── Sin configuración de email ──
-  console.warn('⚠️ RESEND_API_KEY no configurada. Formulario recibido:', { nombre, email, empresa })
-  return res.status(200).json({
-    ok: true,
-    notice: 'Form submitted. No email transport configured.',
-  })
+    // Try Resend API v2 (emails endpoint)
+    const resendUrl = 'https://api.resend.com/emails'
+    const payload = {
+      from: 'onboarding@resend.dev',
+      to: ['daniel@westlinksl.com'],
+      reply_to: email,
+      subject,
+      html: emailHtml,
+    }
+
+    console.log('Resend payload:', JSON.stringify({ ...payload, html: payload.html.substring(0, 50) + '...' }))
+
+    const r = await fetch(resendUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+
+    const body = await r.text()
+    console.log('Resend response:', r.status, body)
+
+    if (!r.ok) {
+      // Try to parse error
+      let errMsg = body
+      try {
+        const parsed = JSON.parse(body)
+        errMsg = parsed.message || parsed.error || JSON.stringify(parsed)
+      } catch {}
+      return res.status(500).json({
+        error: `Resend (${r.status}): ${errMsg}`,
+      })
+    }
+
+    console.log('✅ Email sent successfully')
+    return res.status(200).json({ ok: true })
+  } catch (err) {
+    console.error('❌ Resend exception:', err.message, err.stack)
+    return res.status(500).json({
+      error: `Exception: ${err.message}`,
+    })
+  }
 }
 
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
+    .replace(</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
