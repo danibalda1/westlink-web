@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { BsCpu, BsPrinter, BsLayers, BsRulers, BsPlayCircle, BsImage } from 'react-icons/bs'
-import { HiOutlineCube, HiOutlineCheckCircle, HiOutlineChip, HiOutlinePhotograph, HiOutlineFilm } from 'react-icons/hi'
+import { BsCpu, BsPrinter, BsLayers, BsRulers, BsPlayCircle, BsImage, BsCloudArrowUp, BsShieldCheck } from 'react-icons/bs'
+import { HiOutlineCube, HiOutlineCheckCircle, HiOutlineChip, HiOutlinePhotograph, HiOutlineFilm, HiOutlineLightningBolt } from 'react-icons/hi'
 import { FaWrench } from 'react-icons/fa'
 
 const tiers = [
@@ -288,6 +288,131 @@ export default function Hardware() {
               </motion.div>
             )
           })}
+        </motion.div>
+
+        {/* ── HYBRID ALTERNATIVE ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-16 bg-white rounded-3xl border border-amber-100 overflow-hidden shadow-sm"
+        >
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-6 sm:px-8 py-5 border-b border-amber-100">
+            <div className="flex items-center gap-3">
+              <BsCloudArrowUp className="text-amber-600 text-xl" />
+              <div>
+                <h3 className="font-bold text-gray-900">¿No necesitas IA 100% privada?</h3>
+                <p className="text-sm text-gray-600">
+                  También ofrecemos modelos híbridos con APIs externas (OpenAI, Claude, Gemini…).
+                  Hardware más ligero, coste inicial menor, pero con recurrencia mensual en APIs.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8">
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Híbrido Starter */}
+              <div className="rounded-2xl border border-amber-100 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-bold text-gray-900">Hybrid Starter</h4>
+                  <span className="text-xl font-bold text-gray-900">1.200€</span>
+                </div>
+                <p className="text-xs text-gray-500 mb-4">Instalación única + API</p>
+                <ul className="space-y-2 mb-5">
+                  {['Mini PC orquestador', '1 empleado digital vía API', 'Rack compacto impreso en 3D', 'Capa de ciberseguridad incluida'].map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                      <HiOutlineCheckCircle className="text-amber-500 mt-0.5 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <div className="bg-amber-50 rounded-xl p-3 mb-5">
+                  <p className="text-xs text-amber-800 font-medium flex items-center gap-1.5">
+                    <BsShieldCheck className="shrink-0" />
+                    Coste ciberseguridad: +300€/año
+                  </p>
+                  <p className="text-xs text-amber-600 mt-1">
+                    Gastos de API aparte (según uso)
+                  </p>
+                </div>
+                <a href="#contacto" className="block text-center py-2.5 rounded-xl font-semibold text-sm bg-amber-50 text-amber-800 hover:bg-amber-100 transition-all">
+                  Consultar
+                </a>
+              </div>
+
+              {/* Híbrido Business */}
+              <div className="rounded-2xl border border-amber-100 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-bold text-gray-900">Hybrid Business</h4>
+                  <span className="text-xl font-bold text-gray-900">3.900€</span>
+                </div>
+                <p className="text-xs text-gray-500 mb-4">Instalación única + API</p>
+                <ul className="space-y-2 mb-5">
+                  {['Servidor orquestador ligero', 'Hasta 5 empleados vía API', 'Rack ventilado impreso en 3D', 'Monitorización de tráfico API', 'Capa de ciberseguridad incluida'].map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                      <HiOutlineCheckCircle className="text-amber-500 mt-0.5 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <div className="bg-amber-50 rounded-xl p-3 mb-5">
+                  <p className="text-xs text-amber-800 font-medium flex items-center gap-1.5">
+                    <BsShieldCheck className="shrink-0" />
+                    Coste ciberseguridad: +600€/año
+                  </p>
+                  <p className="text-xs text-amber-600 mt-1">
+                    Gastos de API aparte (según uso)
+                  </p>
+                </div>
+                <a href="#contacto" className="block text-center py-2.5 rounded-xl font-semibold text-sm bg-amber-50 text-amber-800 hover:bg-amber-100 transition-all">
+                  Consultar
+                </a>
+              </div>
+
+              {/* Híbrido Enterprise */}
+              <div className="rounded-2xl border border-amber-100 p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-bold text-gray-900">Hybrid Enterprise</h4>
+                  <span className="text-xl font-bold text-gray-900">7.900€</span>
+                </div>
+                <p className="text-xs text-gray-500 mb-4">Desde — instalación única + API</p>
+                <ul className="space-y-2 mb-5">
+                  {['Servidor multi-API + balanceo', 'Empleados digitales ilimitados', 'Rack profesional impreso en 3D', 'Firewall de APIs + logging', 'Capa completa de ciberseguridad', 'Auditoría de seguridad anual'].map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                      <HiOutlineCheckCircle className="text-amber-500 mt-0.5 shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <div className="bg-amber-50 rounded-xl p-3 mb-5">
+                  <p className="text-xs text-amber-800 font-medium flex items-center gap-1.5">
+                    <BsShieldCheck className="shrink-0" />
+                    Coste ciberseguridad: +1.200€/año
+                  </p>
+                  <p className="text-xs text-amber-600 mt-1">
+                    Gastos de API aparte (según uso)
+                  </p>
+                </div>
+                <a href="#contacto" className="block text-center py-2.5 rounded-xl font-semibold text-sm bg-amber-50 text-amber-800 hover:bg-amber-100 transition-all">
+                  Consultar
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-start gap-3 bg-amber-50/50 rounded-xl p-4">
+              <HiOutlineLightningBolt className="text-amber-600 text-lg mt-0.5 shrink-0" />
+              <div>
+                <p className="text-sm font-medium text-gray-900">¿Por qué ciberseguridad adicional?</p>
+                <p className="text-xs text-gray-600 mt-1">
+                  Al conectar APIs externas, tus datos viajan fuera de tu red. Implementamos
+                  cifrado extremo a extremo, túneles VPN dedicados, logging de accesos,
+                  y protección contra exfiltración. El coste cubre la implantación y
+                  mantenimiento anual de estas medidas.
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Note */}
