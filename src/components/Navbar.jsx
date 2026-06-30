@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
-import { FaWineBottle } from 'react-icons/fa'
 
 const links = [
   { label: 'Qué hacemos', href: '#que-hacemos' },
@@ -36,9 +35,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-shadow">
-              <FaWineBottle className="text-lg" />
-            </div>
+            <img
+              src="/logo.jpg"
+              alt="Westlink SL"
+              className="w-10 h-10 rounded-xl object-cover shadow-lg group-hover:shadow-xl transition-shadow"
+            />
             <div>
               <span className="text-lg font-bold text-gray-900">Westlink</span>
               <span className="text-xs text-gray-500 block leading-tight">IA Privada · La Rioja</span>

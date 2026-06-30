@@ -1,4 +1,3 @@
-import { FaWineBottle } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
 
 export default function Footer() {
@@ -30,9 +29,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center text-white text-xs">
-              <FaWineBottle />
-            </div>
+            <img
+              src="/logo.jpg"
+              alt="Westlink SL"
+              className="w-8 h-8 rounded-lg object-cover"
+            />
             <div>
               <span className="text-white font-semibold text-sm">Westlink SL</span>
               <span className="text-gray-500 text-xs block">IA Privada para PYMES · La Rioja</span>
