@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX, HiPhone } from 'react-icons/hi'
 
 const links = [
@@ -99,15 +98,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-strong border-t border-gray-200/40 overflow-hidden shadow-xl"
-          >
+      {/* Mobile menu — sin animación para que el scroll a secciones funcione */}
+      {open && (
+        <div className="lg:hidden glass-strong border-t border-gray-200/40 shadow-xl">
             <div className="px-4 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
               {links.map((l) => (
                 <a
@@ -137,9 +130,8 @@ export default function Navbar() {
                 </a>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </nav>
   )
 }
