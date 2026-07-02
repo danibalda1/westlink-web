@@ -79,11 +79,16 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'onboarding@resend.dev',
+        from: 'Westlink Web <onboarding@resend.dev>',
         to: 'daniel@westlinksl.com',
         reply_to: email,
-        subject: `Contacto web - ${nombre}${empresaTexto}`,
+        subject: `🆕 Contacto web - ${nombre}${empresaTexto}`,
         html,
+        text: `Nuevo contacto desde westlinksl.com
+
+Nombre: ${nombre}
+Email: ${email}${empresa ? `\nEmpresa: ${empresa}` : ''}
+Mensaje: ${mensaje}`,
       }),
     })
 
