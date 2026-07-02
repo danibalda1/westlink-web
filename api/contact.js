@@ -16,12 +16,11 @@ function checkRate(ip, maxPerMin = 5) {
 export default async function handler(req, res) {
   const origin = req.headers['origin'] || ''
 
-  // CORS
-  const allowed = ['https://westlinksl.com', 'https://www.westlinksl.com']
-  if (allowed.includes(origin) || origin.endsWith('.vercel.app')) {
+  // CORS — solo dominios propios
+  const allowed = ['https://westlinksl.com', 'https://www.westlinksl.com', 'https://westlink-web.vercel.app']
+  if (allowed.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin)
-  } else if (!origin) {
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Vary', 'Origin')
   }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
@@ -38,6 +37,17 @@ export default async function handler(req, res) {
   const { nombre, email, empresa, mensaje } = req.body || {}
   if (!nombre || !email || !mensaje) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' })
+  }
+
+  // Validar formato de email básico
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Email no válido' })
+  }
+
+  // Limitar longitud de campos (prevenir abuso)
+  if (nombre.length > 100 || email.length > 200 || mensaje.length > 5000) {
+    return res.status(400).json({ error: 'Datos demasiado largos' })
   }
 
   // Sanitizar API key (por si tiene saltos de línea)
@@ -116,16 +126,13 @@ Mensaje: ${mensaje}`,
 
     if (!resendResp.ok) {
       console.error(`Resend error (${resendResp.status}): ${bodyText}`)
-      return res.status(500).json({
-        error: `Error al enviar el email (${resendResp.status})`,
-        detail: bodyText,
-      })
+      return res.status(500).json({ error: 'Error al enviar el email. Inténtalo más tarde.' })
     }
 
     return res.status(200).json({ ok: true })
   } catch (err) {
     console.error('Contact API error:', err)
-    return res.status(500).json({ error: `Error interno: ${err.message}` })
+    return res.status(500).json({ error: 'Error interno del servidor' })
   }
 }
 
