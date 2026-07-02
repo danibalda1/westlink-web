@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { HiMenu, HiX } from 'react-icons/hi'
+import { HiMenu, HiX, HiPhone } from 'react-icons/hi'
 
 const links = [
   { label: 'Qué hacemos', href: '#que-hacemos' },
@@ -63,8 +63,15 @@ export default function Navbar() {
               </a>
             ))}
             <a
+              href="tel:+34648253217"
+              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 rounded-xl hover:bg-indigo-50 transition-all duration-200"
+            >
+              <HiPhone className="text-sm" />
+              648 25 32 17
+            </a>
+            <a
               href="#contacto"
-              className="ml-3 gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="ml-2 gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               Solicita información
             </a>
@@ -101,7 +108,15 @@ export default function Navbar() {
                   {l.label}
                 </a>
               ))}
-              <div className="pt-2">
+              <div className="pt-2 space-y-2">
+                <a
+                  href="tel:+34648253217"
+                  onClick={close}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-center font-semibold text-sm bg-indigo-50 text-indigo-700"
+                >
+                  <HiPhone />
+                  648 25 32 17
+                </a>
                 <a
                   href="#contacto"
                   onClick={close}
