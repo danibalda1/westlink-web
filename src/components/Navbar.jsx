@@ -78,14 +78,24 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-          >
+          {/* Mobile teléfono + hamburger */}
+          <div className="flex lg:hidden items-center gap-1">
+            <a
+              href="tel:+34648253217"
+              className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-sm font-semibold text-indigo-600 hover:bg-indigo-50 transition-all active:scale-95"
+              aria-label="Llamar al 648 25 32 17"
+            >
+              <HiPhone className="text-base" />
+              <span className="hidden sm:inline">648 25 32 17</span>
+            </a>
+            <button
+              onClick={() => setOpen(!open)}
+              className="p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors"
+              aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            >
             {open ? <HiX size={22} /> : <HiMenu size={22} />}
           </button>
+          </div>
         </div>
       </div>
 
