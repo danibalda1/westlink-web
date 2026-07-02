@@ -1,3 +1,17 @@
+// ── Rate limiting simple (5 emails/min por IP) ──
+const rateMap = new Map()
+function checkRate(ip, maxPerMin = 5) {
+  const now = Date.now()
+  const entry = rateMap.get(ip)
+  if (!entry || now - entry.windowStart > 60000) {
+    rateMap.set(ip, { count: 1, windowStart: now })
+    return true
+  }
+  if (entry.count >= maxPerMin) return false
+  entry.count++
+  return true
+}
+
 // Vercel Serverless Function — Contact form → Email via Resend
 export default async function handler(req, res) {
   const origin = req.headers['origin'] || ''
@@ -14,6 +28,12 @@ export default async function handler(req, res) {
 
   if (req.method === 'OPTIONS') return res.status(200).end()
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+
+  // Check rate limit
+  const ip = req.headers['x-forwarded-for'] || 'unknown'
+  if (!checkRate(ip)) {
+    return res.status(429).json({ error: 'Demasiadas solicitudes. Espera un minuto.' })
+  }
 
   const { nombre, email, empresa, mensaje } = req.body || {}
   if (!nombre || !email || !mensaje) {

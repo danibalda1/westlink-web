@@ -72,6 +72,21 @@ export default function CasosDeUso() {
             )
           })}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="#contacto"
+            className="inline-flex items-center gap-2 gradient-primary text-white px-7 py-3.5 rounded-2xl font-semibold text-sm hover:shadow-xl hover:shadow-primary/25 transition-all duration-300"
+          >
+            ¿Hablamos de lo que tu empleado digital haría en tu empresa?
+          </a>
+        </motion.div>
       </div>
     </section>
   )
