@@ -95,6 +95,24 @@ export default function QueHacemos() {
           })}
         </div>
 
+        {/* ── IMAGEN: Diagrama UI ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mt-14"
+        >
+          <div className="relative max-w-4xl mx-auto">
+            <div className="absolute -inset-6 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent rounded-3xl blur-[40px]" />
+            <img
+              src="/images/diagrama-ui.jpg"
+              alt="Interfaz del empleado digital Westlink"
+              className="relative w-full rounded-2xl border border-gray-200/60 shadow-premium-lg"
+              loading="lazy"
+            />
+          </div>
+        </motion.div>
+
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

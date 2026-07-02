@@ -52,6 +52,19 @@ export default function Hero() {
         <div className="absolute bottom-1/3 -right-32 w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-[100px] animate-float-slow" />
         <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[80px]" />
 
+        {/* Product image flotante */}
+        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] pointer-events-none select-none hidden xl:block opacity-25 translate-x-1/4 -translate-y-1/4 rotate-12">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-transparent rounded-full blur-[80px] scale-125" />
+          <div className="relative w-full h-full rounded-[40px] overflow-hidden shadow-2xl shadow-indigo-500/20 ring-1 ring-white/10 backdrop-blur-sm">
+            <img
+              src="/images/westlink-box.jpg"
+              alt="Westlink Box - IA privada"
+              className="w-full h-full object-contain mix-blend-screen opacity-80"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
         {/* Grid sutil */}
         <div
           className="absolute inset-0 opacity-[0.03]"

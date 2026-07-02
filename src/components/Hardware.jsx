@@ -137,6 +137,25 @@ export default function Hardware() {
           </div>
         </motion.div>
 
+        {/* ── IMAGEN: Técnico instalando ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="max-w-3xl mx-auto mb-8"
+        >
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent rounded-3xl blur-[30px]" />
+            <img
+              src="/images/tecnico-instalando.jpg"
+              alt="Instalación presencial del sistema Westlink"
+              className="relative w-full rounded-2xl border border-gray-100 shadow-premium-lg"
+              loading="lazy"
+            />
+          </div>
+          <p className="text-xs text-gray-400 text-center mt-3">Instalación y formación presencial incluidas</p>
+        </motion.div>
+
         <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }} className="text-center text-xs text-gray-400 mt-6">
           Visitas gratuitas en La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza · ¿Financiación? <a href="#contacto" className="text-indigo-600 font-semibold hover:underline">Pregúntanos</a>
         </motion.p>

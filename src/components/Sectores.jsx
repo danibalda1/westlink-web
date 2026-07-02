@@ -83,6 +83,16 @@ export default function Sectores() {
   return (
     <section id="sectores" className="py-20 md:py-28 relative overflow-hidden section-subtle">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        {/* ── Imagen de fondo decorativa: bodega ── */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-15 pointer-events-none hidden lg:block">
+          <img
+            src="/images/bodega-ambiente.jpg"
+            alt=""
+            className="w-full h-full object-cover rounded-3xl"
+            loading="lazy"
+          />
+        </div>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}

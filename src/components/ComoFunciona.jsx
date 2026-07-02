@@ -66,10 +66,12 @@ export default function ComoFunciona() {
           </p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="max-w-4xl mx-auto relative">
-          {/* Vertical line */}
-          <div className="absolute left-[27px] top-0 bottom-0 w-px bg-gradient-to-b from-indigo-200 via-purple-200 to-emerald-200 hidden sm:block" />
+        {/* ── DIAGRAMA DE RED + TIMELINE ── */}
+        <div className="grid lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+          {/* Timeline: 3/5 */}
+          <div className="lg:col-span-3 relative">
+            {/* Vertical line */}
+            <div className="absolute left-[27px] top-0 bottom-0 w-px bg-gradient-to-b from-indigo-200 via-purple-200 to-emerald-200 hidden sm:block" />
 
           <div className="space-y-0">
             {pasos.map((p, i) => {
@@ -102,6 +104,30 @@ export default function ComoFunciona() {
                 </motion.div>
               )
             })}
+          </div>
+          </div>
+
+          {/* Diagram: 2/5 */}
+          <div className="lg:col-span-2 lg:pt-12">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="sticky top-24"
+            >
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent rounded-3xl blur-[30px]" />
+                <img
+                  src="/images/diagrama-red.jpg"
+                  alt="Arquitectura de red local con IA privada"
+                  className="relative w-full rounded-2xl border border-gray-100 shadow-premium-lg"
+                  loading="lazy"
+                />
+              </div>
+              <p className="text-xs text-gray-400 mt-3 text-center">
+                Tu IA funciona en tu propia red. Sin pasar por internet.
+              </p>
+            </motion.div>
           </div>
         </div>
 

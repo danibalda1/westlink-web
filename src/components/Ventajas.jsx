@@ -68,6 +68,24 @@ export default function Ventajas() {
           </p>
         </motion.div>
 
+        {/* ── IMAGEN: Westlink Box ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-14"
+        >
+          <div className="relative max-w-lg mx-auto">
+            <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/8 via-purple-500/5 to-transparent rounded-3xl blur-[30px]" />
+            <img
+              src="/images/westlink-box.jpg"
+              alt="Westlink Box — hardware de IA privada"
+              className="relative w-full rounded-2xl border border-gray-100 shadow-premium-lg"
+              loading="lazy"
+            />
+          </div>
+        </motion.div>
+
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {ventajas.map((v, i) => {
