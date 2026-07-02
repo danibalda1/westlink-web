@@ -10,81 +10,81 @@ const ventajas = [
   {
     icon: BsShieldCheck,
     title: 'Tus datos no salen de tu empresa',
-    desc: 'Todo corre en hardware local. Sin nubes externas, sin APIs de terceros, sin riesgos de fuga. Tus secretos comerciales, recetas y datos de clientes están seguros.',
+    desc: 'Todo corre en hardware local. Sin nubes externas, sin APIs de terceros, sin riesgos de fuga.',
   },
   {
     icon: BsHddNetwork,
     title: 'Sin depender de APIs externas',
-    desc: 'No pagas por token, no te cortan el servicio si cambian los precios, no dependes de internet para funcionar. Tu IA funciona aunque se caiga la nube.',
+    desc: 'No pagas por token, no te cortan el servicio. Tu IA funciona aunque se caiga internet.',
   },
   {
     icon: BsGearWideConnected,
     title: 'A medida, no genérico',
-    desc: 'Entrenamos y configuramos el sistema para tu negocio, tu sector, tu forma de trabajar. No compras una herramienta estándar — construimos tu herramienta.',
+    desc: 'Entrenamos el sistema para tu negocio, tu sector, tu forma de trabajar.',
   },
   {
     icon: BsClockHistory,
     title: 'Disponible 24/7 los 365 días',
-    desc: 'Tu empleado digital nunca duerme, nunca se pone enfermo, nunca pide vacaciones. Procesa trabajo mientras tú descansas.',
+    desc: 'Tu empleado digital nunca duerme, nunca se pone enfermo, nunca pide vacaciones.',
   },
   {
     icon: BsGraphUpArrow,
-    title: 'ROI demostrable',
-    desc: '70h/semana recuperadas por técnico. Payback en 3-6 meses. Cada hora invertida en implantación se multiplica por 10 en productividad recuperada.',
+    title: 'ROI demostrable en 3-6 meses',
+    desc: 'Cada hora invertida en implantación se multiplica por 10 en productividad.',
   },
   {
     icon: BsPersonCheck,
     title: 'Tu equipo trabaja mejor',
-    desc: 'Libera a tu gente de tareas repetitivas. Que se dediquen a lo que realmente aporta valor: atención al cliente, estrategia, creatividad.',
+    desc: 'Libera a tu gente de tareas repetitivas. Que se dediquen a lo que importa.',
   },
   {
     icon: BsCashCoin,
     title: 'Sin cuotas mensuales abusivas',
-    desc: 'Pago único por implantación. El sistema es tuyo. No pagas suscripción de por vida por algo que ya está instalado y funcionando.',
+    desc: 'Pago único por implantación. El sistema es tuyo para siempre.',
   },
 ]
 
 export default function Ventajas() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="ventajas" className="py-20 md:py-28 relative overflow-hidden section-gradient-bg">
+    <section id="ventajas" className="py-20 md:py-28 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-primary font-semibold text-sm tracking-widest uppercase">Ventajas</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 mb-4">
-            IA privada {'>'} IA en la nube
+          <span className="section-badge">Ventajas</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4 text-balance">
+            IA privada <span className="text-gray-300 font-normal">&gt;</span> IA en la nube
           </h2>
-          <p className="text-lg text-gray-600">
-            Mientras otros te venden una suscripción mensual a una IA que vive en servidores ajenos,
+          <p className="text-lg text-gray-500 leading-relaxed">
+            Mientras otros te venden una suscripción a una IA en servidores ajenos,
             nosotros te instalamos un sistema que es 100% tuyo.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {ventajas.map((v, i) => {
             const Icon = v.icon
             return (
               <motion.div
                 key={v.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="bg-white rounded-2xl p-6 card-shadow border border-gray-100 hover:border-primary/20 transition-all duration-300 hover:shadow-lg"
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-premium shadow-premium-hover transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary text-xl mb-4">
+                <div className="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 text-lg mb-4 group-hover:bg-indigo-100 group-hover:scale-110 transition-all duration-300">
                   <Icon />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{v.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
+                <h3 className="text-[15px] font-bold text-gray-900 mb-2">{v.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">{v.desc}</p>
               </motion.div>
             )
           })}

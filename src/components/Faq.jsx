@@ -37,11 +37,19 @@ const faqs = [
     q: '¿Y si no funciona como esperaba?',
     a: 'Hacemos un seguimiento continuo durante el primer mes. Ajustamos y mejoramos hasta que el sistema funcione exactamente como necesitas. No te dejamos tirado.',
   },
+  {
+    q: '¿Por qué no usar directamente ChatGPT?',
+    a: 'ChatGPT envía tus datos a servidores en EE.UU. para procesarlos. Nosotros instalamos la IA en tu propia red. Tus datos nunca salen de tu empresa. Además, ChatGPT es un chat generalista, no un trabajador entrenado en tus procesos concretos.',
+  },
+  {
+    q: '¿Qué tareas concretas puede hacer mi empleado digital?',
+    a: 'Depende de tu empresa, pero por lo general: responder dudas sobre documentación interna, buscar contratos y facturas, generar presupuestos, clasificar archivos, preparar informes, automatizar procesos repetitivos, consultar manuales y normativas. Y todo aprendiendo de tu forma de trabajar.',
+  },
 ]
 
 export default function Faq() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [openIndex, setOpenIndex] = useState(null)
 
   return (
@@ -49,42 +57,42 @@ export default function Faq() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-primary font-semibold text-sm tracking-widest uppercase">FAQ</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-3 mb-4">
+          <span className="section-badge">FAQ</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4">
             Preguntas frecuentes
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-500 leading-relaxed">
             Las dudas más comunes cuando las PYMES descubren que pueden tener su propia IA privada.
           </p>
         </motion.div>
 
         {/* FAQ items */}
-        <div className="max-w-3xl mx-auto space-y-3">
+        <div className="max-w-3xl mx-auto space-y-2.5">
           {faqs.map((faq, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
+              transition={{ duration: 0.3, delay: i * 0.03 }}
               className={`rounded-2xl border transition-all duration-300 cursor-pointer ${
                 openIndex === i
-                  ? 'border-primary/20 bg-primary/[0.02] shadow-sm'
-                  : 'border-gray-100 bg-white hover:border-gray-200'
+                  ? 'border-indigo-100 bg-indigo-50/20 shadow-sm'
+                  : 'border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm'
               }`}
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
             >
-              <div className="flex items-center justify-between px-6 py-5">
-                <h3 className="font-semibold text-gray-900 pr-4 text-sm sm:text-base">{faq.q}</h3>
+              <div className="flex items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
+                <h3 className="font-semibold text-gray-900 pr-4 text-sm sm:text-[15px] leading-snug">{faq.q}</h3>
                 <HiChevronDown
-                  className={`text-gray-400 shrink-0 transition-transform duration-300 ${
-                    openIndex === i ? 'rotate-180 text-primary' : ''
+                  className={`text-gray-300 shrink-0 transition-transform duration-300 ${
+                    openIndex === i ? 'rotate-180 text-indigo-500' : ''
                   }`}
-                  size={20}
+                  size={18}
                 />
               </div>
               <AnimatePresence initial={false}>
@@ -93,10 +101,10 @@ export default function Faq() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <p className="px-6 pb-5 text-gray-600 leading-relaxed text-sm sm:text-base border-t border-gray-100 pt-4">
+                    <p className="px-5 sm:px-6 pb-4 sm:pb-5 text-sm sm:text-[15px] text-gray-500 leading-relaxed border-t border-gray-100 pt-4">
                       {faq.a}
                     </p>
                   </motion.div>

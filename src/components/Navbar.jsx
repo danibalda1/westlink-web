@@ -4,11 +4,12 @@ import { HiMenu, HiX } from 'react-icons/hi'
 
 const links = [
   { label: 'Qué hacemos', href: '#que-hacemos' },
-  { label: 'Sectores', href: '#sectores' },
-  { label: 'Ventajas', href: '#ventajas' },
+  { label: 'Casos de uso', href: '#casos-de-uso' },
+  { label: 'Comparativa', href: '#comparativa' },
   { label: 'Cómo funciona', href: '#como-funciona' },
   { label: 'Hardware', href: '#hardware' },
   { label: 'Kit Digital', href: '#kit-digital' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Contacto', href: '#contacto' },
 ]
 
@@ -18,7 +19,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -28,7 +29,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'glass shadow-lg border-b border-gray-200/50'
+          ? 'glass-strong shadow-premium border-b border-gray-200/40'
           : 'bg-transparent'
       }`}
     >
@@ -36,32 +37,34 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <img
-              src="/logo.jpg"
-              alt="Westlink SL"
-              className="w-10 h-10 rounded-xl object-cover shadow-lg group-hover:shadow-xl transition-shadow"
-            />
-            <div>
-              <span className="text-lg font-bold text-gray-900">Westlink</span>
-              <span className="text-xs text-gray-500 block leading-tight">IA Privada · La Rioja</span>
+            <div className="relative">
+              <img
+                src="/logo.jpg"
+                alt="Westlink SL"
+                className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-cover shadow-lg group-hover:shadow-xl transition-all duration-300"
+              />
+              <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity -z-10 blur-sm" />
+            </div>
+            <div className="hidden sm:block">
+              <span className="text-base font-bold text-gray-900 leading-none">Westlink</span>
+              <span className="text-[10px] text-gray-400 block leading-tight mt-0.5 font-medium">IA Privada · La Rioja</span>
             </div>
           </a>
 
-          {/* Desktop */}
-          <div className="hidden md:flex items-center gap-8">
-            {links.map((l) => (
+          {/* Desktop nav */}
+          <div className="hidden lg:flex items-center gap-1">
+            {links.slice(0, -1).map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors relative group"
+                className="px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-xl hover:bg-gray-50 transition-all duration-200"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <a
               href="#contacto"
-              className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
+              className="ml-3 gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
               Solicita información
             </a>
@@ -70,10 +73,10 @@ export default function Navbar() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors"
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           >
-            {open ? <HiX size={24} /> : <HiMenu size={24} />}
+            {open ? <HiX size={22} /> : <HiMenu size={22} />}
           </button>
         </div>
       </div>
@@ -85,26 +88,28 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-gray-200/50 overflow-hidden"
+            className="lg:hidden glass-strong border-t border-gray-200/40 overflow-hidden shadow-xl"
           >
-            <div className="px-4 py-4 space-y-2">
+            <div className="px-4 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
               {links.map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
                   onClick={close}
-                  className="block px-4 py-3 rounded-lg text-gray-700 font-medium hover:bg-primary/5 hover:text-primary transition-all"
+                  className="block px-4 py-3 rounded-xl text-gray-600 font-medium hover:bg-primary/5 hover:text-primary transition-all text-sm"
                 >
                   {l.label}
                 </a>
               ))}
-              <a
-                href="#contacto"
-                onClick={close}
-                className="block gradient-primary text-white px-4 py-3 rounded-xl text-center font-semibold mt-3"
-              >
-                Solicita información
-              </a>
+              <div className="pt-2">
+                <a
+                  href="#contacto"
+                  onClick={close}
+                  className="block gradient-primary text-white px-4 py-3 rounded-xl text-center font-semibold text-sm"
+                >
+                  Solicita información
+                </a>
+              </div>
             </div>
           </motion.div>
         )}
