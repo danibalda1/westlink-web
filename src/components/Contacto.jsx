@@ -103,7 +103,8 @@ export default function Contacto() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 font-medium">Zona de actuación</p>
-                    <p className="text-sm text-gray-300">La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza</p>
+                    <p className="text-sm text-gray-300">Villamediana de Iregua, La Rioja</p>
+                    <p className="text-xs text-gray-400 mt-0.5">Cubrimos: Álava, Navarra, Burgos, Soria y Zaragoza</p>
                   </div>
                 </div>
                 <p className="text-xs text-indigo-400/70 leading-relaxed pl-[52px]">

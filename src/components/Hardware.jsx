@@ -137,11 +137,38 @@ export default function Hardware() {
           </p>
         </motion.div>
 
-        {/* ── SUBCRIPCIÓN MENSUAL ── */}
+        {/* ── RACK FEATURES ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.05 }}
+          className="mb-14"
+        >
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[
+              { icon: BsPrinter, title: 'Diseño propio', desc: 'Modelamos cada rack en 3D desde cero. Adaptado al espacio disponible y a la estética de tu negocio.' },
+              { icon: BsLayers, title: 'Impresión local', desc: 'Fabricamos en La Rioja con materiales resistentes. Nada de importar cajas chinas genéricas.' },
+              { icon: BsRulers, title: 'A medida', desc: '¿Un hueco raro en la recepción? ¿Detrás de la barra? Lo medimos y diseñamos el rack para que encaje.' },
+            ].map((item, i) => {
+              const Icon = item.icon
+              return (
+                <div key={item.title} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-premium shadow-premium-hover text-center transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-xl text-indigo-600 mx-auto mb-4">
+                    <Icon />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 text-sm mb-2">{item.title}</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+                </div>
+              )
+            })}
+          </div>
+        </motion.div>
+
+        {/* ── SUBCRIPCIÓN MENSUAL ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.08 }}
           className="mb-16"
         >
           <div className="flex items-center gap-2 mb-6">

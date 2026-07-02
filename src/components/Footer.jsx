@@ -1,4 +1,4 @@
-import { HiOutlineMail } from 'react-icons/hi'
+import { HiOutlineMail, HiPhone } from 'react-icons/hi'
 import { BsArrowRight } from 'react-icons/bs'
 
 export default function Footer() {
@@ -50,11 +50,15 @@ export default function Footer() {
               <HiOutlineMail className="text-xs" />
               daniel@westlinksl.com
             </a>
+            <a href="tel:+34648253217" className="flex items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors">
+              <HiPhone className="text-xs" />
+              648 25 32 17
+            </a>
           </div>
 
           {/* Copyright */}
           <span className="text-[11px] text-gray-700">
-            © {new Date().getFullYear()} Westlink SL. Empresa familiar riojana.
+            © {new Date().getFullYear()} Westlink SL · Villamediana de Iregua, La Rioja
           </span>
         </div>
       </div>

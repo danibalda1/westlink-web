@@ -189,7 +189,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="hidden lg:block"
+            className="block"
           >
             <div className="relative">
               {/* Glow detrás de la demo */}
@@ -217,7 +217,7 @@ export default function Hero() {
                 </div>
 
                 {/* Demo messages */}
-                <div className="p-5 space-y-3.5 min-h-[340px]">
+                <div className="p-4 sm:p-5 space-y-3 min-h-[200px] sm:min-h-[340px]">
                   {demoMessages.slice(0, demoStep + 1).map((msg, i) => {
                     const isLast = i === demoStep
                     return (
@@ -229,7 +229,7 @@ export default function Hero() {
                         className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                       >
                         <div
-                          className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                          className={`max-w-[92%] sm:max-w-[85%] rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm leading-relaxed ${
                             msg.role === 'user'
                               ? 'bg-indigo-600/20 border border-indigo-500/15 text-indigo-200'
                               : 'bg-white/6 border border-white/6 text-gray-200'
