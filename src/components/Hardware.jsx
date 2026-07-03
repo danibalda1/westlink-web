@@ -2,18 +2,85 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { BsCalendarWeek, BsBox, BsRocket, BsPiggyBank } from 'react-icons/bs'
+import { BsCalendarWeek, BsBox, BsRocket, BsPiggyBank, BsShieldCheck, BsLightningCharge, BsCloud, BsCpu } from 'react-icons/bs'
 import { HiOutlineCheckCircle, HiOutlineStar, HiChevronDown } from 'react-icons/hi'
 
 const planesMensuales = [
-  { name: 'Básico', price: '199', desc: 'Autónomos', features: ['1 empleado digital', 'Soporte email', 'Actualizaciones', 'Sin permanencia'], highlight: false },
-  { name: 'Profesional', price: '399', desc: 'PYMES 3-25 emp.', features: ['Hasta 3 empleados', 'Soporte prioritario', '1h consultoría/mes', 'Sin permanencia'], highlight: true },
-  { name: 'Empresa', price: '799', desc: 'Escala sin límites', features: ['Empleados ilimitados', 'Soporte 24/7', 'Consultoría ilimitada', 'Sin permanencia'], highlight: false },
+  {
+    name: 'Start',
+    price: '149',
+    desc: 'Autónomos y microempresas',
+    icon: BsCloud,
+    features: [
+      'Westlink Box en cesión',
+      'IA mediante APIs externas',
+      'Auto-configuración al encender',
+      'Soporte email',
+      'Actualizaciones automáticas',
+      'Copias de seguridad',
+      'Sin permanencia',
+    ],
+    highlight: false,
+  },
+  {
+    name: 'Private',
+    price: '199',
+    desc: 'Máxima privacidad',
+    icon: BsShieldCheck,
+    features: [
+      'Westlink Box en cesión',
+      'Modelos locales (Ollama)',
+      'Sin depender de APIs externas',
+      'Todos los datos en tu oficina',
+      'Auto-configuración al encender',
+      'Soporte prioritario',
+      'Actualizaciones automáticas',
+      'Copias de seguridad',
+      'Sin permanencia',
+    ],
+    highlight: true,
+  },
+  {
+    name: 'Hybrid',
+    price: '299',
+    desc: 'Lo mejor de ambos mundos',
+    icon: BsLightningCharge,
+    features: [
+      'Westlink Box en cesión',
+      'Modelos locales para mayoría tareas',
+      'APIs solo cuando es necesario',
+      'Selección automática del mejor modelo',
+      'Auto-configuración al encender',
+      'Soporte prioritario',
+      'Actualizaciones automáticas',
+      'Copias de seguridad',
+      'Sin permanencia',
+    ],
+    highlight: false,
+  },
+]
+
+const planesBusiness = [
+  {
+    name: 'Business',
+    price: '499',
+    desc: 'Hardware más potente',
+    icon: BsCpu,
+    features: [
+      'Westlink Box Pro en cesión',
+      'Más RAM y almacenamiento',
+      'Hasta 5 empleados digitales',
+      'Modelos locales más grandes',
+      'Integraciones empresariales',
+      'Soporte 24/7 prioritario',
+      'Sin permanencia',
+    ],
+  },
 ]
 
 const tiersUnico = [
-  { name: 'Starter', price: '2.300', desc: 'Autónomos y microempresas', features: ['Mini PC 64GB RAM / 2TB SSD', '1 empleado digital', 'Rack 3D compacto', 'Instalación + formación', 'Soporte 30 días'] },
-  { name: 'Business', price: '7.900', desc: 'PYMES 3-25 empleados', features: ['Servidor GPU 128GB RAM', 'Hasta 5 empleados', 'Rack 3D ventilado', 'Instalación + formación', 'Soporte 90 días', 'Diseño personalizado'], highlight: true },
+  { name: 'Starter', price: '2.300', desc: 'Autónomos y microempresas', features: ['Mini PC 256GB NVMe / 16GB RAM', '1 empleado digital', 'IA local + APIs', 'Rack 3D compacto', 'Instalación + formación', 'Soporte 30 días'] },
+  { name: 'Business', price: '7.900', desc: 'PYMES 3-25 empleados', features: ['Servidor 1TB NVMe / 32GB RAM', 'Hasta 5 empleados', 'Modelos locales avanzados', 'Rack 3D ventilado', 'Instalación + formación', 'Soporte 90 días', 'Diseño personalizado'], highlight: true },
   { name: 'Enterprise', price: '15.900', desc: 'Empresas grandes', features: ['Servidor multi-GPU', 'Empleados ilimitados', 'Rack profesional 3D', 'Ampliación modular', 'Soporte 12 meses'], highlight: false },
 ]
 
@@ -28,6 +95,7 @@ export default function Hardware() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [showUnico, setShowUnico] = useState(false)
+  const [showBusiness, setShowBusiness] = useState(false)
 
   return (
     <section id="hardware" className="py-20 md:py-28 relative overflow-hidden bg-white">
@@ -42,37 +110,89 @@ export default function Hardware() {
         <motion.div initial={{ opacity: 0, y: 24 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center max-w-3xl mx-auto mb-14">
           <span className="section-badge">Planes y precios</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4 text-balance">
-            Empieza desde <span className="gradient-text-warm">199€/mes</span>
+            Contrata un empleado digital desde <span className="gradient-text-warm">149€/mes</span>
           </h2>
           <p className="text-lg text-gray-500 leading-relaxed">
-            Sin permanencia. Sin letra pequeña. Crece cuando quieras.
+            Hardware en cesión. Sin permanencia. Lo enchufas y funciona.
           </p>
         </motion.div>
 
-        {/* ── SUBCRIPCIÓN MENSUAL (PRINCIPAL) ── */}
-        <div className="mb-10">
+        {/* ── SUSCRIPCIÓN MENSUAL (PRINCIPAL) ── */}
+        <div className="mb-8">
           <div className="flex items-center gap-2 mb-5 justify-center">
             <BsCalendarWeek className="text-indigo-600" />
-            <span className="font-semibold text-gray-900">Suscripción mensual</span>
+            <span className="font-semibold text-gray-900">Suscripción mensual — hardware incluido</span>
             <span className="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">Sin permanencia</span>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {planesMensuales.map((plan, i) => (
-              <motion.div key={plan.name} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
-                className={`relative rounded-2xl p-6 border-2 transition-all duration-300 ${plan.highlight ? 'border-indigo-500 bg-white shadow-xl shadow-indigo-500/8 scale-[1.03]' : 'border-gray-100 bg-white hover:border-gray-200 shadow-premium'}`}
-              >
-                {plan.highlight && <span className="absolute -top-3 left-1/2 -translate-x-1/2 gradient-primary text-white text-[11px] font-bold px-4 py-1 rounded-full shadow-lg shadow-indigo-500/20">Más popular</span>}
-                <h3 className="font-bold text-gray-900 text-base mb-0.5">{plan.name}</h3>
-                <p className="text-xs text-gray-400 mb-3">{plan.desc}</p>
-                <div className="mb-4"><span className="text-3xl font-bold text-gray-900">{plan.price}€</span><span className="text-xs text-gray-400">/mes</span></div>
-                <ul className="space-y-1.5 mb-5">
-                  {plan.features.map(f => <li key={f} className="flex items-start gap-1.5 text-xs text-gray-600"><HiOutlineCheckCircle className="text-indigo-500 mt-0.5 shrink-0" />{f}</li>)}
-                </ul>
-                <a href="#contacto" className={`block text-center py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${plan.highlight ? 'gradient-primary text-white hover:shadow-lg hover:shadow-indigo-500/25' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>Lo quiero</a>
-              </motion.div>
-            ))}
+          <div className="grid md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {planesMensuales.map((plan, i) => {
+              const Icon = plan.icon
+              return (
+                <motion.div key={plan.name} initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.4, delay: 0.1 + i * 0.06 }}
+                  className={`relative rounded-2xl p-6 border-2 transition-all duration-300 flex flex-col ${plan.highlight ? 'border-indigo-500 bg-white shadow-xl shadow-indigo-500/8 scale-[1.03] z-10' : 'border-gray-100 bg-white hover:border-gray-200 shadow-premium'}`}
+                >
+                  {plan.highlight && <span className="absolute -top-3 left-1/2 -translate-x-1/2 gradient-primary text-white text-[11px] font-bold px-4 py-1 rounded-full shadow-lg shadow-indigo-500/20">Recomendado</span>}
+                  <Icon className={`text-xl mb-3 ${plan.name === 'Start' ? 'text-sky-500' : plan.name === 'Private' ? 'text-emerald-500' : 'text-amber-500'}`} />
+                  <h3 className="font-bold text-gray-900 text-base mb-0.5">{plan.name}</h3>
+                  <p className="text-xs text-gray-400 mb-3">{plan.desc}</p>
+                  <div className="mb-4"><span className="text-3xl font-bold text-gray-900">{plan.price}€</span><span className="text-xs text-gray-400">/mes</span></div>
+                  <p className="text-[11px] text-gray-400 mb-4">Hardware en cesión · Recuperable al cancelar</p>
+                  <ul className="space-y-1.5 mb-5 flex-1">
+                    {plan.features.map(f => <li key={f} className="flex items-start gap-1.5 text-xs text-gray-600"><HiOutlineCheckCircle className="text-indigo-500 mt-0.5 shrink-0" />{f}</li>)}
+                  </ul>
+                  <a href="#contacto" className={`block text-center py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${plan.highlight ? 'gradient-primary text-white hover:shadow-lg hover:shadow-indigo-500/25' : 'bg-gray-50 text-gray-700 hover:bg-gray-100'}`}>Lo quiero</a>
+                </motion.div>
+              )
+            })}
           </div>
+        </div>
+
+        {/* ── BUSINESS (TOGGLE) ── */}
+        <div className="max-w-5xl mx-auto mb-10">
+          <button onClick={() => setShowBusiness(!showBusiness)} className="w-full flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-gray-200 transition-all group">
+            <div className="flex items-center gap-3">
+              <BsCpu className="text-violet-600 text-lg" />
+              <div className="text-left">
+                <span className="font-semibold text-gray-900 text-sm">¿Necesitas más potencia? Planes Business y Enterprise</span>
+                <p className="text-xs text-gray-400 mt-0.5">Hardware superior, más RAM, más agentes, integraciones</p>
+              </div>
+            </div>
+            <HiChevronDown className={`text-gray-400 transition-transform duration-300 ${showBusiness ? 'rotate-180' : ''}`} />
+          </button>
+
+          {showBusiness && (
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} transition={{ duration: 0.3 }} className="overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-4 mt-4">
+                {planesBusiness.map((plan, i) => {
+                  const Icon = plan.icon
+                  return (
+                    <motion.div key={plan.name} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: i * 0.05 }}
+                      className="relative rounded-2xl p-6 border-2 border-violet-200 bg-white shadow-lg"
+                    >
+                      <Icon className="text-xl text-violet-500 mb-3" />
+                      <h3 className="font-bold text-gray-900 text-base mb-0.5">{plan.name}</h3>
+                      <p className="text-xs text-gray-400 mb-3">{plan.desc}</p>
+                      <div className="mb-4"><span className="text-3xl font-bold text-gray-900">{plan.price}€</span><span className="text-xs text-gray-400">/mes</span></div>
+                      <p className="text-[11px] text-gray-400 mb-4">Hardware en cesión</p>
+                      <ul className="space-y-1.5 mb-5">
+                        {plan.features.map(f => <li key={f} className="flex items-start gap-1.5 text-xs text-gray-600"><HiOutlineCheckCircle className="text-violet-500 mt-0.5 shrink-0" />{f}</li>)}
+                      </ul>
+                      <a href="#contacto" className="block text-center py-2.5 rounded-xl font-semibold text-sm bg-violet-500 text-white hover:bg-violet-600 transition-all">Lo quiero</a>
+                    </motion.div>
+                  )
+                })}
+                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: 0.1 }}
+                  className="rounded-2xl p-6 border-2 border-dashed border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-center"
+                >
+                  <HiOutlineStar className="text-2xl text-amber-400 mb-2" />
+                  <h3 className="font-bold text-gray-900 text-base mb-1">Enterprise</h3>
+                  <p className="text-xs text-gray-500 mb-3">Infraestructura dedicada, multi-GPU, personalizado</p>
+                  <a href="#contacto" className="inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:underline">Solicitar presupuesto →</a>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
         </div>
 
         {/* ── INVERSIÓN ÚNICA (TOGGLE) ── */}
@@ -82,7 +202,7 @@ export default function Hardware() {
               <BsPiggyBank className="text-amber-600 text-lg" />
               <div className="text-left">
                 <span className="font-semibold text-gray-900 text-sm">¿Prefieres pago único? El sistema es tuyo para siempre</span>
-                <p className="text-xs text-gray-400 mt-0.5">Desde 2.300€ · Sin cuotas de por vida</p>
+                <p className="text-xs text-gray-400 mt-0.5">Desde 2.300€ · Sin cuotas mensuales</p>
               </div>
             </div>
             <HiChevronDown className={`text-gray-400 transition-transform duration-300 ${showUnico ? 'rotate-180' : ''}`} />
@@ -142,18 +262,17 @@ export default function Hardware() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="max-w-3xl mx-auto mb-8"
+          className="max-w-3xl mx-auto mb-8 mt-8"
         >
           <div className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent rounded-3xl blur-[30px]" />
             <img
               src="/images/tecnico-instalando.jpg"
-              alt="Instalación presencial del sistema Westlink"
+              alt="Westlink Box — instalación"
               className="relative w-full rounded-2xl border border-gray-100 shadow-premium-lg"
               loading="lazy"
             />
           </div>
-          <p className="text-xs text-gray-400 text-center mt-3">Instalación y formación presencial incluidas</p>
         </motion.div>
 
         <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }} className="text-center text-xs text-gray-400 mt-6">
