@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { HiMenu, HiX, HiPhone } from 'react-icons/hi'
 
 const links = [
+  { label: 'Plan Go', href: '#plan-go' },
   { label: 'Qué hacemos', href: '#que-hacemos' },
   { label: 'Casos de uso', href: '#casos-de-uso' },
   { label: 'Comparativa', href: '#comparativa' },

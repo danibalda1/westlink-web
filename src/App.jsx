@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet-async'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
+import PlanGo from './components/PlanGo.jsx'
 import Footer from './components/Footer.jsx'
 
 /* Lazy-loaded sections — below the fold, no need for eager load */
@@ -81,6 +82,7 @@ export default function App() {
       <Navbar />
       <main id="main-content">
         <Hero />
+        <PlanGo />
         <Suspense fallback={<SectionLoader />}>
           <QueHacemos />
           <CasosDeUso />
