@@ -34,8 +34,14 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Demasiadas solicitudes. Espera un minuto.' })
   }
 
-  const { nombre, email, empresa, mensaje } = req.body || {}
-  if (!nombre || !email || !mensaje) {
+  const { nombre, email, empresa, mensaje, telefono, origen } = req.body || {}
+
+  // ── Lead magnet: no requiere mensaje ──
+  const esLeadMagnet = origen === 'lead-magnet-plan-go'
+  if (!nombre || !email) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios' })
+  }
+  if (!esLeadMagnet && !mensaje) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' })
   }
 
@@ -58,6 +64,12 @@ export default async function handler(req, res) {
   }
 
   const empresaTexto = empresa ? ` (${empresa})` : ''
+  const telefonoTexto = telefono ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px">Teléfono</td><td style="padding:6px 0;font-weight:600;font-size:14px;color:#1e293b">${escHtml(telefono)}</td></tr>` : ''
+
+  const titulo = esLeadMagnet ? '📥 Lead magnet — Guía 10h/mes' : '🆕 Contacto web'
+  const asunto = esLeadMagnet
+    ? `📥 Lead: ${nombre}${empresaTexto} quiere la guía`
+    : `🆕 Contacto web - ${nombre}${empresaTexto}`
 
   const html = `<!DOCTYPE html>
 <html>
@@ -66,7 +78,7 @@ export default async function handler(req, res) {
   <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:24px auto;background:white;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0">
     <tr>
       <td style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:28px 32px">
-        <h1 style="color:white;margin:0;font-size:20px;font-weight:700">Nuevo contacto web</h1>
+        <h1 style="color:white;margin:0;font-size:20px;font-weight:700">${titulo}</h1>
         <p style="color:#c4b5fd;margin:4px 0 0;font-size:14px">Westlink SL — westlinksl.com</p>
       </td>
     </tr>
@@ -82,6 +94,7 @@ export default async function handler(req, res) {
             <td style="padding:6px 0;font-size:14px"><a href="mailto:${escHtml(email)}" style="color:#4f46e5">${escHtml(email)}</a></td>
           </tr>
           ${empresa ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px">Empresa</td><td style="padding:6px 0;font-weight:600;font-size:14px;color:#1e293b">${escHtml(empresa)}</td></tr>` : ''}
+          ${telefonoTexto}
           <tr>
             <td style="padding:6px 0;color:#64748b;font-size:13px">Fecha</td>
             <td style="padding:6px 0;font-size:14px;color:#64748b">${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</td>
@@ -109,16 +122,12 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Westlink Web <onboarding@resend.dev>',
+        from: 'Westlink Web <daniel@westlinksl.com>',
         to: 'daniel@westlinksl.com',
         reply_to: email,
-        subject: `🆕 Contacto web - ${nombre}${empresaTexto}`,
+        subject: asunto,
         html,
-        text: `Nuevo contacto desde westlinksl.com
-
-Nombre: ${nombre}
-Email: ${email}${empresa ? `\nEmpresa: ${empresa}` : ''}
-Mensaje: ${mensaje}`,
+        text: `${titulo}\n\nNombre: ${nombre}\nEmail: ${email}${empresa ? `\nEmpresa: ${empresa}` : ''}${telefono ? `\nTeléfono: ${telefono}` : ''}${esLeadMagnet ? '\nTipo: Lead magnet (guía 10h/mes)' : `\nMensaje: ${mensaje}`}`,
       }),
     })
 
