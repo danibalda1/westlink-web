@@ -2,8 +2,26 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { BsCalendarWeek, BsBox, BsRocket, BsPiggyBank, BsShieldCheck, BsLightningCharge, BsCloud, BsCpu } from 'react-icons/bs'
-import { HiOutlineCheckCircle, HiOutlineStar, HiChevronDown } from 'react-icons/hi'
+import { BsCalendarWeek, BsBox, BsRocket, BsPiggyBank, BsShieldCheck, BsLightningCharge, BsCloud, BsCpu, BsWhatsapp, BsGlobe2 } from 'react-icons/bs'
+import { HiOutlineCheckCircle, HiOutlineStar, HiChevronDown, HiOutlineSparkles } from 'react-icons/hi'
+
+const planGo = {
+  name: 'Go',
+  price: '49',
+  desc: 'El empleado digital de entrada',
+  icon: BsWhatsapp,
+  features: [
+    'Sin hardware — 100% digital',
+    'Acceso por WhatsApp + Web',
+    'Extrae facturas, albaranes, PDFs',
+    'Organiza documentos automáticamente',
+    'Búsqueda instantánea en todos tus docs',
+    'Panel web con tu información',
+    'Configuración remota en 15 min',
+    'Sin permanencia · Cancela cuando quieras',
+  ],
+  highlight: false,
+}
 
 const planesMensuales = [
   {
@@ -96,6 +114,7 @@ export default function Hardware() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
   const [showUnico, setShowUnico] = useState(false)
   const [showBusiness, setShowBusiness] = useState(false)
+  const [showGo, setShowGo] = useState(true)
 
   return (
     <section id="hardware" className="py-20 md:py-28 relative overflow-hidden bg-white">
@@ -110,18 +129,70 @@ export default function Hardware() {
         <motion.div initial={{ opacity: 0, y: 24 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-center max-w-3xl mx-auto mb-14">
           <span className="section-badge">Planes y precios</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4 text-balance">
-            Contrata un empleado digital desde <span className="gradient-text-warm">149€/mes</span>
+            Contrata un empleado digital desde <span className="gradient-text-warm">49€/mes</span>
           </h2>
           <p className="text-lg text-gray-500 leading-relaxed">
-            Hardware en cesión. Sin permanencia. Lo enchufas y funciona.
+            Sin hardware. Sin instalación. Sin permanencia. O con hardware si lo prefieres.
           </p>
         </motion.div>
 
-        {/* ── SUSCRIPCIÓN MENSUAL (PRINCIPAL) ── */}
+        {/* ── PLAN GO (DIGITAL) ── */}
+        {showGo && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="max-w-3xl mx-auto mb-8"
+          >
+            <div className="relative rounded-2xl p-6 border-2 border-sky-200 bg-gradient-to-br from-sky-50/80 to-white shadow-lg shadow-sky-500/5">
+              <div className="absolute -top-3 left-6 bg-gradient-to-r from-sky-500 to-cyan-500 text-white text-[11px] font-bold px-4 py-1 rounded-full shadow-lg shadow-sky-500/20 flex items-center gap-1.5">
+                <HiOutlineSparkles className="text-xs" />
+                NUEVO — Digital, sin hardware
+              </div>
+              <div className="flex flex-col md:flex-row md:items-center gap-6 mt-3">
+                {/* Columna izquierda: info del plan */}
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <BsWhatsapp className="text-2xl text-sky-500" />
+                    <div>
+                      <h3 className="font-bold text-gray-900 text-lg">Go</h3>
+                      <p className="text-xs text-gray-400">{planGo.desc}</p>
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <span className="text-4xl font-bold text-gray-900">{planGo.price}€</span>
+                    <span className="text-xs text-gray-400">/mes</span>
+                    <span className="ml-3 text-[11px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">Sin permanencia</span>
+                  </div>
+                  <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 mt-4">
+                    {planGo.features.map(f => (
+                      <li key={f} className="flex items-start gap-1.5 text-xs text-gray-600">
+                        <HiOutlineCheckCircle className="text-sky-500 mt-0.5 shrink-0" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* Columna derecha: CTA */}
+                <div className="flex flex-col items-center md:items-end justify-center md:min-w-[200px] gap-2">
+                  <a
+                    href="#contacto"
+                    className="w-full text-center bg-gradient-to-r from-sky-500 to-cyan-500 text-white px-6 py-3 rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-sky-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    Empieza por 49€
+                  </a>
+                  <p className="text-[10px] text-gray-400 text-center">Configuración remota · Sin hardware</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ── SUSCRIPCIÓN MENSUAL (CON HARDWARE) ── */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-5 justify-center">
             <BsCalendarWeek className="text-indigo-600" />
-            <span className="font-semibold text-gray-900">Suscripción mensual — hardware incluido</span>
+            <span className="font-semibold text-gray-900">Con hardware incluido</span>
             <span className="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">Sin permanencia</span>
           </div>
 
@@ -254,24 +325,6 @@ export default function Hardware() {
             <h3 className="text-base font-bold text-gray-900 mb-2">¿Nada encaja exactamente?</h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-5">Cuéntanos tu caso y te preparamos un presupuesto a medida. Sin compromiso.</p>
             <a href="#contacto" className="inline-flex items-center gap-2 gradient-primary text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-indigo-500/25 transition-all duration-300">Quiero un presupuesto a medida</a>
-          </div>
-        </motion.div>
-
-        {/* ── IMAGEN: Técnico instalando ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="max-w-3xl mx-auto mb-8 mt-8"
-        >
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-transparent rounded-3xl blur-[30px]" />
-            <img
-              src="/images/tecnico-instalando.jpg"
-              alt="Westlink Box — instalación"
-              className="relative w-full rounded-2xl border border-gray-100 shadow-premium-lg"
-              loading="lazy"
-            />
           </div>
         </motion.div>
 

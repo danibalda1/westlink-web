@@ -35,8 +35,8 @@ export default function App() {
         <link rel="canonical" href="https://westlinksl.com" />
         <link rel="icon" type="image/jpeg" href="/logo.jpg" />
 
-        <title>Westlink SL — Contrata un empleado digital de IA privado para tu PYME</title>
-        <meta name="description" content="Instalamos un empleado digital de IA en tu PYME. Privado, local, sin cuotas mensuales. 24/7. Rioja." />
+        <title>Westlink SL — Empleado digital de IA desde 49€/mes para tu PYME</title>
+        <meta name="description" content="Instalamos un empleado digital de IA en tu PYME. Desde 49€/mes sin hardware. Privado, local, 24/7. La Rioja." />
 
         {/* OpenGraph */}
         <meta property="og:type" content="website" />

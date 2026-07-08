@@ -165,6 +165,13 @@ export default function Hero() {
                 <HiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
               </a>
               <a
+                href="#hardware"
+                className="inline-flex items-center gap-2 text-sm text-emerald-400/80 hover:text-emerald-300 px-5 py-3.5 rounded-2xl border border-white/8 hover:border-emerald-500/30 transition-all duration-300"
+              >
+                <HiArrowRight className="text-sm" />
+                Empieza por 49€/mes · Plan Go
+              </a>
+              <a
                 href="#como-funciona"
                 className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white px-5 py-3.5 rounded-2xl border border-white/8 hover:border-white/20 transition-all duration-300"
               >
