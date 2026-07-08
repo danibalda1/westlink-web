@@ -52,7 +52,7 @@ export default async function handler(req, res) {
   }
 
   // Limitar longitud de campos (prevenir abuso)
-  if (nombre.length > 100 || email.length > 200 || mensaje.length > 5000) {
+  if (nombre.length > 100 || email.length > 200 || (mensaje && mensaje.length > 5000)) {
     return res.status(400).json({ error: 'Datos demasiado largos' })
   }
 
@@ -100,9 +100,13 @@ export default async function handler(req, res) {
             <td style="padding:6px 0;font-size:14px;color:#64748b">${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</td>
           </tr>
         </table>
-        <div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0">
-          <p style="margin:0;color:#475569;font-size:14px;line-height:1.6;white-space:pre-wrap">${escHtml(mensaje)}</p>
-        </div>
+          ${esLeadMagnet ? `<div style="margin-top:16px;padding:16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0">
+            <p style="margin:0;color:#166534;font-size:14px;font-weight:600">🎯 Quiere la guía «Cómo ahorrar 10h/mes»</p>
+            <p style="margin:4px 0 0;color:#15803d;font-size:13px">Enviarle el PDF de la guía y hacer seguimiento comercial.</p>
+          </div>`
+          : `<div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0">
+            <p style="margin:0;color:#475569;font-size:14px;line-height:1.6;white-space:pre-wrap">${escHtml(mensaje)}</p>
+          </div>`}
       </td>
     </tr>
     <tr>
