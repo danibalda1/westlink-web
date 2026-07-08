@@ -126,7 +126,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Westlink Web <daniel@westlinksl.com>',
+        from: 'Westlink Web <onboarding@resend.dev>',
         to: 'daniel@westlinksl.com',
         reply_to: email,
         subject: asunto,
