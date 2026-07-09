@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
+import { useState } from 'react'
 import { useInView } from 'framer-motion'
 import { BsWhatsapp, BsSearch, BsFileEarmarkText, BsFolderCheck, BsArrowUpShort, BsLightningCharge, BsShieldCheck, BsCloudArrowUp } from 'react-icons/bs'
 import { HiOutlineCheckCircle, HiOutlineSparkles, HiArrowRight } from 'react-icons/hi'
@@ -32,6 +33,30 @@ const comparativa = [
 export default function PlanGo() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const [enviado, setEnviado] = useState(false)
+  const [enviando, setEnviando] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setEnviando(true)
+    const form = e.target
+    const data = Object.fromEntries(new FormData(form))
+    try {
+      const res = await fetch('/api/contact.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (res.ok) {
+        setEnviado(true)
+      } else {
+        alert('Error al enviar. Inténtalo de nuevo o escríbenos a daniel@westlinksl.com')
+      }
+    } catch {
+      alert('Error de conexión. Inténtalo de nuevo.')
+    }
+    setEnviando(false)
+  }
 
   return (
     <section id="plan-go" className="py-20 md:py-28 relative overflow-hidden bg-gradient-to-b from-white via-sky-50/30 to-white">
@@ -163,9 +188,19 @@ export default function PlanGo() {
               cómo una bodega de La Rioja dejó de perder los viernes por la tarde organizando facturas.
             </p>
 
-            <form
-              action="/api/contact.js"
-              method="POST"
+            {enviado ? (
+              <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
+                <div className="text-4xl mb-3">🎉</div>
+                <h4 className="text-white font-bold text-lg mb-2">¡Guía enviada!</h4>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  Revisa tu email (y la carpeta de spam por si acaso).<br/>
+                  Si no te llega en 5 min, escríbenos a <strong>daniel@westlinksl.com</strong>
+                </p>
+              </div>
+            ) : (
+              <>
+              <form
+              onSubmit={handleSubmit}
               className="max-w-md mx-auto space-y-3"
             >
               <input type="hidden" name="origen" value="lead-magnet-plan-go" />
@@ -193,10 +228,12 @@ export default function PlanGo() {
                 type="submit"
                 className="w-full bg-white text-sky-700 font-bold px-6 py-3.5 rounded-xl text-sm hover:bg-gray-100 transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
               >
-                Quiero la guía gratis → Empieza por 49€
+                {enviando ? 'Enviando...' : 'Quiero la guía gratis → Empieza por 49€'}
               </button>
             </form>
             <p className="text-[10px] text-white/50 mt-4">Sin spam. Sin compromiso. 1 correo con la guía y ya.</p>
+            </>
+            )}
           </div>
         </motion.div>
 
