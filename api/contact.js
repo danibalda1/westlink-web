@@ -126,7 +126,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Westlink <onboarding@resend.dev>',
+        from: 'Westlink <daniel@westlinksl.com>',
         to: 'daniel@westlinksl.com',
         reply_to: email,
         subject: asunto,
@@ -224,7 +224,7 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Westlink <onboarding@resend.dev>',
+          from: 'Westlink <daniel@westlinksl.com>',
           to: email,
           reply_to: 'daniel@westlinksl.com',
           subject: '📖 Tu guía: Cómo ahorrar 10h/mes en papeleo con IA',
