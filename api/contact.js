@@ -217,7 +217,7 @@ export default async function handler(req, res) {
 </body>
 </html>`
 
-      await fetch('https://api.resend.com/emails', {
+      const guiaResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${key}`,
@@ -232,6 +232,10 @@ export default async function handler(req, res) {
           text: `Hola ${nombre},\n\nAquí tienes tu guía "Cómo ahorrar 10h al mes en papeleo con IA".\n\n1. Digitaliza todo lo que entre por WhatsApp\n2. Búsqueda instantánea, no carpetas\n3. Informe semanal automático para tu gestor\n4. Sin miedo a la tecnología\n5. Empieza pequeño, escala cuando quieras\n\n¿Quieres verlo en acción? Escríbenos a daniel@westlinksl.com o visita westlinksl.com\n\nWestlink SL · La Rioja`,
         }),
       })
+      const guiaBody = await guiaResp.text()
+      if (!guiaResp.ok) {
+        console.error(`Guía lead error (${guiaResp.status}): ${guiaBody}`)
+      }
     }
 
     return res.status(200).json({ ok: true })
