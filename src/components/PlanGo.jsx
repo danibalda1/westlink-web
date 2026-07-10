@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useState } from 'react'
 import { useInView } from 'framer-motion'
-import { BsWhatsapp, BsSearch, BsFileEarmarkText, BsFolderCheck, BsArrowUpShort, BsLightningCharge, BsShieldCheck, BsCloudArrowUp } from 'react-icons/bs'
+import { BsWhatsapp, BsSearch, BsLightningCharge } from 'react-icons/bs'
 import { HiOutlineCheckCircle, HiOutlineSparkles, HiArrowRight } from 'react-icons/hi'
 
 const steps = [
@@ -119,11 +119,11 @@ export default function PlanGo() {
               )
             })}
           </div>
-          {/* Arrow connector between steps (desktop) */}
-          <div className="hidden md:flex justify-center gap-0 -mt-52 mb-0 relative z-0 opacity-30 pointer-events-none">
+          {/* Arrow connector between steps — disabled (layout issues on desktop) */}
+          {/* <div className="hidden md:flex justify-center gap-0 -mt-52 mb-0 relative z-0 opacity-30 pointer-events-none">
             <BsArrowUpShort className="text-4xl text-sky-400 ml-[16.5%]" />
             <BsArrowUpShort className="text-4xl text-sky-400 ml-[33%]" />
-          </div>
+          </div> */}
         </motion.div>
 
         {/* ── BENEFICIOS ── */}
