@@ -189,17 +189,17 @@ export default function Hero() {
             >
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Instalación local
+                Desde 49€/mes
               </span>
               <span className="w-px h-3 bg-white/10" />
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Sin cuotas mensuales
+                Sin permanencia
               </span>
               <span className="w-px h-3 bg-white/10" />
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Pago único
+                Datos 100% locales
               </span>
             </motion.div>
           </div>
