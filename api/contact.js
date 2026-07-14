@@ -12,6 +12,44 @@ function checkRate(ip, maxPerMin = 5) {
   return true
 }
 
+// ── Airtable CRM — guardar leads automáticamente ──
+const AIRTABLE_BASE = 'app0ZXZ67bcNmuLej'
+const AIRTABLE_TABLE = 'tblZFJ6ORAwIfvlpG'
+const AIRTABLE_KEY = (process.env.AIRTABLE_API_KEY || '').split('\n')[0].trim()
+
+async function saveToAirtable({ nombre, email, telefono, origen }) {
+  if (!AIRTABLE_KEY) {
+    console.error('No AIRTABLE_API_KEY configured — lead not saved')
+    return
+  }
+  try {
+    const resp = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${AIRTABLE_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fields: {
+          Nombre: nombre,
+          Email: email,
+          'Teléfono': telefono || '',
+          Origen: origen || 'formulario-contacto',
+          Fecha: new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
+          Estado: 'Nuevo',
+          Notas: '',
+        },
+      }),
+    })
+    if (!resp.ok) {
+      const text = await resp.text()
+      console.error(`Airtable error (${resp.status}): ${text}`)
+    }
+  } catch (err) {
+    console.error('Airtable save error:', err)
+  }
+}
+
 // Vercel Serverless Function — Contact form → Email via Resend
 export default async function handler(req, res) {
   const origin = req.headers['origin'] || ''
@@ -34,8 +72,14 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Demasiadas solicitudes. Espera un minuto.' })
   }
 
-  const { nombre, email, empresa, mensaje } = req.body || {}
-  if (!nombre || !email || !mensaje) {
+  const { nombre, email, empresa, mensaje, telefono, origen } = req.body || {}
+
+  // ── Lead magnet: no requiere mensaje ──
+  const esLeadMagnet = origen === 'lead-magnet-plan-go'
+  if (!nombre || !email) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios' })
+  }
+  if (!esLeadMagnet && !mensaje) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' })
   }
 
@@ -46,7 +90,7 @@ export default async function handler(req, res) {
   }
 
   // Limitar longitud de campos (prevenir abuso)
-  if (nombre.length > 100 || email.length > 200 || mensaje.length > 5000) {
+  if (nombre.length > 100 || email.length > 200 || (mensaje && mensaje.length > 5000)) {
     return res.status(400).json({ error: 'Datos demasiado largos' })
   }
 
@@ -58,6 +102,12 @@ export default async function handler(req, res) {
   }
 
   const empresaTexto = empresa ? ` (${empresa})` : ''
+  const telefonoTexto = telefono ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px">Teléfono</td><td style="padding:6px 0;font-weight:600;font-size:14px;color:#1e293b">${escHtml(telefono)}</td></tr>` : ''
+
+  const titulo = esLeadMagnet ? '📥 Lead magnet — Guía 10h/mes' : '🆕 Contacto web'
+  const asunto = esLeadMagnet
+    ? `📥 Lead: ${nombre}${empresaTexto} quiere la guía`
+    : `🆕 Contacto web - ${nombre}${empresaTexto}`
 
   const html = `<!DOCTYPE html>
 <html>
@@ -66,7 +116,7 @@ export default async function handler(req, res) {
   <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:24px auto;background:white;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0">
     <tr>
       <td style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:28px 32px">
-        <h1 style="color:white;margin:0;font-size:20px;font-weight:700">Nuevo contacto web</h1>
+        <h1 style="color:white;margin:0;font-size:20px;font-weight:700">${titulo}</h1>
         <p style="color:#c4b5fd;margin:4px 0 0;font-size:14px">Westlink SL — westlinksl.com</p>
       </td>
     </tr>
@@ -82,14 +132,19 @@ export default async function handler(req, res) {
             <td style="padding:6px 0;font-size:14px"><a href="mailto:${escHtml(email)}" style="color:#4f46e5">${escHtml(email)}</a></td>
           </tr>
           ${empresa ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px">Empresa</td><td style="padding:6px 0;font-weight:600;font-size:14px;color:#1e293b">${escHtml(empresa)}</td></tr>` : ''}
+          ${telefonoTexto}
           <tr>
             <td style="padding:6px 0;color:#64748b;font-size:13px">Fecha</td>
             <td style="padding:6px 0;font-size:14px;color:#64748b">${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</td>
           </tr>
         </table>
-        <div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0">
-          <p style="margin:0;color:#475569;font-size:14px;line-height:1.6;white-space:pre-wrap">${escHtml(mensaje)}</p>
-        </div>
+          ${esLeadMagnet ? `<div style="margin-top:16px;padding:16px;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0">
+            <p style="margin:0;color:#166534;font-size:14px;font-weight:600">🎯 Quiere la guía «Cómo ahorrar 10h/mes»</p>
+            <p style="margin:4px 0 0;color:#15803d;font-size:13px">Enviarle el PDF de la guía y hacer seguimiento comercial.</p>
+          </div>`
+          : `<div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0">
+            <p style="margin:0;color:#475569;font-size:14px;line-height:1.6;white-space:pre-wrap">${escHtml(mensaje)}</p>
+          </div>`}
       </td>
     </tr>
     <tr>
@@ -109,25 +164,120 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Westlink Web <daniel@westlinksl.com>',
+        from: 'Westlink <daniel@westlinksl.com>',
         to: 'daniel@westlinksl.com',
         reply_to: email,
-        subject: `🆕 Contacto web - ${nombre}${empresaTexto}`,
+        subject: asunto,
         html,
-        text: `Nuevo contacto desde westlinksl.com
-
-Nombre: ${nombre}
-Email: ${email}${empresa ? `\nEmpresa: ${empresa}` : ''}
-Mensaje: ${mensaje}`,
+        text: `${titulo}\n\nNombre: ${nombre}\nEmail: ${email}${empresa ? `\nEmpresa: ${empresa}` : ''}${telefono ? `\nTeléfono: ${telefono}` : ''}${esLeadMagnet ? '\nTipo: Lead magnet (guía 10h/mes)' : `\nMensaje: ${mensaje}`}`,
       }),
     })
 
     const bodyText = await resendResp.text()
-
     if (!resendResp.ok) {
       console.error(`Resend error (${resendResp.status}): ${bodyText}`)
       return res.status(500).json({ error: 'Error al enviar el email. Inténtalo más tarde.' })
     }
+
+    // ── Si es lead magnet, enviar la guía automáticamente al lead ──
+    if (esLeadMagnet) {
+      const guiaHtml = `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Inter,-apple-system,sans-serif;background:#f8fafc">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:24px auto;background:white;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0">
+    <tr>
+      <td style="background:linear-gradient(135deg,#06b6d4,#0891b2);padding:32px 36px;text-align:center">
+        <p style="color:#a5f3fc;margin:0;font-size:13px;text-transform:uppercase;letter-spacing:2px;font-weight:600">Westlink SL · La Rioja</p>
+        <h1 style="color:white;margin:12px 0 0;font-size:24px;font-weight:700">📖 Cómo ahorrar 10h al mes<br/>en papeleo con IA</h1>
+        <p style="color:#cffafe;margin:8px 0 0;font-size:14px;line-height:1.4">Guía práctica para PYMES · ${nombre}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:28px 36px">
+        <h2 style="color:#0f172a;font-size:16px;margin:0 0 16px">El problema real</h2>
+        <p style="color:#475569;font-size:14px;line-height:1.7;margin:0 0 20px">
+          Cada semana pierdes horas buscando facturas, organizando albaranes, preparando informes para el gestor.
+          No es que seas desorganizado — es que estas tareas no las debería hacer una persona.
+        </p>
+
+        <div style="background:#f0fdf4;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #bbf7d0">
+          <p style="color:#166534;font-size:13px;font-weight:600;margin:0 0 8px">⚡ El dato</p>
+          <p style="color:#15803d;font-size:14px;line-height:1.6;margin:0">
+            Una gestoría con 3 empleados recuperó <strong>12h semanales</strong> al delegar la clasificación de documentos a un empleado digital.
+          </p>
+        </div>
+
+        <h2 style="color:#0f172a;font-size:16px;margin:24px 0 16px">5 formas de ahorrar tiempo esta semana</h2>
+
+        <div style="margin-bottom:16px">
+          <h3 style="color:#0f172a;font-size:14px;margin:0 0 4px">1. Digitaliza todo lo que entre por WhatsApp</h3>
+          <p style="color:#64748b;font-size:13px;line-height:1.6;margin:0">Factura recibida → reenvíala a tu empleado digital. Él la extrae, clasifica y archiva. Tú ni la abres.</p>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <h3 style="color:#0f172a;font-size:14px;margin:0 0 4px">2. Búsqueda instantánea, no carpetas</h3>
+          <p style="color:#64748b;font-size:13px;line-height:1.6;margin:0">Olvídate de "¿En qué carpeta puse la factura de García López?". Pregunta y el empleado te la encuentra en 5 segundos.</p>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <h3 style="color:#0f172a;font-size:14px;margin:0 0 4px">3. Informe semanal automático para tu gestor</h3>
+          <p style="color:#64748b;font-size:13px;line-height:1.6;margin:0">El gestor te cobra 50€ extra si le llevas los papeles desordenados. Con el informe automático, llegas perfecto cada mes.</p>
+        </div>
+
+        <div style="margin-bottom:16px">
+          <h3 style="color:#0f172a;font-size:14px;margin:0 0 4px">4. Sin miedo a la tecnología</h3>
+          <p style="color:#64748b;font-size:13px;line-height:1.6;margin:0">Si sabes usar WhatsApp, sabes usar tu empleado digital. No hay formación, no hay manuales.</p>
+        </div>
+
+        <div style="margin-bottom:20px">
+          <h3 style="color:#0f172a;font-size:14px;margin:0 0 4px">5. Empieza pequeño, escala cuando quieras</h3>
+          <p style="color:#64748b;font-size:13px;line-height:1.6;margin:0">El Plan Go cuesta 49€/mes y funciona desde ya. Sin hardware, sin instalación. Si luego quieres más, subes de plan.</p>
+        </div>
+
+        <div style="background:#f0f9ff;border-radius:12px;padding:24px;border:1px solid #bae6fd;text-align:center">
+          <p style="color:#0369a1;font-size:15px;font-weight:600;margin:0 0 12px">¿Quieres verlo en acción?</p>
+          <p style="color:#475569;font-size:13px;line-height:1.6;margin:0 0 16px">
+            Dani, fundador de Westlink, te enseña en 10 minutos cómo funciona tu empleado digital.
+            Sin compromiso, sin venta — solo la demo.
+          </p>
+          <a href="https://westlinksl.com/#contacto" style="display:inline-block;background:linear-gradient(135deg,#06b6d4,#0891b2);color:white;padding:12px 28px;border-radius:12px;text-decoration:none;font-size:14px;font-weight:600">Quiero ver la demo gratuita →</a>
+        </div>
+
+        <p style="color:#94a3b8;font-size:11px;line-height:1.5;margin:24px 0 0;text-align:center">
+          Westlink SL · implantamos IA privada en PYMES · La Rioja<br/>
+          <a href="https://westlinksl.com" style="color:#06b6d4">westlinksl.com</a> · daniel@westlinksl.com · 648 25 32 17<br/>
+          <span style="color:#cbd5e1">Si no quieres recibir más correos, responde "baja" y te eliminamos.</span>
+        </p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`
+
+      const guiaResp = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${key}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Westlink <daniel@westlinksl.com>',
+          to: email,
+          reply_to: 'daniel@westlinksl.com',
+          subject: '📖 Tu guía: Cómo ahorrar 10h/mes en papeleo con IA',
+          html: guiaHtml,
+          text: `Hola ${nombre},\n\nAquí tienes tu guía "Cómo ahorrar 10h al mes en papeleo con IA".\n\n1. Digitaliza todo lo que entre por WhatsApp\n2. Búsqueda instantánea, no carpetas\n3. Informe semanal automático para tu gestor\n4. Sin miedo a la tecnología\n5. Empieza pequeño, escala cuando quieras\n\n¿Quieres verlo en acción? Escríbenos a daniel@westlinksl.com o visita westlinksl.com\n\nWestlink SL · La Rioja`,
+        }),
+      })
+      const guiaBody = await guiaResp.text()
+      if (!guiaResp.ok) {
+        console.error(`Guía lead error (${guiaResp.status}): ${guiaBody}`)
+      }
+    }
+
+    // ── Guardar lead en Airtable CRM ──
+    await saveToAirtable({ nombre, email, telefono, origen })
 
     return res.status(200).json({ ok: true })
   } catch (err) {
