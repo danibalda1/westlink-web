@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo — Westlink: tu empleado digital</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0A0A1A;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px;
+    }
+
+    .phone {
+      width: 360px;
+      height: 740px;
+      background: #111B28;
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow: 0 0 0 2px #1E2D3D, 0 30px 80px rgba(0,0,0,0.6);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 28px;
+      background: #111B28;
+      border-radius: 0 0 18px 18px;
+      z-index: 10;
+    }
+    .phone-notch::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: #1E2D3D;
+      border-radius: 50%;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #0B141A;
+      border-radius: 34px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Header del chat */
+    .chat-header {
+      background: #1F2C38;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #1E2D3D;
+      flex-shrink: 0;
+      z-index: 5;
+    }
+    .chat-header .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .chat-header .info { flex: 1; }
+    .chat-header .info .name { color: #E9EDEF; font-size: 15px; font-weight: 600; }
+    .chat-header .info .status { color: #8696A0; font-size: 11px; }
+
+    /* Mensajes */
+    .chat-messages {
+      flex: 1;
+      padding: 8px 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .msg {
+      max-width: 85%;
+      padding: 8px 12px 8px 12px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      margin-bottom: 4px;
+      opacity: 0;
+      animation: fadeInUp 0.4s ease forwards;
+      position: relative;
+      word-wrap: break-word;
+    }
+    .msg.user {
+      align-self: flex-end;
+      background: #005C4B;
+      color: #E9EDEF;
+      border-bottom-right-radius: 2px;
+      margin-left: auto;
+    }
+    .msg.bot {
+      align-self: flex-start;
+      background: #1F2C38;
+      color: #E9EDEF;
+      border-bottom-left-radius: 2px;
+      margin-right: auto;
+    }
+    .msg .time {
+      font-size: 10px;
+      color: rgba(233,237,239,0.5);
+      text-align: right;
+      margin-top: 2px;
+    }
+    .msg.bot .time { text-align: left; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Input simulado */
+    .chat-input {
+      background: #1F2C38;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      z-index: 5;
+    }
+    .chat-input .field {
+      flex: 1;
+      background: #2A3942;
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: #E9EDEF;
+      font-size: 13px;
+      border: none;
+      outline: none;
+    }
+    .chat-input .field::placeholder { color: #8696A0; }
+    .chat-input .send-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #00A884;
+      border: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .chat-input .send-btn:hover { background: #06CF9C; }
+    .chat-input .send-btn svg { width: 18px; height: 18px; fill: white; }
+
+    /* Botón de acción */
+    .demo-cta {
+      margin-top: 14px;
+      text-align: center;
+    }
+    .demo-cta a {
+      display: inline-block;
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    .demo-cta a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(6,182,212,0.3);
+    }
+
+    /* Texto informativo */
+    .demo-info {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      margin-top: 20px;
+      max-width: 360px;
+    }
+    .demo-info strong { color: rgba(255,255,255,0.6); }
+
+    @media (max-width: 420px) {
+      .phone { width: 100%; height: 90vh; border-radius: 0; padding: 0; box-shadow: none; }
+      .phone-notch { display: none; }
+      .phone-screen { border-radius: 0; }
+      body { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      <div class="chat-header">
+        <div class="avatar">W</div>
+        <div class="info">
+          <div class="name">Empleado Digital</div>
+          <div class="status">en línea</div>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="messages">
+        <!-- Los mensajes se inyectan aquí -->
+      </div>
+
+      <div class="chat-input">
+        <input class="field" placeholder="Escribe un mensaje..." disabled />
+        <button class="send-btn">
+          <svg viewBox="0 0 24 24"><path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-cta" style="opacity:0" id="cta">
+    <a href="https://westlinksl.com/#contacto">Quiero probarlo →</a>
+  </div>
+
+  <p class="demo-info">
+    Así funciona tu empleado digital — <strong>tú le hablas por WhatsApp como a una persona</strong>.
+    <br/>westlinksl.com · Dani · La Rioja
+  </p>
+
+  <script>
+    const messages = [
+      { type: 'user', text: 'Busca la factura de materiales de Salto del mes pasado' },
+      { type: 'bot', text: 'Aquí está. Factura nº F-2026-0842 de Salto Eléctrico — 1.842€ en material. La tengo en Proveedores/Salto.', delay: 1200 },
+      { type: 'user', text: 'Prepárame un presupuesto para cambiar el cuadro de luces en la calle Mayor', delay: 3000 },
+      { type: 'bot', text: 'Listo. Basado en trabajos similares: 2.450€ materiales + 800€ mano de obra. ¿Lo envío al cliente?', delay: 2000 },
+      { type: 'user', text: 'Sí, envíalo. Y dime si tengo certificados pendientes de firmar', delay: 3500 },
+      { type: 'bot', text: 'Enviado. El cliente recibirá el presupuesto por WhatsApp.\n\nY sí, el boletín de la reforma de García López (C/ Río 23) está pendiente desde el 28/06 ¿Lo preparo?', delay: 2500 },
+      { type: 'user', text: 'Sí, prepáralo. ¿Cuánto llevamos facturado este trimestre?', delay: 3000 },
+      { type: 'bot', text: '28.430€ en Q2 2026. 12 obras. La más grande: reforma integral de Finca Miranda (8.200€).\n\n¿Necesitas algo más?', delay: 2000 },
+    ];
+
+    const container = document.getElementById('messages');
+    const cta = document.getElementById('cta');
+
+    function addTime() {
+      const now = new Date();
+      return now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+    }
+
+    function addMessage(msg, index) {
+      const div = document.createElement('div');
+      div.className = `msg ${msg.type}`;
+      div.style.animationDelay = '0s';
+      
+      const text = document.createElement('div');
+      text.textContent = msg.text;
+      div.appendChild(text);
+      
+      const time = document.createElement('div');
+      time.className = 'time';
+      time.textContent = addTime();
+      div.appendChild(time);
+
+      const delay = msg.delay || 800;
+      setTimeout(() => {
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
+
+        // Si es el último, mostrar CTA
+        if (index === messages.length - 1) {
+          setTimeout(() => {
+            cta.style.opacity = '1';
+            cta.style.transition = 'opacity 0.6s ease';
+          }, 1500);
+        }
+      }, (msg === messages[0] ? 500 : delay));
+    }
+
+    // Iniciar animación
+    let totalDelay = 300;
+    messages.forEach((msg, i) => {
+      const wait = msg === messages[0] ? 500 : (messages[i-1]?.delay || 800) + 300;
+      totalDelay += wait;
+      setTimeout(() => addMessage(msg, i), totalDelay - wait);
+    });
+  </script>
+
+</body>
+</html>

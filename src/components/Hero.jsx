@@ -180,11 +180,11 @@ export default function Hero() {
                 Empieza por 49€/mes · Plan Go
               </a>
               <a
-                href="#como-funciona"
-                className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white px-5 py-3.5 rounded-2xl border border-white/8 hover:border-white/20 transition-all duration-300"
+                href="/demo.html"
+                className="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 px-5 py-3.5 rounded-2xl border border-cyan-500/30 hover:border-cyan-400/50 transition-all duration-300"
               >
                 <HiShieldCheck className="text-emerald-400/70" />
-                Ver cómo funciona
+                ▶ Ver demo en acción
               </a>
             </motion.div>
 

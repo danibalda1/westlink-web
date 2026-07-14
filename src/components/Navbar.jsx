@@ -3,6 +3,7 @@ import { HiMenu, HiX, HiPhone } from 'react-icons/hi'
 
 const links = [
   { label: 'Plan Go', href: '#plan-go' },
+  { label: 'Demo', href: '/demo.html' },
   { label: 'Para quién', href: '#para-quien' },
   { label: 'Precios', href: '#hardware' },
   { label: 'FAQ', href: '#faq' },
