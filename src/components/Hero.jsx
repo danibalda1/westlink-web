@@ -162,7 +162,7 @@ export default function Hero() {
                 href="#contacto"
                 className="group relative inline-flex items-center gap-2.5 gradient-primary text-white px-7 py-3.5 rounded-2xl text-base font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>Quiero dejarme de papeles</span>
+                <span>Quiero probarlo</span>
                 <HiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
               </a>
               <a
@@ -331,6 +331,22 @@ export default function Hero() {
               <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
             </div>
           ))}
+        </motion.div>
+
+        {/* ── Trust strip ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="text-center mt-8"
+        >
+          <p className="text-[11px] text-gray-500 flex items-center justify-center gap-4 flex-wrap">
+            <span>🔒 Tus datos nunca salen de España</span>
+            <span className="hidden sm:inline">·</span>
+            <span>✅ Cumplimos RGPD</span>
+            <span className="hidden sm:inline">·</span>
+            <span>📍 Procesado en La Rioja</span>
+          </p>
         </motion.div>
       </div>
     </section>
