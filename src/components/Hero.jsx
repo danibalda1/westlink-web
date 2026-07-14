@@ -5,14 +5,14 @@ import { BsDot } from 'react-icons/bs'
 
 /* ── Demo messages que simulan una conversación real ── */
 const demoMessages = [
-  { role: 'user', text: '¿Tenemos el contrato de García López actualizado?' },
-  { role: 'assistant', text: 'Sí. Última versión firmada el 12/06/2026. Está en la carpeta Clientes/García López/Contratos.' },
-  { role: 'user', text: 'Sácame un resumen de ingresos de este trimestre' },
-  { role: 'assistant', text: 'Aquí tienes: 214.580€ en ingresos (+23% vs Q1). Facturación pendiente: 34.200€.' },
-  { role: 'user', text: 'Prepara un presupuesto para el cliente nuevo de Plaza Logística' },
-  { role: 'assistant', text: 'Listo. Basado en tarifas 2026 y descuento por volumen: 18.400€ IVA incluido. ¿Lo envío?' },
-  { role: 'user', text: '¿Hay alguna normativa nueva que afecte a nuestro sector?' },
-  { role: 'assistant', text: 'Sí. BOE del 28/06: nueva directiva de verificación fiscal (Verifactu). Entra en vigor en enero 2027. He actualizado los procesos de facturación para cumplir.' },
+  { role: 'user', text: 'Busca la factura de materiales de Salto del mes pasado' },
+  { role: 'assistant', text: 'Aquí está. Factura nº F-2026-0842 de Salto Eléctrico — 1.842€ en material. La tengo clasificada en Proveedores/Salto.' },
+  { role: 'user', text: 'Prepárame un presupuesto para cambiar el cuadro de luces en la calle Mayor' },
+  { role: 'assistant', text: 'Listo. Basado en trabajos similares: 2.450€ materiales + 800€ mano de obra. ¿Lo envío al cliente?' },
+  { role: 'user', text: '¿Tengo algún certificado de instalación pendiente de firmar?' },
+  { role: 'assistant', text: 'Sí. El boletín de la reforma de García López (C/ Río 23) está pendiente de firma desde el 28/06. ¿Lo preparo?' },
+  { role: 'user', text: '¿Cuánto facturé en obras este trimestre?' },
+  { role: 'assistant', text: '28.430€ en Q2 2026. 12 obras facturadas. La más grande: reforma integral de Finca Miranda (8.200€).' },
 ]
 
 export default function Hero() {
