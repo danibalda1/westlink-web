@@ -107,11 +107,11 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight"
             >
-              Contrata un
+              Olvídate del papeleo.
               <span className="block mt-2">
-                <span className="gradient-text-warm">Olvídate del papeleo</span>
+                <span className="gradient-text-warm">Contrata un empleado digital</span>
               </span>
-              <span className="block mt-2 text-white/90">Un empleado digital hace todo por ti</span>
+              <span className="block mt-2 text-white/90">Desde 49€/mes, por WhatsApp</span>
             </motion.h1>
 
             {/* Subtitle */}
