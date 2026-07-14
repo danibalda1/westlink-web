@@ -62,16 +62,16 @@ export default function Contacto() {
             className="text-center mb-12"
           >
             <span className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/8 text-indigo-300 text-[11px] px-3 py-1.5 rounded-full uppercase tracking-widest font-semibold">
-              Contacto
+              Háblame
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mt-5 mb-4">
-              Háblame, soy Dani
+              Escríbeme sin compromiso
             </h2>
             <p className="text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
-              Sin compromiso. Te atiendo yo en persona. Quedamos, te enseño cómo funciona
-              y si te gusta, empezamos.
+              Soy Dani, de Villamediana. Si tienes un negocio y te duele el papeleo,
+              háblame y te cuento cómo te echo una mano. Sin comerciales, sin presiones.
               <br />
-              <span className="text-indigo-400/80">Visitas gratuitas en La Rioja y alrededores.</span>
+              <span className="text-indigo-400/80">Visitas gratis en La Rioja y alrededores.</span>
             </p>
           </motion.div>
 

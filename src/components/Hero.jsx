@@ -107,11 +107,11 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight"
             >
-              Olvídate del papeleo.
+              Hola, soy Dani.
               <span className="block mt-2">
-                <span className="gradient-text-warm">Contrata un empleado digital</span>
+                <span className="gradient-text-warm">Te ayudo con el papeleo</span>
               </span>
-              <span className="block mt-2 text-white/90">Sin instalar nada, desde el móvil</span>
+              <span className="block mt-2 text-white/90">Sin empresas, sin rodeos. Te echo una mano.</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -121,10 +121,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-gray-400 mt-6 leading-relaxed max-w-lg"
             >
-              Soy Dani — de Villamediana, La Rioja. Te ayudo a dejar
-              de perder horas con facturas, presupuestos y papeles.
-              Tu empleado digital trabaja por WhatsApp desde 49€/mes.
-              Sin instalar nada, sin permanencia, sin tonterías.
+              Vivo en Villamediana y ayudo a negocios de La Rioja a dejar de perder
+              horas con facturas, presupuestos y papeles. Todo por WhatsApp,
+              sin instalaciones raras, sin compromiso.
             </motion.p>
 
             {/* Feature pills */}
@@ -162,7 +161,7 @@ export default function Hero() {
                 href="#contacto"
                 className="group relative inline-flex items-center gap-2.5 gradient-primary text-white px-7 py-3.5 rounded-2xl text-base font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>Quiero probarlo</span>
+                <span>Cuéntame qué te duele</span>
                 <HiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
               </a>
               <a
@@ -170,7 +169,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-3.5 rounded-2xl text-sm font-bold hover:bg-white/20 transition-all duration-300"
               >
                 <HiPhone className="text-lg" />
-                Llámame: 648 25 32 17
+                Mi móvil: 648 25 32 17
               </a>
               <a
                 href="#hardware"
@@ -197,17 +196,12 @@ export default function Hero() {
             >
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Desde 49€/mes
+                Desde 49€/mes · Sin tonterías
               </span>
               <span className="w-px h-3 bg-white/10" />
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Sin permanencia
-              </span>
-              <span className="w-px h-3 bg-white/10" />
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Ya lo usan negocios en La Rioja
+                Ya ayudo a gente en La Rioja
               </span>
             </motion.div>
           </div>
