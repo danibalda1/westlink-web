@@ -109,7 +109,7 @@ export default function Hero() {
             >
               Hola, soy Dani.
               <span className="block mt-2">
-                <span className="gradient-text-warm">Te ayudo con el papeleo</span>
+                <span className="gradient-text-warm">Te ayudo con el papeleo (con IA)</span>
               </span>
               <span className="block mt-2 text-white/90">Sin empresas, sin rodeos. Te echo una mano.</span>
             </motion.h1>
@@ -122,8 +122,8 @@ export default function Hero() {
               className="text-base sm:text-lg text-gray-400 mt-6 leading-relaxed max-w-lg"
             >
               Vivo en Villamediana y ayudo a negocios de La Rioja a dejar de perder
-              horas con facturas, presupuestos y papeles. Todo por WhatsApp,
-              sin instalaciones raras, sin compromiso.
+              horas con facturas, presupuestos y papeles. No es una persona — es una IA
+              que trabaja por WhatsApp. Sin instalaciones raras, sin compromiso.
             </motion.p>
 
             {/* Feature pills */}
