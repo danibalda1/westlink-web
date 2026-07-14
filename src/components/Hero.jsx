@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { HiArrowRight, HiShieldCheck, HiPlay, HiPause } from 'react-icons/hi'
+import { HiArrowRight, HiShieldCheck, HiPlay, HiPause, HiPhone } from 'react-icons/hi'
 import { BsDot } from 'react-icons/bs'
 
 /* ── Demo messages que simulan una conversación real ── */
@@ -109,9 +109,9 @@ export default function Hero() {
             >
               Contrata un
               <span className="block mt-2">
-                <span className="gradient-text-warm">empleado digital</span>
+                <span className="gradient-text-warm">Olvídate del papeleo</span>
               </span>
-              <span className="block mt-2 text-white/90">que trabaja 24h</span>
+              <span className="block mt-2 text-white/90">Un empleado digital hace todo por ti</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -121,10 +121,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-gray-400 mt-6 leading-relaxed max-w-lg"
             >
-              Instalamos un trabajador de inteligencia artificial
-              dentro de tu empresa — da igual que tengas una gestoría, una bodega,
-              una empresa de electricidad o un taller. Aprende tus procesos, automatiza tareas y mantiene
-              todos tus datos seguros en tus instalaciones.
+              Olvídate de perder horas buscando facturas, organizando papeles,
+              preparando informes. Tu empleado digital lo hace por ti — por WhatsApp,
+              desde 49€/mes, sin instalar nada.
             </motion.p>
 
             {/* Feature pills */}
@@ -162,8 +161,15 @@ export default function Hero() {
                 href="#contacto"
                 className="group relative inline-flex items-center gap-2.5 gradient-primary text-white px-7 py-3.5 rounded-2xl text-base font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>Quiero mi empleado IA</span>
+                <span>Quiero dejarme de papeles</span>
                 <HiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
+              </a>
+              <a
+                href="tel:+34648253217"
+                className="inline-flex items-center gap-2 text-white bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-3.5 rounded-2xl text-sm font-bold hover:bg-white/20 transition-all duration-300"
+              >
+                <HiPhone className="text-lg" />
+                Llámame: 648 25 32 17
               </a>
               <a
                 href="#hardware"
@@ -186,7 +192,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="mt-12 flex items-center gap-4 text-xs text-gray-500"
+              className="mt-12 flex items-center gap-4 text-xs text-gray-500 flex-wrap"
             >
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
@@ -200,7 +206,7 @@ export default function Hero() {
               <span className="w-px h-3 bg-white/10" />
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
-                Datos 100% locales
+                Ya lo usan negocios en La Rioja
               </span>
             </motion.div>
           </div>

@@ -1,21 +1,12 @@
-import { lazy, Suspense } from 'react'
 import { Helmet } from 'react-helmet-async'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import PlanGo from './components/PlanGo.jsx'
 import QuienLoUsa from './components/QuienLoUsa.jsx'
+import Hardware from './components/Hardware.jsx'
+import Faq from './components/Faq.jsx'
+import Contacto from './components/Contacto.jsx'
 import Footer from './components/Footer.jsx'
-
-/* Lazy-loaded */
-const Hardware = lazy(() => import('./components/Hardware.jsx'))
-const Faq = lazy(() => import('./components/Faq.jsx'))
-const Contacto = lazy(() => import('./components/Contacto.jsx'))
-
-const SectionLoader = () => (
-  <div className="flex items-center justify-center py-24">
-    <div className="w-6 h-6 border-2 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-  </div>
-)
 
 export default function App() {
   return (
@@ -29,23 +20,20 @@ export default function App() {
         <link rel="canonical" href="https://westlinksl.com" />
         <link rel="icon" type="image/jpeg" href="/logo.jpg" />
 
-        <title>Westlink SL — Empleado digital desde 49€/mes para tu PYME</title>
-        <meta name="description" content="Un empleado digital para tu PYME. Organiza facturas, busca documentos, responde dudas. Por WhatsApp, desde 49€/mes. La Rioja." />
+        <title>Westlink SL — Olvídate del papeleo. IA para PYMES desde 49€/mes</title>
+        <meta name="description" content="Olvídate de perder horas con facturas y papeles. Un empleado digital que trabaja por WhatsApp. Desde 49€/mes. La Rioja." />
 
-        {/* OpenGraph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Westlink SL — Empleado digital para PYMES" />
-        <meta property="og:description" content="IA privada para tu empresa. Por WhatsApp. Desde 49€/mes." />
+        <meta property="og:title" content="Westlink SL — Olvídate del papeleo" />
+        <meta property="og:description" content="Un empleado digital para tu negocio. Por WhatsApp. Desde 49€/mes." />
         <meta property="og:url" content="https://westlinksl.com" />
         <meta property="og:site_name" content="Westlink SL" />
         <meta property="og:locale" content="es_ES" />
 
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Westlink SL — Empleado digital de IA" />
+        <meta name="twitter:title" content="Westlink SL — Olvídate del papeleo" />
         <meta name="twitter:description" content="IA privada 24/7. Desde 49€/mes. Por WhatsApp." />
 
-        {/* Schema */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -56,7 +44,8 @@ export default function App() {
             "email": "daniel@westlinksl.com",
             "areaServed": ["La Rioja", "Álava", "Navarra", "Burgos", "Soria", "Zaragoza"],
             "priceRange": "€€",
-            "address": {"@type": "PostalAddress", "addressRegion": "La Rioja", "addressCountry": "ES"}
+            "address": {"@type": "PostalAddress", "addressRegion": "La Rioja", "addressCountry": "ES"},
+            "telephone": "+34648253217"
           })}
         </script>
       </Helmet>
@@ -68,11 +57,9 @@ export default function App() {
         <Hero />
         <PlanGo />
         <QuienLoUsa />
-        <Suspense fallback={<SectionLoader />}>
-          <Hardware />
-          <Faq />
-          <Contacto />
-        </Suspense>
+        <Hardware />
+        <Faq />
+        <Contacto />
       </main>
       <Footer />
     </>

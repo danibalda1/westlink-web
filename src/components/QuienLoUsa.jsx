@@ -1,27 +1,38 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { FaWineBottle, FaBalanceScale, FaGavel, FaTruck, FaSeedling, FaTooth, FaHandshake, FaBolt } from 'react-icons/fa'
-import { HiOutlineMail, HiOutlineDocumentSearch, HiOutlineCurrencyEuro, HiOutlineDocumentText, HiOutlineSearch, HiOutlineClipboardList } from 'react-icons/hi'
+import { FaWineBottle, FaBalanceScale, FaGavel, FaTruck, FaSeedling, FaTooth, FaHandshake, FaBolt, FaWrench, FaHammer, FaStore, FaTractor, FaHardHat, FaBreadSlice } from 'react-icons/fa'
+import { HiOutlineDocumentSearch, HiOutlineCurrencyEuro, HiOutlineDocumentText, HiOutlineClipboardList, HiOutlineMail, HiOutlineSearch } from 'react-icons/hi'
 
 const sectores = [
   { icon: FaWineBottle, title: 'Bodegas', subtitle: 'DOCa Rioja', color: 'text-rose-600', bg: 'bg-rose-50' },
-  { icon: FaBalanceScale, title: 'Gestorías', subtitle: 'Fiscal · Laboral', color: 'text-blue-600', bg: 'bg-blue-50' },
+  { icon: FaBalanceScale, title: 'Gestorías', subtitle: 'Fiscal · Contable', color: 'text-blue-600', bg: 'bg-blue-50' },
   { icon: FaBolt, title: 'Electricidad', subtitle: 'Instaladores', color: 'text-yellow-600', bg: 'bg-yellow-50' },
+  { icon: FaWrench, title: 'Fontanería', subtitle: 'Calefacción · Clima', color: 'text-cyan-600', bg: 'bg-cyan-50' },
   { icon: FaGavel, title: 'Abogados', subtitle: 'Despachos', color: 'text-purple-600', bg: 'bg-purple-50' },
-  { icon: FaTruck, title: 'Logística', subtitle: 'Transporte', color: 'text-amber-600', bg: 'bg-amber-50' },
-  { icon: FaSeedling, title: 'Agro', subtitle: 'Alimentación', color: 'text-emerald-600', bg: 'bg-emerald-50' },
+  { icon: FaTruck, title: 'Transporte', subtitle: 'Logística', color: 'text-amber-600', bg: 'bg-amber-50' },
+  { icon: FaStore, title: 'Tiendas', subtitle: 'Comercio local', color: 'text-pink-600', bg: 'bg-pink-50' },
+  { icon: FaSeedling, title: 'Agro', subtitle: 'Agricultura · Ganadería', color: 'text-emerald-600', bg: 'bg-emerald-50' },
+  { icon: FaHardHat, title: 'Construcción', subtitle: 'Obra · Reformas', color: 'text-orange-600', bg: 'bg-orange-50' },
+  { icon: FaBreadSlice, title: 'Panaderías', subtitle: 'Hostelería', color: 'text-amber-600', bg: 'bg-amber-50' },
+  { icon: FaHammer, title: 'Talleres', subtitle: 'Mecánica · Vehículos', color: 'text-gray-600', bg: 'bg-gray-50' },
+  { icon: FaTractor, title: 'Maquinaria', subtitle: 'Agrícola · Obra', color: 'text-green-600', bg: 'bg-green-50' },
   { icon: FaTooth, title: 'Clínicas', subtitle: 'Salud privada', color: 'text-cyan-600', bg: 'bg-cyan-50' },
-  { icon: FaHandshake, title: 'Consultorías', subtitle: 'Arquitectura', color: 'text-slate-600', bg: 'bg-slate-50' },
+  { icon: FaHandshake, title: 'Consultorías', subtitle: 'Arquitectura · Ing.', color: 'text-slate-600', bg: 'bg-slate-50' },
 ]
 
+const antesDespues = {
+  antes: '2h cada noche organizando facturas, buscando presupuestos, preparando informes para el gestor.',
+  despues: 'Llegas a casa, cenas y te olvidas. Todo lo hace tu empleado digital por WhatsApp.',
+}
+
 const casos = [
-  { icon: HiOutlineDocumentSearch, title: 'Busca contratos y facturas', desc: 'Encuentra cualquier documento en segundos. Sin carpetas.' },
-  { icon: HiOutlineCurrencyEuro, title: 'Organiza facturas', desc: 'Las clasifica por cliente, fecha, importe. Automático.' },
-  { icon: HiOutlineDocumentText, title: 'Crea presupuestos', desc: 'A partir de plantillas. En segundos, desde el móvil.' },
-  { icon: HiOutlineClipboardList, title: 'Clasifica documentos', desc: 'Albaranes, certificados, informes. Todo etiquetado.' },
-  { icon: HiOutlineMail, title: 'Responde dudas', desc: 'Sobre tus documentos, normas, clientes. Al instante.' },
-  { icon: HiOutlineSearch, title: 'Busca en PDFs', desc: 'Lee montones de documentos y te responde.' },
+  { icon: HiOutlineDocumentSearch, title: 'Busca contratos y facturas', desc: 'Encuentra cualquier documento en segundos.' },
+  { icon: HiOutlineCurrencyEuro, title: 'Organiza facturas', desc: 'Las clasifica por cliente, fecha, importe.' },
+  { icon: HiOutlineDocumentText, title: 'Crea presupuestos', desc: 'Desde plantillas, en segundos.' },
+  { icon: HiOutlineClipboardList, title: 'Clasifica documentos', desc: 'Albaranes, certificados, informes.' },
+  { icon: HiOutlineMail, title: 'Responde dudas', desc: 'Sobre documentos, normas, clientes.' },
+  { icon: HiOutlineSearch, title: 'Busca en PDFs', desc: 'Lee documentos y te responde al momento.' },
 ]
 
 export default function QuienLoUsa() {
@@ -39,15 +50,15 @@ export default function QuienLoUsa() {
         >
           <span className="section-badge">Para quién es</span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4">
-            Da igual tu sector — esto sirve para todos
+            Da igual tu sector — si tienes papeles, sirve
           </h2>
           <p className="text-lg text-gray-500 leading-relaxed">
-            Da igual que tengas una gestoría, una bodega, un taller de electricidad o un despacho.
-            Si pierdes tiempo con papeles, esto te va a gustar.
+            Lo usan gestorías, bodegas, electricistas, talleres, panaderías, clínicas...
+            Cualquier negocio que pierda tiempo con facturas, albaranes y documentos.
           </p>
         </motion.div>
 
-        {/* Sectores rápido */}
+        {/* Sectores — 14 tarjetas compactas */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -65,11 +76,30 @@ export default function QuienLoUsa() {
           })}
         </motion.div>
 
-        {/* Lo que hace - 6 tarjetas compactas */}
+        {/* Antes / Después */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.15 }}
+          className="max-w-3xl mx-auto mb-14"
+        >
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-red-50 rounded-2xl p-6 border border-red-100">
+              <span className="text-xs font-bold text-red-500 uppercase tracking-wider mb-2 block">Antes</span>
+              <p className="text-sm text-red-700 leading-relaxed">{antesDespues.antes}</p>
+            </div>
+            <div className="bg-emerald-50 rounded-2xl p-6 border border-emerald-100">
+              <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider mb-2 block">Después</span>
+              <p className="text-sm text-emerald-700 leading-relaxed">{antesDespues.despues}</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Lo que hace - 6 tarjetas */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto mb-12"
         >
           {casos.map((c, i) => {
