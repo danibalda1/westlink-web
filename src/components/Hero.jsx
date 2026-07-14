@@ -211,92 +211,90 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
-            className="block"
+            className="block w-full max-w-md mx-auto lg:mx-0"
           >
             <div className="relative">
-              {/* Glow detrás de la demo */}
-              <div className="absolute -inset-8 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-transparent rounded-3xl blur-[60px]" />
+              {/* Glow detrás */}
+              <div className="absolute -inset-8 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent rounded-3xl blur-[60px]" />
 
-              {/* Card demo */}
-              <div className="relative bg-[#13132B]/80 backdrop-blur-xl border border-white/8 rounded-3xl overflow-hidden shadow-2xl shadow-indigo-500/5">
-                {/* Demo header */}
-                <div className="flex items-center justify-between px-5 py-4 border-b border-white/6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
+              {/* ── MÓVIL ── */}
+              <div className="relative bg-[#111B28] rounded-[38px] p-2.5 shadow-2xl shadow-amber-500/5 border border-white/10">
+                {/* Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-[#111B28] rounded-b-xl z-10">
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-[#1E2D3D] rounded-full" />
+                </div>
+
+                {/* Pantalla */}
+                <div className="bg-[#0B141A] rounded-[28px] overflow-hidden">
+                  {/* Header WhatsApp */}
+                  <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-[#1F2C38]">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                      W
                     </div>
-                    <span className="text-xs text-white/30 font-medium">Empleado Digital · Westlink</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-white text-sm font-semibold truncate">Empleado Digital</div>
+                      <div className="text-[10px] text-emerald-400">en línea</div>
+                    </div>
+                    <button
+                      onClick={() => setDemoPlaying(!demoPlaying)}
+                      className="text-white/30 hover:text-white/60 transition-colors shrink-0"
+                      aria-label={demoPlaying ? 'Pausar demo' : 'Reanudar demo'}
+                    >
+                      {demoPlaying ? <HiPause size={16} /> : <HiPlay size={16} />}
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setDemoPlaying(!demoPlaying)}
-                    className="text-white/30 hover:text-white/60 transition-colors"
-                    aria-label={demoPlaying ? 'Pausar demo' : 'Reanudar demo'}
+
+                  {/* Mensajes */}
+                  <div className="px-3.5 py-3 min-h-[300px] sm:min-h-[380px] flex flex-col justify-end gap-1"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                    }}
                   >
-                    {demoPlaying ? <HiPause size={14} /> : <HiPlay size={14} />}
-                  </button>
-                </div>
-
-                {/* Demo messages */}
-                <div className="p-4 sm:p-5 space-y-3 min-h-[200px] sm:min-h-[340px]">
-                  {demoMessages.slice(0, demoStep + 1).map((msg, i) => {
-                    const isLast = i === demoStep
-                    return (
-                      <motion.div
-                        key={i}
-                        initial={isLast ? { opacity: 0, y: 8, scale: 0.97 } : { opacity: 1 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 0.3, ease: 'easeOut' }}
-                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div
-                          className={`max-w-[92%] sm:max-w-[85%] rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm leading-relaxed ${
-                            msg.role === 'user'
-                              ? 'bg-indigo-600/20 border border-indigo-500/15 text-indigo-200'
-                              : 'bg-white/6 border border-white/6 text-gray-200'
-                          }`}
+                    {demoMessages.slice(0, demoStep + 1).map((msg, i) => {
+                      const isLast = i === demoStep
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={isLast ? { opacity: 0, y: 8, scale: 0.97 } : { opacity: 1 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{ duration: 0.3, ease: 'easeOut' }}
+                          className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                         >
-                          {msg.text}
-                          {isLast && msg.role === 'assistant' && (
-                            <span className="inline-flex gap-0.5 ml-1">
-                              <span className="w-1 h-1 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                              <span className="w-1 h-1 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                              <span className="w-1 h-1 bg-indigo-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                            </span>
-                          )}
-                        </div>
-                      </motion.div>
-                    )
-                  })}
+                          <div
+                            className={`max-w-[88%] rounded-lg px-3 py-2 text-[13px] leading-relaxed ${
+                              msg.role === 'user'
+                                ? 'bg-[#005C4B] text-white rounded-br-sm'
+                                : 'bg-[#1F2C38] text-gray-100 rounded-bl-sm'
+                            }`}
+                          >
+                            {msg.text}
+                            {isLast && msg.role === 'assistant' && (
+                              <span className="inline-flex gap-0.5 ml-1">
+                                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                              </span>
+                            )}
+                            <div className="text-[9px] text-white/40 text-right mt-0.5">
+                              {new Date().getHours().toString().padStart(2,'0')}:{new Date().getMinutes().toString().padStart(2,'0')}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )
+                    })}
+                    {demoStep === 0 && (
+                      <div className="flex items-center justify-center h-32 text-white/15 text-xs">
+                        <span className="animate-pulse">Iniciando conversación...</span>
+                      </div>
+                    )}
+                  </div>
 
-                  {/* Si no ha empezado, muestra placeholder */}
-                  {demoStep === 0 && (
-                    <div className="flex items-center justify-center h-48 text-white/15 text-sm">
-                      <span className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400/40 animate-pulse" />
-                        Demo iniciándose...
-                      </span>
+                  {/* Input */}
+                  <div className="flex items-center gap-2 px-3 py-2 bg-[#1F2C38]">
+                    <div className="flex-1 bg-[#2A3942] rounded-lg px-3 py-2 text-xs text-white/30">Escribe un mensaje...</div>
+                    <div className="w-9 h-9 rounded-full bg-[#00A884] flex items-center justify-center shrink-0">
+                      <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"/></svg>
                     </div>
-                  )}
-                </div>
-
-                {/* Demo footer - contador */}
-                <div className="px-5 py-3 border-t border-white/6 flex items-center justify-between">
-                  <span className="text-[10px] text-white/20 font-mono">
-                    0{Math.min(demoStep + 1, 9)}/{demoMessages.length.toString().padStart(2, '0')}
-                  </span>
-                  <div className="flex gap-1">
-                    {demoMessages.map((_, i) => (
-                      <span
-                        key={i}
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                          i <= demoStep
-                            ? 'bg-indigo-400/70 w-3'
-                            : 'bg-white/10'
-                        }`}
-                      />
-                    ))}
                   </div>
                 </div>
               </div>
