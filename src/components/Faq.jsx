@@ -18,8 +18,8 @@ const faqs = [
     a: 'Probamos primero. Te enseñamos cómo funciona con tus documentos reales. Si no te convence, no sigues. Sin permanencia, cancelas cuando quieras.',
   },
   {
-    q: '¿Mis datos estarán seguros?',
-    a: 'Completamente. En el Plan Go tus documentos se procesan de forma segura. Con hardware local, todo corre en tu oficina. Tus datos nunca salen de tu red. Cumplimos RGPD.',
+    q: '¿Mis datos están seguros? ¿Y la IA por dónde los procesa?',
+    a: 'En el Plan Go (49€/mes), los documentos se procesan a través de DeepSeek, una IA externa que no almacena ni entrena con tus datos. Es lo que usan miles de empresas hoy en día. Si trabajas con datos muy sensibles, elige un plan con hardware instalado en tu oficina — ahí la IA corre en tu propia red y ni yo tengo acceso.',
   },
   {
     q: '¿Vale para mi sector?',

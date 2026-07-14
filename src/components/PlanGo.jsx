@@ -211,7 +211,7 @@ export default function PlanGo() {
                   </button>
                 </form>
                 <p className="text-[10px] text-white/50 mt-4">
-                  Sin spam. Sin compromiso. Tus datos seguros (RGPD). 1 correo con la guía y ya.
+                  Sin spam. Sin compromiso. IA externa (DeepSeek) sin almacenamiento de datos. 1 correo con la guía y ya.
                 </p>
               </>
             )}

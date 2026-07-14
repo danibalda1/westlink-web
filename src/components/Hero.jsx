@@ -341,11 +341,11 @@ export default function Hero() {
           className="text-center mt-8"
         >
           <p className="text-[11px] text-gray-500 flex items-center justify-center gap-4 flex-wrap">
-            <span>🔒 Tus datos nunca salen de España</span>
+            <span>🔒 IA externa (DeepSeek) no almacena tus datos</span>
             <span className="hidden sm:inline">·</span>
-            <span>✅ Cumplimos RGPD</span>
+            <span>✅ Hardware local disponible para máxima privacidad</span>
             <span className="hidden sm:inline">·</span>
-            <span>📍 Procesado en La Rioja</span>
+            <span>📍 Gestionado desde La Rioja</span>
           </p>
         </motion.div>
       </div>
