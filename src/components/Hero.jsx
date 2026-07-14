@@ -121,8 +121,9 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-gray-400 mt-6 leading-relaxed max-w-lg"
             >
-              No vendemos software. Instalamos un trabajador de inteligencia artificial
-              dentro de tu empresa. Aprende tus procesos, automatiza tareas y mantiene
+              Instalamos un trabajador de inteligencia artificial
+              dentro de tu empresa — da igual que tengas una gestoría, una bodega,
+              una empresa de electricidad o un taller. Aprende tus procesos, automatiza tareas y mantiene
               todos tus datos seguros en tus instalaciones.
             </motion.p>
 

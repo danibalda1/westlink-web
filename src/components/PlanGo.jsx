@@ -146,7 +146,7 @@ export default function PlanGo() {
             <h3 className="text-white font-bold text-lg mb-2">¿Te duele el papeleo?</h3>
             <p className="text-white/80 text-sm leading-relaxed mb-6">
               Descarga gratis la guía <strong className="text-white">"Cómo ahorrar 10h al mes en papeleo con IA"</strong>
-              {' '}y descubre cómo una bodega de La Rioja dejó de perder los viernes por la tarde organizando facturas.
+              {' '}y descubre cómo un negocio de La Rioja dejó de perder los viernes por la tarde organizando facturas, albaranes y certificados.
             </p>
 
             {enviado ? (
