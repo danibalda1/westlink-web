@@ -92,7 +92,7 @@ export default function Hero() {
               href="#contacto"
               className="group inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>Quiero que me ayudes</span>
+              <span>Hablar con Dani</span>
               <HiArrowRight className="text-base group-hover:translate-x-1 transition-transform" />
             </a>
             <a
