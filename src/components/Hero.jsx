@@ -111,7 +111,7 @@ export default function Hero() {
               <span className="block mt-2">
                 <span className="gradient-text-warm">Contrata un empleado digital</span>
               </span>
-              <span className="block mt-2 text-white/90">Desde 49€/mes, por WhatsApp</span>
+              <span className="block mt-2 text-white/90">Sin instalar nada, desde el móvil</span>
             </motion.h1>
 
             {/* Subtitle */}
