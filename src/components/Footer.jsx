@@ -9,11 +9,11 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-18">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-              ¿Listo para que tu empresa trabaje sola?
+              ¿Hablamos?
             </h2>
             <p className="text-gray-400 text-sm leading-relaxed mb-8">
-              Un empleado digital que nunca duerme, nunca se equivoca y nunca pide aumento.
-              Todo con tus datos seguros y en tus instalaciones.
+              Soy Daniel Balda, fundador de Westlink. Te atiendo en persona, sin comerciales
+              ni bots. Si estás en La Rioja o alrededores, quedamos un día y te lo enseño.
             </p>
             <a
               href="#contacto"

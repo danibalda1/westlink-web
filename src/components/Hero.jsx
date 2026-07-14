@@ -121,9 +121,10 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg text-gray-400 mt-6 leading-relaxed max-w-lg"
             >
-              Olvídate de perder horas buscando facturas, organizando papeles,
-              preparando informes. Tu empleado digital lo hace por ti — por WhatsApp,
-              desde 49€/mes, sin instalar nada.
+              Soy Dani — de Villamediana, La Rioja. Te ayudo a dejar
+              de perder horas con facturas, presupuestos y papeles.
+              Tu empleado digital trabaja por WhatsApp desde 49€/mes.
+              Sin instalar nada, sin permanencia, sin tonterías.
             </motion.p>
 
             {/* Feature pills */}

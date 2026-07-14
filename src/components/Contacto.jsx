@@ -65,10 +65,11 @@ export default function Contacto() {
               Contacto
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mt-5 mb-4">
-              ¿Hablamos de tu empleado digital?
+              Háblame, soy Dani
             </h2>
             <p className="text-lg text-gray-400 leading-relaxed max-w-2xl mx-auto">
-              Sin compromiso. Te visitamos, analizamos tu caso y te damos un presupuesto personalizado.
+              Sin compromiso. Te atiendo yo en persona. Quedamos, te enseño cómo funciona
+              y si te gusta, empezamos.
               <br />
               <span className="text-indigo-400/80">Visitas gratuitas en La Rioja y alrededores.</span>
             </p>
