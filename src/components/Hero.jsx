@@ -41,21 +41,21 @@ export default function Hero() {
   const isUser = currentMsg?.role === 'user'
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0A0A1A]">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510]">
       {/* ── Fondo con gradiente y profundidad ── */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Gradiente principal */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A1A] via-[#0F0F2E] to-[#1A1040]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510]" />
 
-        {/* Orbes de luz */}
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] animate-float-subtle" />
-        <div className="absolute bottom-1/3 -right-32 w-[400px] h-[400px] bg-violet-600/8 rounded-full blur-[100px] animate-float-slow" />
-        <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[80px]" />
+        {/* Orbes de luz cálidos */}
+        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-amber-500/8 rounded-full blur-[120px] animate-float-subtle" />
+        <div className="absolute bottom-1/3 -right-32 w-[400px] h-[400px] bg-orange-500/6 rounded-full blur-[100px] animate-float-slow" />
+        <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-rose-500/5 rounded-full blur-[80px]" />
 
         {/* Product image flotante */}
-        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] pointer-events-none select-none hidden xl:block opacity-25 translate-x-1/4 -translate-y-1/4 rotate-12">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/10 to-transparent rounded-full blur-[80px] scale-125" />
-          <div className="relative w-full h-full rounded-[40px] overflow-hidden shadow-2xl shadow-indigo-500/20 ring-1 ring-white/10 backdrop-blur-sm">
+        <div className="absolute top-1/3 right-0 w-[500px] h-[500px] pointer-events-none select-none hidden xl:block opacity-20 translate-x-1/4 -translate-y-1/4 rotate-12">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent rounded-full blur-[80px] scale-125" />
+          <div className="relative w-full h-full rounded-[40px] overflow-hidden shadow-2xl shadow-amber-500/10 ring-1 ring-white/5 backdrop-blur-sm">
             <img
               src="/images/westlink-box.jpg"
               alt="Westlink Box - IA privada"
@@ -94,10 +94,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/8 text-white/70 text-[11px] px-3 py-1.5 rounded-full mb-8 uppercase tracking-widest font-semibold"
+              className="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/10 text-amber-200/80 text-[11px] px-3 py-1.5 rounded-full mb-8 uppercase tracking-widest font-semibold"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              IA privada para PYMES · La Rioja
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              🌄 De La Rioja para tu negocio
             </motion.div>
 
             {/* Title */}
@@ -159,7 +159,7 @@ export default function Hero() {
             >
               <a
                 href="#contacto"
-                className="group relative inline-flex items-center gap-2.5 gradient-primary text-white px-7 py-3.5 rounded-2xl text-base font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/25 hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-7 py-3.5 rounded-2xl text-base font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>Cuéntame qué te duele</span>
                 <HiArrowRight className="text-lg group-hover:translate-x-1 transition-transform" />
@@ -321,7 +321,7 @@ export default function Hero() {
               key={stat.label}
               className="bg-white/[0.02] backdrop-blur-sm px-6 py-5 text-center hover:bg-white/[0.04] transition-colors"
             >
-              <div className="text-2xl md:text-3xl font-bold gradient-text-warm">{stat.value}</div>
+              <div className="text-2xl md:text-3xl font-bold bg-gradient-to-br from-amber-400 to-orange-400 bg-clip-text text-transparent">{stat.value}</div>
               <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
             </div>
           ))}
