@@ -252,14 +252,16 @@
 
   <script>
     const messages = [
-      { type: 'user', text: 'Busca la factura de materiales de Salto del mes pasado' },
-      { type: 'bot', text: 'Aquí está. Factura nº F-2026-0842 de Salto Eléctrico — 1.842€ en material. La tengo en Proveedores/Salto.', delay: 1200 },
-      { type: 'user', text: 'Prepárame un presupuesto para cambiar el cuadro de luces en la calle Mayor', delay: 3000 },
-      { type: 'bot', text: 'Listo. Basado en trabajos similares: 2.450€ materiales + 800€ mano de obra. ¿Lo envío al cliente?', delay: 2000 },
-      { type: 'user', text: 'Sí, envíalo. Y dime si tengo certificados pendientes de firmar', delay: 3500 },
-      { type: 'bot', text: 'Enviado. El cliente recibirá el presupuesto por WhatsApp.\n\nY sí, el boletín de la reforma de García López (C/ Río 23) está pendiente desde el 28/06 ¿Lo preparo?', delay: 2500 },
-      { type: 'user', text: 'Sí, prepáralo. ¿Cuánto llevamos facturado este trimestre?', delay: 3000 },
-      { type: 'bot', text: '28.430€ en Q2 2026. 12 obras. La más grande: reforma integral de Finca Miranda (8.200€).\n\n¿Necesitas algo más?', delay: 2000 },
+      { type: 'user', text: 'Buenos días, ¿qué facturas tengo pendientes de cobro?' },
+      { type: 'bot', text: 'Buenos días. Tienes 4 facturas pendientes por un total de 12.430€. La más antigua es de Construcciones Martínez (3.200€) del 02/06.', delay: 1500 },
+      { type: 'user', text: 'Mándale un recordatorio a Martínez por WhatsApp', delay: 3000 },
+      { type: 'bot', text: 'Hecho. Le he enviado un WhatsApp recordándole la factura F-2026-0891 de 3.200€ con vencimiento el 02/07.', delay: 2000 },
+      { type: 'user', text: '¿Cuánto hemos facturado a Bodegas Rioja este año?', delay: 3500 },
+      { type: 'bot', text: '42.800€ en lo que va de año. 8 facturas emitidas. La última: 6.200€ del contrato de mantenimiento mensual.', delay: 2000 },
+      { type: 'user', text: 'Genial. Dame los datos del cliente nuevo que me pasaron ayer, García López', delay: 3000 },
+      { type: 'bot', text: 'García López SL — CIF B-26384721. Domicilio fiscal: C/ Mayor 12, Logroño. Teléfono: 648 11 22 33. ¿Quieres que cree una ficha de cliente y le prepare un presupuesto de bienvenida?', delay: 2500 },
+      { type: 'user', text: 'Sí, hazlo. El presupuesto de bienvenida de 150€/mes por el plan básico', delay: 3000 },
+      { type: 'bot', text: 'Perfecto. Ficha creada y presupuesto generado. ¿Te mando un resumen por WhatsApp para que lo revises antes de enviarlo?', delay: 2000 },
     ];
 
     const container = document.getElementById('messages');
