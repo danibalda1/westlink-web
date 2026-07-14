@@ -331,6 +331,27 @@ export default function Hardware() {
         <motion.p initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }} className="text-center text-xs text-gray-400 mt-6">
           Visitas gratuitas en La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza · ¿Financiación? <a href="#contacto" className="text-indigo-600 font-semibold hover:underline">Pregúntanos</a>
         </motion.p>
+
+        {/* ── DEMO CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="max-w-xl mx-auto mt-10 text-center"
+        >
+          <div className="bg-gradient-to-br from-sky-500 to-cyan-600 rounded-2xl p-6 shadow-xl">
+            <h3 className="text-white font-bold text-lg mb-2">¿Prefieres verte una demo primero?</h3>
+            <p className="text-white/80 text-sm mb-5">
+              Dani te enseña en 10 minutos cómo funciona tu empleado digital. Sin compromiso.
+            </p>
+            <a
+              href="#contacto"
+              className="inline-flex items-center gap-2 bg-white text-sky-700 font-bold px-6 py-3 rounded-xl text-sm hover:bg-gray-100 transition-all shadow-lg"
+            >
+              Quiero ver la demo →
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

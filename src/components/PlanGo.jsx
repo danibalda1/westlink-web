@@ -150,14 +150,20 @@ export default function PlanGo() {
             </p>
 
             {enviado ? (
-              <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-8 text-center">
+              <div className="bg-white/15 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
                 <div className="text-4xl mb-3">🎉</div>
                 <h4 className="text-white font-bold text-lg mb-2">¡Guía enviada!</h4>
-                <p className="text-white/70 text-sm leading-relaxed">
+                <p className="text-white/70 text-sm leading-relaxed mb-5">
                   Revisa tu email (y la carpeta de spam por si acaso).
                   <br />
                   Si no te llega en 5 min, escríbenos a <strong>daniel@westlinksl.com</strong>
                 </p>
+                <a
+                  href="#contacto"
+                  className="inline-flex items-center gap-2 bg-white text-sky-700 font-bold px-5 py-2.5 rounded-xl text-sm hover:bg-gray-100 transition-all"
+                >
+                  Quiero ver la demo gratuita →
+                </a>
               </div>
             ) : (
               <>

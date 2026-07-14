@@ -72,9 +72,15 @@ export default function Navbar() {
             </a>
             <a
               href="#contacto"
-              className="ml-2 gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              className="ml-2 bg-white text-sky-600 border-2 border-sky-500 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-sky-50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              Solicita información
+              🎬 Ver demo
+            </a>
+            <a
+              href="#contacto"
+              className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ml-2"
+            >
+              Contratar
             </a>
           </div>
 
@@ -103,6 +109,9 @@ export default function Navbar() {
       {open && (
         <div className="lg:hidden glass-strong border-t border-gray-200/40 shadow-xl">
             <div className="px-4 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
+              <a href="tel:+34648253217" onClick={close} className="flex items-center gap-2 px-4 py-2 mb-2 rounded-xl text-sm font-semibold text-indigo-600 bg-indigo-50/50">
+                <HiPhone className="text-sm" /> 648 25 32 17
+              </a>
               {links.map((l) => (
                 <a
                   key={l.href}
@@ -115,19 +124,18 @@ export default function Navbar() {
               ))}
               <div className="pt-2 space-y-2">
                 <a
-                  href="tel:+34648253217"
+                  href="#contacto"
                   onClick={close}
-                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-center font-semibold text-sm bg-indigo-50 text-indigo-700"
+                  className="block bg-white text-sky-600 border-2 border-sky-500 px-4 py-3 rounded-xl text-center font-bold text-sm"
                 >
-                  <HiPhone />
-                  648 25 32 17
+                  🎬 Ver demo
                 </a>
                 <a
                   href="#contacto"
                   onClick={close}
                   className="block gradient-primary text-white px-4 py-3 rounded-xl text-center font-semibold text-sm"
                 >
-                  Solicita información
+                  Contratar ahora
                 </a>
               </div>
             </div>
