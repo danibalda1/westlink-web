@@ -6,44 +6,28 @@ import { HiChevronDown } from 'react-icons/hi'
 
 const faqs = [
   {
-    q: '¿Qué diferencia hay entre un chatbot y vuestro empleado virtual?',
-    a: 'Un chatbot responde preguntas con respuestas prefabricadas. Nuestro empleado virtual ejecuta tareas reales: redacta documentos, procesa facturas, gestiona inventarios, coordina pedidos. Es un trabajador digital, no un asistente de conversación.',
+    q: '¿Cuánto cuesta y qué incluye?',
+    a: 'Desde 49€/mes para el Plan Go (digital, por WhatsApp, sin hardware). Si necesitas hardware local, desde 149€/mes con la Westlink Box incluida. También hay opción de pago único desde 2.300€. Sin permanencia. Sin sorpresas.',
   },
   {
-    q: '¿Mis datos están seguros?',
-    a: 'Completamente. Todo el sistema se instala en hardware local dentro de tus instalaciones. No enviamos datos a ninguna nube externa. Tus secretos comerciales, procesos y datos de clientes nunca salen de tu red. Cumplimos RGPD y EU AI Act.',
+    q: '¿Tengo que instalar algo?',
+    a: 'En el Plan Go no instalas nada — funciona por WhatsApp. Si contratas hardware, nosotros lo instalamos y configuramos todo. No necesitas saber de tecnología.',
   },
   {
-    q: '¿Necesito internet para que funcione?',
-    a: 'No. La IA corre en tu propio hardware. Si se cae internet, tu empleado digital sigue trabajando. Eres independiente de conexiones externas, APIs de terceros y servidores en la nube.',
+    q: '¿Y si no funciona para mi negocio?',
+    a: 'Probamos primero. Te enseñamos cómo funciona con tus documentos reales. Si no te convence, no sigues. Sin permanencia, cancelas cuando quieras.',
   },
   {
-    q: '¿Cuánto cuesta?',
-    a: 'No tenemos cuotas mensuales. Es una inversión única por implantación. El sistema es tuyo para siempre. El payback suele llegar en 3-6 meses. Te damos un presupuesto personalizado después de analizar tu caso.',
-  },
-  {
-    q: '¿Cuánto tarda la implantación?',
-    a: 'Depende del tamaño de tu empresa, pero la mayoría de los casos están operativos en 1-2 semanas. La primera semana visitamos tu empresa y analizamos procesos. La segunda instalamos y formamos a tu equipo.',
+    q: '¿Mis datos estarán seguros?',
+    a: 'Completamente. En el Plan Go tus documentos se procesan de forma segura. Con hardware local, todo corre en tu oficina. Tus datos nunca salen de tu red. Cumplimos RGPD.',
   },
   {
     q: '¿Vale para mi sector?',
-    a: 'Nos enfocamos en bodegas, gestorías, electricistas, fontaneros, despachos de abogados, logística, agroalimentario, clínicas y consultorías. Si tu sector no está en la lista, háblanos. Seguro que encajas.',
+    a: 'Funciona en bodegas, gestorías, electricistas, fontaneros, abogados, logística, clínicas, talleres… Si tienes papeles que organizar, sirve. Si no estás seguro, pregúntanos.',
   },
   {
-    q: '¿Necesito conocimientos técnicos?',
-    a: 'Ninguno. Nosotros instalamos todo y formamos a tu equipo. Tus empleados solo necesitan saber usar un ordenador. El resto lo hacemos nosotros.',
-  },
-  {
-    q: '¿Y si no funciona como esperaba?',
-    a: 'Hacemos un seguimiento continuo durante el primer mes. Ajustamos y mejoramos hasta que el sistema funcione exactamente como necesitas. No te dejamos tirado.',
-  },
-  {
-    q: '¿Por qué no usar directamente ChatGPT?',
-    a: 'ChatGPT envía tus datos a servidores en EE.UU. para procesarlos. Nosotros instalamos la IA en tu propia red. Tus datos nunca salen de tu empresa. Además, ChatGPT es un chat generalista, no un trabajador entrenado en tus procesos concretos.',
-  },
-  {
-    q: '¿Qué tareas concretas puede hacer mi empleado digital?',
-    a: 'Depende de tu empresa, pero por lo general: responder dudas sobre documentación interna, buscar contratos y facturas, generar presupuestos, clasificar archivos, preparar informes, automatizar procesos repetitivos, consultar manuales y normativas. Y todo aprendiendo de tu forma de trabajar.',
+    q: '¿En qué zonas estáis?',
+    a: 'Estamos en La Rioja (Villamediana de Iregua) y hacemos visitas gratuitas en La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza. Si estás fuera, escríbenos igualmente.',
   },
 ]
 
@@ -67,7 +51,7 @@ export default function Faq() {
             Preguntas frecuentes
           </h2>
           <p className="text-lg text-gray-500 leading-relaxed">
-            Las dudas más comunes cuando las PYMES descubren que pueden tener su propia IA privada.
+            Respuestas rápidas a lo que seguro te estás preguntando.
           </p>
         </motion.div>
 

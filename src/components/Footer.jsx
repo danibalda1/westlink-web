@@ -56,6 +56,13 @@ export default function Footer() {
             </a>
           </div>
 
+          {/* Coverage */}
+          <div className="text-center md:text-left">
+            <p className="text-[11px] text-gray-600">
+              📍 Cubrimos: La Rioja · Álava · Navarra · Burgos · Soria · Zaragoza · Visitas gratuitas
+            </p>
+          </div>
+
           {/* Copyright */}
           <span className="text-[11px] text-gray-700">
             © {new Date().getFullYear()} Westlink SL · Villamediana de Iregua, La Rioja

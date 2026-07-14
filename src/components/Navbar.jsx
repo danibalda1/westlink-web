@@ -3,13 +3,8 @@ import { HiMenu, HiX, HiPhone } from 'react-icons/hi'
 
 const links = [
   { label: 'Plan Go', href: '#plan-go' },
-  { label: 'Qué hacemos', href: '#que-hacemos' },
-  { label: 'Casos de uso', href: '#casos-de-uso' },
-  { label: 'Comparativa', href: '#comparativa' },
-  { label: 'Ventajas', href: '#ventajas' },
-  { label: 'Cómo funciona', href: '#como-funciona' },
+  { label: 'Para quién', href: '#para-quien' },
   { label: 'Precios', href: '#hardware' },
-  { label: 'Cobertura', href: '#cobertura' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contacto', href: '#contacto' },
 ]
