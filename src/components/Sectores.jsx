@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'framer-motion'
-import { FaWineBottle, FaBalanceScale, FaGavel, FaTruck, FaSeedling, FaTooth, FaHandshake } from 'react-icons/fa'
+import { FaWineBottle, FaBalanceScale, FaGavel, FaTruck, FaSeedling, FaTooth, FaHandshake, FaBolt } from 'react-icons/fa'
 
 const sectores = [
   {
@@ -32,6 +32,16 @@ const sectores = [
     gradient: 'from-purple-500 to-violet-600',
     light: 'bg-purple-50',
     iconColor: 'text-purple-600',
+    highlight: true,
+  },
+  {
+    icon: FaBolt,
+    title: 'Electricidad y Fontanería',
+    subtitle: 'Instaladores · Autónomos',
+    desc: 'Presupuestos desde obra, certificados de instalación siempre a mano, facturas organizadas. Sin papeleo al llegar a casa.',
+    gradient: 'from-yellow-500 to-amber-600',
+    light: 'bg-yellow-50',
+    iconColor: 'text-yellow-600',
     highlight: true,
   },
   {
