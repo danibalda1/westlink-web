@@ -20,18 +20,19 @@ export default function App() {
         <link rel="canonical" href="https://westlinksl.com" />
         <link rel="icon" type="image/jpeg" href="/logo.jpg" />
 
-        <title>Westlink SL — Olvídate del papeleo. IA para PYMES desde 49€/mes</title>
-        <meta name="description" content="Olvídate de perder horas con facturas y papeles. Un empleado digital que trabaja por WhatsApp. Desde 49€/mes. La Rioja." />
+        <title>Westlink SL — Empleado digital IA para PYMES en La Rioja | desde 49€/mes</title>
+        <meta name="description" content="Empleado digital de IA para PYMES en La Rioja. Organiza facturas, busca documentos, responde dudas por WhatsApp. Sin instalar nada, desde 49€/mes. Creado por Dani, en Villamediana." />
+        <meta name="keywords" content="IA para PYMES La Rioja, empleado digital Logroño, inteligencia artificial para empresas, automatizar facturas, organizar documentos, WhatsApp business, asistente IA, digitalización PYMES" />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Westlink SL — Olvídate del papeleo" />
-        <meta property="og:description" content="Un empleado digital para tu negocio. Por WhatsApp. Desde 49€/mes." />
+        <meta property="og:title" content="Westlink SL — Empleado digital IA para PYMES en La Rioja" />
+        <meta property="og:description" content="Olvídate del papeleo. Un empleado digital que organiza facturas por WhatsApp. Desde 49€/mes. Creado por Dani en Villamediana." />
         <meta property="og:url" content="https://westlinksl.com" />
         <meta property="og:site_name" content="Westlink SL" />
         <meta property="og:locale" content="es_ES" />
-
+        <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Westlink SL — Olvídate del papeleo" />
+        <meta name="twitter:title" content="Westlink SL — IA para PYMES en La Rioja" />
+        <meta name="twitter:description" content="Empleado digital por WhatsApp. Organiza facturas, busca documentos. Desde 49€/mes. La Rioja." />
         <meta name="twitter:description" content="IA privada 24/7. Desde 49€/mes. Por WhatsApp." />
 
         <script type="application/ld+json">
