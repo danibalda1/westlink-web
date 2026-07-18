@@ -19,6 +19,24 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://westlinksl.com/para/electricistas.html</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://westlinksl.com/para/gestorias.html</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://westlinksl.com/para/fontaneros.html</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://westlinksl.com/aviso-legal.html</loc>
     <lastmod>2026-07-10</lastmod>
     <changefreq>yearly</changefreq>
