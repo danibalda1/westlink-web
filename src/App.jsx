@@ -29,6 +29,7 @@ export default function App() {
         <meta property="og:url" content="https://westlinksl.com" />
         <meta property="og:site_name" content="Westlink SL" />
         <meta property="og:locale" content="es_ES" />
+        <meta property="og:image" content="https://westlinksl.com/logo.jpg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Westlink SL — IA para PYMES en La Rioja" />
@@ -40,13 +41,31 @@ export default function App() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Westlink SL",
-            "description": "Implantación de IA privada en PYMES.",
+            "description": "Implantación de IA privada en PYMES. Empleado digital que organiza facturas y documentos por WhatsApp.",
             "url": "https://westlinksl.com",
             "email": "daniel@westlinksl.com",
+            "telephone": "+34648253217",
+            "image": "https://westlinksl.com/logo.jpg",
             "areaServed": ["La Rioja", "Álava", "Navarra", "Burgos", "Soria", "Zaragoza"],
             "priceRange": "€€",
-            "address": {"@type": "PostalAddress", "addressRegion": "La Rioja", "addressCountry": "ES"},
-            "telephone": "+34648253217"
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Villamediana de Iregua",
+              "addressRegion": "La Rioja",
+              "addressCountry": "ES"
+            },
+            "openingHours": "Mo-Su 00:00-24:00",
+            "founder": {
+              "@type": "Person",
+              "name": "Daniel Balda"
+            },
+            "offers": {
+              "@type": "Offer",
+              "name": "Plan Go",
+              "price": "49.00",
+              "priceCurrency": "EUR",
+              "description": "Empleado digital por WhatsApp desde 49€/mes"
+            }
           })}
         </script>
       </Helmet>
