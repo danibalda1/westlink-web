@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/para/electricistas", "destination": "/para/electricistas.html" },
+    { "source": "/para/gestorias", "destination": "/para/gestorias.html" },
+    { "source": "/para/fontaneros", "destination": "/para/fontaneros.html" },
+    { "source": "/demo", "destination": "/demo.html" },
+    { "source": "/gracias", "destination": "/gracias.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
