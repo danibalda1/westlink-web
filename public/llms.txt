@@ -1,0 +1,28 @@
+# Westlink SL — Empleado digital IA para PYMES
+> https://westlinksl.com
+
+Westlink SL ofrece empleados digitales de IA para PYMES en La Rioja (España). Organizan facturas, presupuestos y documentos por WhatsApp desde 49€/mes.
+
+## Páginas principales
+
+- https://westlinksl.com/ — Inicio: empleado digital IA para PYMES
+- https://westlinksl.com/demo.html — Demo interactiva del empleado digital
+- https://westlinksl.com/para/electricistas — IA para electricistas en La Rioja
+- https://westlinksl.com/para/gestorias — IA para gestorías en La Rioja
+- https://westlinksl.com/para/fontaneros — IA para fontaneros en La Rioja
+- https://westlinksl.com/gracias.html — Página de confirmación
+
+## Contacto
+
+- Creado por: Dani (Daniel Balda)
+- Ubicación: Villamediana de Iregua, La Rioja, España
+- Teléfono: +34 648 25 32 17
+- Email: daniel@westlinksl.com
+- WhatsApp: +34 648 25 32 17
+
+## FAQ
+
+- ¿Qué hace? Organiza facturas, busca documentos, prepara presupuestos por WhatsApp.
+- ¿Cuánto cuesta? Plan Go desde 49€/mes. Plan Private desde 149€/mes.
+- ¿Necesito instalar algo? No, funciona por WhatsApp.
+- ¿Dónde están mis datos? Plan Go: servidores en La Rioja. Plan Private: en tu oficina.
