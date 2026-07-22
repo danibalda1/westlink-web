@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Westlink — Centro de Control</title>
+<link rel="icon" type="image/jpeg" href="/logo.jpg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#e2e8f0;font-family:Inter,system-ui,-apple-system,sans-serif;min-height:100vh}
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+
+/* Sidebar */
+.sidebar{background:#0f0f1a;border-right:1px solid rgba(255,255,255,.06);padding:24px 16px}
+.sidebar .logo{font-size:18px;font-weight:700;margin-bottom:32px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sidebar nav{display:flex;flex-direction:column;gap:4px}
+.sidebar nav a{padding:10px 12px;border-radius:10px;color:#94a3b8;text-decoration:none;font-size:14px;transition:.2s}
+.sidebar nav a:hover,.sidebar nav a.active{background:rgba(255,255,255,.06);color:#fff}
+.sidebar nav a span{margin-right:10px}
+
+/* Main */
+.main{padding:32px;overflow-y:auto}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.header h1{font-size:24px;font-weight:600}
+.header .date{color:#64748b;font-size:13px}
+.header .stats{display:flex;gap:24px}
+.header .stat{text-align:center}
+.header .stat .num{font-size:20px;font-weight:700;color:#fbbf24}
+.header .stat .label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+
+/* Section titles */
+.section-title{font-size:16px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section-title .badge{font-size:11px;background:rgba(251,191,36,.15);color:#fbbf24;padding:2px 8px;border-radius:6px}
+
+/* Kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px}
+.kanban-col{background:rgba(255,255,255,.03);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,.06)}
+.kanban-col h3{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.kanban-col h3 .count{font-size:11px;background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px}
+.kanban-card{background:rgba(255,255,255,.05);border-radius:8px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.04);cursor:pointer;transition:.2s}
+.kanban-card:hover{border-color:rgba(251,191,36,.3)}
+.kanban-card .tag{font-size:10px;padding:2px 6px;border-radius:4px;display:inline-block;margin-bottom:6px}
+.kanban-card .tag.electricista{background:rgba(59,130,246,.2);color:#60a5fa}
+.kanban-card .tag.gestoria{background:rgba(139,92,246,.2);color:#a78bfa}
+.kanban-card .tag.fontanero{background:rgba(16,185,129,.2);color:#34d399}
+.kanban-card .tag.bodega{background:rgba(245,158,11,.2);color:#fbbf24}
+.kanban-card h4{font-size:13px;margin-bottom:4px}
+.kanban-card p{font-size:11px;color:#64748b}
+.kanban-card .meta{font-size:10px;color:#475569;margin-top:6px;display:flex;gap:8px}
+
+/* Pipeline */
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:48px}
+.pipe-stage{background:rgba(255,255,255,.03);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,.06)}
+.pipe-stage h3{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:10px;text-align:center}
+.pipe-item{background:rgba(255,255,255,.05);border-radius:6px;padding:8px;margin-bottom:6px;font-size:12px;border:1px solid rgba(255,255,255,.04)}
+.pipe-item .status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px}
+.pipe-item .status-dot.idea{background:#94a3b8}
+.pipe-item .status-dot.draft{background:#60a5fa}
+.pipe-item .status-dot.progress{background:#fbbf24}
+.pipe-item .status-dot.review{background:#a78bfa}
+.pipe-item .status-dot.done{background:#34d399}
+
+/* Wiki */
+.wiki-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:48px}
+.wiki-card{background:rgba(255,255,255,.03);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,.06)}
+.wiki-card .icon{font-size:24px;margin-bottom:8px}
+.wiki-card h3{font-size:14px;margin-bottom:4px}
+.wiki-card p{font-size:12px;color:#64748b;line-height:1.5}
+.wiki-card .tags{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.wiki-card .tags span{font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.05);color:#94a3b8}
+
+/* Metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px}
+.metric-card{background:rgba(255,255,255,.03);border-radius:12px;padding:20px;border:1px solid rgba(255,255,255,.06);text-align:center}
+.metric-card .value{font-size:28px;font-weight:700}
+.metric-card .value.up{color:#34d399}
+.metric-card .value.down{color:#f87171}
+.metric-card .label{font-size:11px;color:#64748b;margin-top:4px}
+.metric-card .change{font-size:11px;margin-top:2px}
+
+.content-posts{display:grid;grid-template-columns:1fr;gap:8px}
+.content-post{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 16px;border:1px solid rgba(255,255,255,.04)}
+.content-post .left{display:flex;align-items:center;gap:12px}
+.content-post .left .platform{font-size:11px;padding:2px 6px;border-radius:4px;background:rgba(59,130,246,.15);color:#60a5fa;min-width:40px;text-align:center}
+.content-post .left .post-title{font-size:13px}
+.content-post .right{display:flex;align-items:center;gap:16px;font-size:11px;color:#64748b}
+.content-post .right .metric{text-align:center}
+.content-post .right .metric .num{font-weight:600;color:#e2e8f0}
+
+@media(max-width:1024px){
+  .kanban{grid-template-columns:repeat(2,1fr)}
+  .pipeline{grid-template-columns:repeat(3,1fr)}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .kanban{grid-template-columns:1fr}
+  .pipeline{grid-template-columns:1fr}
+  .metrics{grid-template-columns:1fr}
+  .header{flex-direction:column;align-items:flex-start;gap:16px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">⬡ Westlink</div>
+    <nav>
+      <a href="#" class="active" onclick="showSection('kanban')"><span>📋</span>Kanban</a>
+      <a href="#" onclick="showSection('pipeline')"><span>📈</span>Pipeline</a>
+      <a href="#" onclick="showSection('wiki')"><span>📚</span>Wiki</a>
+      <a href="#" onclick="showSection('metrics')"><span>📊</span>Rendimiento</a>
+    </nav>
+  </aside>
+
+  <main class="main" id="mainContent">
+    <div class="header">
+      <div>
+        <h1>Centro de Control</h1>
+        <div class="date" id="currentDate"></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num">69</div><div class="label">Leads</div></div>
+        <div class="stat"><div class="num">50</div><div class="label">Envíos</div></div>
+        <div class="stat"><div class="num">3</div><div class="label">Pendientes</div></div>
+        <div class="stat"><div class="num">1</div><div class="label">Clientes</div></div>
+      </div>
+    </div>
+
+    <!-- KANBAN -->
+    <div id="section-kanban">
+      <div class="section-title">📋 Tablero Kanban <span class="badge">activo</span></div>
+      <div class="kanban">
+        <div class="kanban-col">
+          <h3>📥 Pendientes <span class="count">3</span></h3>
+          <div class="kanban-card">
+            <span class="tag electricista">Electricista</span>
+            <h4>Electricidad Fuentes</h4>
+            <p>Llamar: 662 324 679</p>
+            <div class="meta">📞 Pendiente de llamada</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag fontanero">Fontanero</span>
+            <h4>Fontaneros JMT</h4>
+            <p>Esperar respuesta email</p>
+            <div class="meta">📧 Enviado 16/07</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag gestoria">Gestoría</span>
+            <h4>Gestoría Roberto Mateo</h4>
+            <p>Email propuesto, esperar OK</p>
+            <div class="meta">⏳ Pendiente revisión</div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <h3>🔄 En progreso <span class="count">2</span></h3>
+          <div class="kanban-card">
+            <span class="tag bodega">Bodega</span>
+            <h4>SEO Web</h4>
+            <p>Optimización llms.txt + enlaces internos</p>
+            <div class="meta">🚀 En despliegue</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag electricista">Sistema</span>
+            <h4>Auto-arranque servicios</h4>
+            <p>systemd bridge + gateway</p>
+            <div class="meta">⚙️ Pendiente reinicio</div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <h3>✅ Completado hoy <span class="count">4</span></h3>
+          <div class="kanban-card">
+            <span class="tag gestoria">Gestoría</span>
+            <h4>Envío email Gestoría Esparza</h4>
+            <p>gestoria.esparza@fer.es</p>
+            <div class="meta">✅ Enviado 22/07</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag gestoria">Gestoría</span>
+            <h4>Envío email Roberto Mateo</h4>
+            <p>info@gestoriarobertomateo.com</p>
+            <div class="meta">✅ Enviado 22/07</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag">Sistema</span>
+            <h4>Cron leads diario</h4>
+            <p>6:00 búsqueda + Airtable + propuesta</p>
+            <div class="meta">✅ Activo</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag">Sistema</span>
+            <h4>Panel de control</h4>
+            <p>Esta página 🎉</p>
+            <div class="meta">✅ Creado</div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <h3>📌 Proyectos <span class="count">3</span></h3>
+          <div class="kanban-card">
+            <span class="tag">Producto</span>
+            <h4>Perfil empleado digital</h4>
+            <p>Skill base para clientes Plan Go</p>
+            <div class="meta">📦 Esperando 1er cliente</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag">Marketing</span>
+            <h4>Google My Business</h4>
+            <p>Crear ficha Westlink</p>
+            <div class="meta">📝 Pendiente</div>
+          </div>
+          <div class="kanban-card">
+            <span class="tag">Personal</span>
+            <h4>Kit herramientas Serbia</h4>
+            <p>Compra material instalador AV</p>
+            <div class="meta">📅 Enero 2027</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div id="section-pipeline" style="display:none">
+      <div class="section-title">📈 Pipeline de Contenido <span class="badge">5 ideas</span></div>
+      <div class="pipeline">
+        <div class="pipe-stage">
+          <h3>💡 Idea</h3>
+          <div class="pipe-item"><span class="status-dot idea"></span>Post: "IA para gestorías"</div>
+          <div class="pipe-item"><span class="status-dot idea"></span>Video demo empleado digital</div>
+          <div class="pipe-item"><span class="status-dot idea"></span>Comparativa: local vs cloud</div>
+        </div>
+        <div class="pipe-stage">
+          <h3>✏️ Borrador</h3>
+          <div class="pipe-item"><span class="status-dot draft"></span>Artículo "IA en La Rioja"</div>
+          <div class="pipe-item"><span class="status-dot draft"></span>Hilo "52 leads en 2 días"</div>
+        </div>
+        <div class="pipe-stage">
+          <h3>⚙️ En producción</h3>
+          <div class="pipe-item"><span class="status-dot progress"></span>Panel centro de control</div>
+        </div>
+        <div class="pipe-stage">
+          <h3>🔍 Revisión</h3>
+          <div class="pipe-item"><span class="status-dot review"></span>Página /para/electricistas</div>
+        </div>
+        <div class="pipe-stage">
+          <h3>✅ Publicado</h3>
+          <div class="pipe-item"><span class="status-dot done"></span>Demo interactiva en Hero</div>
+          <div class="pipe-item"><span class="status-dot done"></span>Lead magnet email</div>
+          <div class="pipe-item"><span class="status-dot done"></span>SEO: llms.txt + sitemap</div>
+          <div class="pipe-item"><span class="status-dot done"></span>3 páginas sectoriales</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIKI -->
+    <div id="section-wiki" style="display:none">
+      <div class="section-title">📚 Wiki de Memoria <span class="badge">12 entradas</span></div>
+      <div class="wiki-grid">
+        <div class="wiki-card">
+          <div class="icon">🏗️</div>
+          <h3>Infraestructura</h3>
+          <p>Mac Mini 6,2 · 8GB DDR3 · Linux Mint 22.3 · Tailscale · Systemd bridge + gateway</p>
+          <div class="tags"><span>sistema</span><span>servicios</span><span>auto-arranque</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">🌐</div>
+          <h3>Web Westlink</h3>
+          <p>westlinksl.com · React Vite · Hero con WhatsApp · 3 páginas sectoriales · SEO optimizado</p>
+          <div class="tags"><span>web</span><span>SEO</span><span>Vercel</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">📧</div>
+          <h3>Email & CRM</h3>
+          <p>Resend API · 50+ emails enviados · Airtable con 69 leads · Seguimiento día+1 automático</p>
+          <div class="tags"><span>email</span><span>CRM</span><span>leads</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">🤖</div>
+          <h3>Skills Instaladas</h3>
+          <p>16 skills: outreachmagic, oh-my-hermes, skill-factory, incident-commander, authsome, dev-gtm, +9 más</p>
+          <div class="tags"><span>skills</span><span>automatización</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">🖥️</div>
+          <h3>Canales WhatsApp</h3>
+          <p>Bridge en puerto 3000 · Gateway Hermes · Health check cada 2h · Briefing diario 9:00</p>
+          <div class="tags"><span>whatsapp</span><span>gateway</span><span>cron</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">📋</div>
+          <h3>Prospección</h3>
+          <p>Cron diario 6:00 búsqueda leads · Guarda en Airtable · Propone email · Apruebas antes de enviar</p>
+          <div class="tags"><span>leads</span><span>prospección</span><span>cron</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">📓</div>
+          <h3>Obsidian</h3>
+          <p>Vault en ~/Documentos/Obsidian Vault/Westlink/ · Dashboard.md · Tareas.md · Actualización diaria</p>
+          <div class="tags"><span>obsidian</span><span>memoria</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">🧰</div>
+          <h3>Kit Serbia</h3>
+          <p>Instalador AV autónomo · Herramientas: Wiha, Knipex, Makita, Fluke · Presupuesto ~650-800€</p>
+          <div class="tags"><span>personal</span><span>serbia</span><span>enero 2027</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">🔧</div>
+          <h3>Empleado Digital</h3>
+          <p>Plan Go 49€/mes · Plan Private 149€/mes · Skill base creada · Perfiles Hermes por cliente</p>
+          <div class="tags"><span>producto</span><span>plan go</span><span>clientes</span></div>
+        </div>
+        <div class="wiki-card">
+          <div class="icon">🔑</div>
+          <h3>Credenciales</h3>
+          <p>Resend: re_... · Airtable: pat_... · OpenRouter configurado · DeepSeek V4 Flash activo</p>
+          <div class="tags"><span>config</span><span>api keys</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RENDIMIENTO -->
+    <div id="section-metrics" style="display:none">
+      <div class="section-title">📊 Rendimiento <span class="badge">X + contenido</span></div>
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="value up">0</div>
+          <div class="label">Seguidores X</div>
+          <div class="change" style="color:#64748b">📌 Sin empezar</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">69</div>
+          <div class="label">Leads CRM</div>
+          <div class="change" style="color:#34d399">↑ +2 hoy</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">50</div>
+          <div class="label">Emails enviados</div>
+          <div class="change" style="color:#34d399">↑ +2 hoy</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">29</div>
+          <div class="label">Emails entregados</div>
+          <div class="change" style="color:#34d399">58% tasa</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">0</div>
+          <div class="label">Respuestas</div>
+          <div class="change" style="color:#fbbf24">⏳ En espera</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">8</div>
+          <div class="label">Páginas web</div>
+          <div class="change" style="color:#34d399">↑ indexando</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">16</div>
+          <div class="label">Skills instaladas</div>
+          <div class="change" style="color:#34d399">Listas para usar</div>
+        </div>
+        <div class="metric-card">
+          <div class="value up">99.9%</div>
+          <div class="label">Uptime sistema</div>
+          <div class="change" style="color:#34d399">✅ Sano</div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:24px">📱 Últimos posts en X</div>
+      <div class="content-posts">
+        <div class="content-post">
+          <div class="left"><span class="platform">X</span><span class="post-title" style="color:#64748b">Todavía no hay actividad en X</span></div>
+          <div class="right"><span style="color:#475569">Crea tu primer post para empezar</span></div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:24px">📈 Sugerencias para mejorar</div>
+      <div class="content-posts">
+        <div class="content-post">
+          <div class="left"><span class="platform">🔥</span><span class="post-title">Crear ficha Google My Business</span></div>
+          <div class="right"><span style="color:#fbbf24">Impacto SEO alto</span></div>
+        </div>
+        <div class="content-post">
+          <div class="left"><span class="platform">🔥</span><span class="post-title">Llamar a leads con teléfono</span></div>
+          <div class="right"><span style="color:#fbbf24">6 números esperando</span></div>
+        </div>
+        <div class="content-post">
+          <div class="left"><span class="platform">📊</span><span class="post-title">Primer post en X sobre Westlink</span></div>
+          <div class="right"><span style="color:#60a5fa">Pendiente</span></div>
+        </div>
+        <div class="content-post">
+          <div class="left"><span class="platform">📧</span><span class="post-title">Seguimiento leads día+1</span></div>
+          <div class="right"><span style="color:#34d399">Automático ✅</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+function showSection(id){
+  document.querySelectorAll('#section-kanban,#section-pipeline,#section-wiki,#section-metrics').forEach(s=>s.style.display='none')
+  document.getElementById('section-'+id).style.display='block'
+  document.querySelectorAll('.sidebar nav a').forEach(a=>a.classList.remove('active'))
+  event.target.classList.add('active')
+}
+document.getElementById('currentDate').textContent=new Date().toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric'})
+</script>
+</body>
+</html>
