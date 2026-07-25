@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { HiArrowRight, HiPlay, HiPause, HiPhone } from 'react-icons/hi'
-import { BsDot } from 'react-icons/bs'
+import { HiArrowRight, HiPlay, HiPause } from 'react-icons/hi'
 
 /* ── Demo messages ── */
 const demoMessages = [
@@ -33,13 +32,12 @@ export default function Hero() {
   }, [demoPlaying, advanceDemo])
 
   const currentMsg = demoMessages[demoStep]
-  const isUser = currentMsg?.role === 'user'
 
   const now = new Date()
   const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0')
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510] px-4 py-8">
+    <section className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510] px-4 pt-24 pb-12 lg:min-h-screen lg:py-8">
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510]" />
@@ -52,7 +50,7 @@ export default function Hero() {
 
       <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
         {/* ── LEFT: Texto breve ── */}
-        <div className="text-center lg:text-left lg:max-w-sm order-2 lg:order-1">
+        <div className="text-center lg:text-left lg:max-w-sm order-1">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,8 +67,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
           >
-            Hola, soy Dani.
-            <span className="block mt-1 text-amber-300">Te ayudo con el papeleo (con IA)</span>
+            Menos papeleo.
+            <span className="block mt-1 text-amber-300">Más tiempo para tu negocio.</span>
           </motion.h1>
 
           <motion.p
@@ -79,7 +77,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-sm sm:text-base text-gray-400 mt-4 leading-relaxed max-w-sm mx-auto lg:mx-0"
           >
-            Vivo en Villamediana, La Rioja. No es una persona — es una IA que trabaja por WhatsApp. Sin instalaciones raras, sin compromiso.
+            Soy Dani, fundador de Westlink en Villamediana. Tu empleado digital organiza facturas y documentos por WhatsApp para que los encuentres en segundos.
           </motion.p>
 
           <motion.div
@@ -89,18 +87,20 @@ export default function Hero() {
             className="flex flex-col sm:flex-row items-center gap-3 mt-6"
           >
             <a
-              href="#contacto"
+              href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span>Hablar con Dani</span>
+              <span>Ver cómo funciona</span>
               <HiArrowRight className="text-base group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="tel:+34648253217"
+              href="/demo.html"
               className="inline-flex items-center gap-2 text-white/80 hover:text-white px-5 py-3 rounded-2xl text-sm font-medium border border-white/15 hover:border-white/30 transition-all duration-300"
             >
-              <HiPhone className="text-base" />
-              Mi móvil: 648 25 32 17
+              <HiPlay className="text-base" />
+              Ver demo
             </a>
           </motion.div>
 
@@ -108,16 +108,16 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex items-center gap-4 text-[11px] text-gray-500 mt-6 justify-center lg:justify-start"
+            className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] text-gray-400 mt-6 justify-center lg:justify-start"
           >
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-emerald-400/60" />
-              IA (DeepSeek) no almacena datos
+              Funciona por WhatsApp
             </span>
             <span className="w-px h-3 bg-white/10" />
             <span className="flex items-center gap-1.5">
               <span className="w-1 h-1 rounded-full bg-emerald-400/60" />
-              Ya ayudo a gente en La Rioja
+              Desde 49€/mes
             </span>
           </motion.div>
         </div>
@@ -127,7 +127,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="order-1 lg:order-2 w-full max-w-sm lg:max-w-md"
+          className="order-2 w-full max-w-[280px] sm:max-w-sm lg:max-w-md"
         >
           <div className="relative">
             <div className="absolute -inset-10 bg-gradient-to-br from-amber-500/15 via-orange-500/8 to-transparent rounded-[60px] blur-[80px]" />
@@ -156,7 +156,7 @@ export default function Hero() {
                 </div>
 
                 {/* Messages */}
-                <div className="px-4 py-3 min-h-[340px] sm:min-h-[420px] flex flex-col justify-end gap-1"
+                <div className="px-4 py-3 min-h-[260px] sm:min-h-[420px] flex flex-col justify-end gap-1"
                   style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
                 >
                   {demoMessages.slice(0, demoStep + 1).map((msg, i) => {

@@ -34,7 +34,6 @@ export default function App() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Westlink SL — IA para PYMES en La Rioja" />
         <meta name="twitter:description" content="Empleado digital por WhatsApp. Organiza facturas, busca documentos. Desde 49€/mes. La Rioja." />
-        <meta name="twitter:description" content="IA privada 24/7. Desde 49€/mes. Por WhatsApp." />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -85,7 +84,7 @@ export default function App() {
 
       {/* ── WhatsApp flotante ── */}
       <a
-        href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20saber%20m%C3%A1s%20sobre%20el%20empleado%20digital"
+        href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 z-50 w-14 h-14 bg-green-500 rounded-full shadow-xl hover:bg-green-600 hover:scale-110 transition-all duration-300 flex items-center justify-center group"
@@ -98,14 +97,6 @@ export default function App() {
           <span className="animate-ping w-4 h-4 bg-red-500 rounded-full absolute opacity-75" />
           <span className="relative text-white text-[8px] font-bold">1</span>
         </span>
-        </a>
-        <a
-        href="https://westlinksl.com/demo.html"
-        className="fixed bottom-5 left-5 z-50 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-3 rounded-full text-xs text-white/70 hover:bg-white/20 transition-all duration-300"
-        target="_blank"
-        rel="noopener noreferrer"
-        >
-        ▶ Ver demo
         </a>
     </>
   )

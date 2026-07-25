@@ -67,16 +67,18 @@ export default function Navbar() {
               648 25 32 17
             </a>
             <a
-              href="#contacto"
+              href="/demo.html"
               className="ml-2 bg-white text-sky-600 border-2 border-sky-500 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-sky-50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
             >
-              🎬 Ver demo
+              Ver demo
             </a>
             <a
-              href="#contacto"
+              href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
+              target="_blank"
+              rel="noopener noreferrer"
               className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ml-2"
             >
-              Contratar
+              Hablar con Dani
             </a>
           </div>
 
@@ -120,18 +122,20 @@ export default function Navbar() {
               ))}
               <div className="pt-2 space-y-2">
                 <a
-                  href="#contacto"
+                  href="/demo.html"
                   onClick={close}
                   className="block bg-white text-sky-600 border-2 border-sky-500 px-4 py-3 rounded-xl text-center font-bold text-sm"
                 >
-                  🎬 Ver demo
+                  Ver demo
                 </a>
                 <a
-                  href="#contacto"
+                  href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={close}
                   className="block gradient-primary text-white px-4 py-3 rounded-xl text-center font-semibold text-sm"
                 >
-                  Contratar ahora
+                  Hablar con Dani
                 </a>
               </div>
             </div>
