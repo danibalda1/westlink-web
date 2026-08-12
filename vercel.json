@@ -5,6 +5,16 @@
     { "source": "/para/fontaneros", "destination": "/para/fontaneros.html" },
     { "source": "/demo", "destination": "/demo.html" },
     { "source": "/gracias", "destination": "/gracias.html" },
+    { "source": "/downloads/(.*)", "destination": "/downloads/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/downloads/(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    }
   ]
 }
