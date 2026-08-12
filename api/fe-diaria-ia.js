@@ -1,12 +1,42 @@
 // Proxy serverless para Fe Diaria IA (Vercel)
 // Evita exponer la API key de DeepSeek en la app
+// Seguridad: token de app + rate limit por IP
 const DEEPSEEK_KEY = process.env.DEEPSEEK_API_KEY;
 const DEEPSEEK_URL = process.env.DEEPSEEK_BASE_URL || 'https://api.deepseek.com';
+// Token secreto que solo conoce la app (se comparte al instalar). CAMBIAR en producción.
+const APP_TOKEN = process.env.FE_DIARIA_APP_TOKEN || 'fe-diar';
+const MAX_PER_IP_PER_HOUR = 30;
+
+// Rate limit simple en memoria (por instancia serverless; suficiente para abuso básico)
+const ipHits = new Map();
 
 export default async function handler(req, res) {
   // Solo POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
+  }
+
+  // Capa 2: verificar token de app
+  const auth = req.headers['x-app-token'] || '';
+  if (auth !== APP_TOKEN) {
+    return res.status(401).json({ error: 'Acceso no autorizado' });
+  }
+
+  // Capa 3: rate limit por IP
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  const hour = Math.floor(Date.now() / 3600000);
+  const key = `${ip}:${hour}`;
+  const count = (ipHits.get(key) || 0) + 1;
+  ipHits.set(key, count);
+  // Limpiar entradas viejas (evitar crecimiento infinito)
+  if (ipHits.size > 5000) {
+    const now = Math.floor(Date.now() / 3600000);
+    for (const k of ipHits.keys()) {
+      if (parseInt(k.split(':')[1], 10) < now - 1) ipHits.delete(k);
+    }
+  }
+  if (count > MAX_PER_IP_PER_HOUR) {
+    return res.status(429).json({ error: 'Demasiadas preguntas. Vuelve en un rato 🙏' });
   }
 
   if (!DEEPSEEK_KEY) {
