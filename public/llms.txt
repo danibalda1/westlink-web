@@ -1,28 +1,54 @@
-# Westlink SL — Empleado digital IA para PYMES
-> https://westlinksl.com
+# Westlink SL — Empleado digital de IA para PYMES
+> https://westlinksl.com — actualizado el 10 de septiembre de 2026
 
-Westlink SL ofrece empleados digitales de IA para PYMES en La Rioja (España). Organizan facturas, presupuestos y documentos por WhatsApp desde 49€/mes.
+Westlink SL ofrece empleados digitales de IA privada para PYMES, autónomos y negocios
+locales de La Rioja (España) y alrededores. Organizan facturas, albaranes, presupuestos,
+certificados y documentos por WhatsApp, los clasifican y los buscan en segundos.
+Creado y atendido por Dani (Daniel Balda), en Villamediana de Iregua (La Rioja).
+
+## Qué hace exactamente
+
+- Organiza facturas, albaranes y contratos por cliente, fecha, proveedor e importe.
+- Busca cualquier documento en segundos pidiéndolo en lenguaje normal.
+- Prepara presupuestos a partir de trabajos anteriores.
+- Controla cobros, vencimientos y documentos pendientes de firmar.
+- Lee PDFs y responde preguntas sobre el contenido de los documentos.
+- Prepara resúmenes de facturación para el gestor.
+
+## Precios (sin IVA, sin permanencia)
+
+- Plan Go: 49€/mes — 100% digital, por WhatsApp y panel web, sin instalar nada.
+- Plan Start: 149€/mes — con Westlink Box en cesión (IA mediante APIs externas).
+- Plan Private: 199€/mes — modelos de IA locales (Ollama); los datos no salen de la oficina.
+- Plan Hybrid: 299€/mes — modelos locales más APIs cuando hace falta.
+- Plan Business: 499€/mes — hardware superior y hasta 5 empleados digitales.
+- Pago único: Starter 2.300€, Business 7.900€, Enterprise 15.900€.
+
+## Zona de servicio
+
+La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza. Visitas presenciales sin coste en esa zona.
 
 ## Páginas principales
 
-- https://westlinksl.com/ — Inicio: empleado digital IA para PYMES
+- https://westlinksl.com/ — Inicio: empleado digital de IA para PYMES (cómo funciona, precios, sectores, FAQ, alcance y contacto)
+- https://westlinksl.com/para/electricistas — IA para electricistas: boletines y certificados de instalación
+- https://westlinksl.com/para/gestorias — IA para gestorías y asesorías: documentos de clientes y vencimientos
+- https://westlinksl.com/para/fontaneros — IA para fontaneros: albaranes, partes de trabajo y presupuestos
 - https://westlinksl.com/demo.html — Demo interactiva del empleado digital
-- https://westlinksl.com/para/electricistas — IA para electricistas en La Rioja
-- https://westlinksl.com/para/gestorias — IA para gestorías en La Rioja
-- https://westlinksl.com/para/fontaneros — IA para fontaneros en La Rioja
-- https://westlinksl.com/gracias.html — Página de confirmación
-
-## Contacto
-
-- Creado por: Dani (Daniel Balda)
-- Ubicación: Villamediana de Iregua, La Rioja, España
-- Teléfono: +34 648 25 32 17
-- Email: daniel@westlinksl.com
-- WhatsApp: +34 648 25 32 17
+- https://westlinksl.com/llms.txt — Este archivo
 
 ## FAQ
 
-- ¿Qué hace? Organiza facturas, busca documentos, prepara presupuestos por WhatsApp.
-- ¿Cuánto cuesta? Plan Go desde 49€/mes. Plan Private desde 149€/mes.
-- ¿Necesito instalar algo? No, funciona por WhatsApp.
-- ¿Dónde están mis datos? Plan Go: servidores en La Rioja. Plan Private: en tu oficina.
+- ¿Qué hace? Organiza facturas, busca documentos, prepara presupuestos y responde dudas por WhatsApp.
+- ¿Cuánto cuesta? Plan Go desde 49€/mes. Con hardware en la oficina desde 149€/mes.
+- ¿Necesito instalar algo? No: el Plan Go funciona por WhatsApp.
+- ¿Dónde están mis datos? Plan Go: se procesan con una IA externa que no almacena ni entrena con ellos. Planes con hardware: en tu propia oficina.
+- ¿Para quién no es? Para quien busca un chat de IA generalista, para empresas grandes con departamento de informática o para quien no vaya a enviar documentos.
+
+## Contacto
+
+- Creado por: Dani (Daniel Balda), Westlink SL
+- Ubicación: Villamediana de Iregua, La Rioja, España
+- Teléfono y WhatsApp: +34 648 25 32 17
+- Email: daniel@westlinksl.com
+- Horario de atención: todos los días

@@ -2,18 +2,227 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+    <link rel="icon" type="image/webp" href="/logo-westlink.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#4F46E5" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://westlinksl.com" />
-    <title>Westlink SL — Tu empleado de IA privado para PYMES</title>
-    <!-- Preload fonts -->
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href="https://westlinksl.com/" />
+
+    <!-- ── Title 30-60 caracteres ── -->
+    <title>Empleado digital de IA para PYMES en La Rioja | Westlink</title>
+    <meta
+      name="description"
+      content="Empleado digital de IA privada para PYMES en La Rioja: organiza facturas y documentos por WhatsApp. Desde 49€/mes, sin instalar nada. Habla con Dani."
+    />
+    <meta name="author" content="Daniel Balda — Westlink SL" />
+    <meta name="geo.region" content="ES-RI" />
+    <meta name="geo.placename" content="Villamediana de Iregua, La Rioja" />
+
+    <!-- ── Open Graph / Twitter ── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Westlink SL" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:url" content="https://westlinksl.com/" />
+    <meta property="og:title" content="Empleado digital de IA para PYMES en La Rioja" />
+    <meta
+      property="og:description"
+      content="Organiza facturas y documentos por WhatsApp. Los encuentras en segundos. Desde 49€/mes, sin instalar nada. Villamediana de Iregua, La Rioja."
+    />
+    <meta property="og:image" content="https://westlinksl.com/images/westlink-box.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Empleado digital de IA para PYMES en La Rioja" />
+    <meta
+      name="twitter:description"
+      content="Organiza facturas y documentos por WhatsApp. Desde 49€/mes. Hecho en La Rioja por Dani."
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- ══════════════════════════════════════════════════════════
+         Schema JSON-LD
+         · LocalBusiness  (ficha del negocio, ya existía)
+         · Service        (servicio + área de servicio)  ← NUEVO
+         · FAQPage        (6 preguntas del FAQ)          ← NUEVO
+         · BreadcrumbList (migas de pan de la home)      ← NUEVO
+         ══════════════════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "LocalBusiness",
+            "@id": "https://westlinksl.com/#negocio",
+            "name": "Westlink SL",
+            "description": "Implantación de IA privada en PYMES. Empleado digital que organiza facturas y documentos por WhatsApp.",
+            "url": "https://westlinksl.com/",
+            "email": "daniel@westlinksl.com",
+            "telephone": "+34648253217",
+            "image": "https://westlinksl.com/images/westlink-box.jpg",
+            "logo": "https://westlinksl.com/logo-westlink.webp",
+            "areaServed": ["La Rioja", "Álava", "Navarra", "Burgos", "Soria", "Zaragoza"],
+            "priceRange": "€€",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Villamediana de Iregua",
+              "addressRegion": "La Rioja",
+              "addressCountry": "ES"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": 42.4286, "longitude": -2.4156 },
+            "openingHours": "Mo-Su 00:00-24:00",
+            "founder": { "@type": "Person", "name": "Daniel Balda" },
+            "founder_name": "Dani",
+            "knowsLanguage": ["es"],
+            "makesOffer": {
+              "@type": "Offer",
+              "name": "Plan Go",
+              "price": "49.00",
+              "priceCurrency": "EUR",
+              "description": "Empleado digital de IA por WhatsApp desde 49€/mes, sin permanencia."
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://westlinksl.com/#empleado-digital",
+            "name": "Empleado digital de IA para PYMES",
+            "serviceType": "Empleado digital de inteligencia artificial",
+            "category": "Automatización documental con IA para PYMES",
+            "description": "Empleado digital de IA privada que organiza facturas, albaranes, presupuestos y documentos por WhatsApp. Extrae los datos, los clasifica, los busca en segundos, prepara informes para el gestor y responde dudas sobre tus documentos. Sin instalar nada (Plan Go, desde 49€/mes) o con hardware en tu propia oficina (planes Private e Hybrid, desde 149€/mes) si necesitas que los datos no salgan de tu red.",
+            "url": "https://westlinksl.com/",
+            "provider": { "@id": "https://westlinksl.com/#negocio" },
+            "areaServed": [
+              { "@type": "AdministrativeArea", "name": "La Rioja" },
+              { "@type": "AdministrativeArea", "name": "Álava" },
+              { "@type": "AdministrativeArea", "name": "Navarra" },
+              { "@type": "AdministrativeArea", "name": "Burgos" },
+              { "@type": "AdministrativeArea", "name": "Soria" },
+              { "@type": "AdministrativeArea", "name": "Zaragoza" }
+            ],
+            "audience": {
+              "@type": "BusinessAudience",
+              "name": "PYMES, autónomos y negocios locales de La Rioja y alrededores",
+              "audienceType": "PYMES, autónomos, gestorías, bodegas, instaladores, talleres, clínicas"
+            },
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Plan Go",
+                "price": "49.00",
+                "priceCurrency": "EUR",
+                "description": "Empleado digital por WhatsApp, sin hardware ni instalación.",
+                "availability": "https://schema.org/InStock",
+                "url": "https://westlinksl.com/#precios"
+              },
+              {
+                "@type": "Offer",
+                "name": "Plan Start",
+                "price": "149.00",
+                "priceCurrency": "EUR",
+                "description": "Empleado digital con Westlink Box en cesión e IA mediante APIs externas.",
+                "availability": "https://schema.org/InStock",
+                "url": "https://westlinksl.com/#precios"
+              },
+              {
+                "@type": "Offer",
+                "name": "Plan Private",
+                "price": "199.00",
+                "priceCurrency": "EUR",
+                "description": "Modelos de IA locales (Ollama): todos los datos se quedan en tu oficina.",
+                "availability": "https://schema.org/InStock",
+                "url": "https://westlinksl.com/#precios"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://westlinksl.com/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Cuánto cuesta y qué incluye?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Desde 49€/mes con el Plan Go (digital, por WhatsApp, sin hardware). Si prefieres el sistema en tu propia oficina, desde 149€/mes con la Westlink Box incluida. También hay opción de pago único desde 2.300€. Sin permanencia y sin sorpresas. Tienes el detalle en los planes y precios."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Tengo que instalar algo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "En el Plan Go no instalas nada: funciona por WhatsApp. Si contratas hardware, lo instalamos y lo configuramos nosotros. No necesitas saber de tecnología."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Y si no funciona para mi negocio?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Lo probamos primero, con tus documentos reales. Si no te convence, no sigues: sin permanencia y cancelas cuando quieras."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Mis datos están seguros? ¿Por dónde se procesa la IA?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "En el Plan Go los documentos se procesan con DeepSeek, una IA externa que no almacena ni entrena con tus datos. Si trabajas con información muy sensible, elige un plan con hardware en tu oficina: ahí la IA corre en tu propia red y ni yo tengo acceso."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Vale para mi sector?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Funciona en electricistas, gestorías, fontaneros, bodegas, abogados, clínicas, talleres y cualquier negocio con papeles que organizar. Si no estás seguro, pregúntame."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿En qué zonas estáis?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Estamos en Villamediana de Iregua (La Rioja) y hacemos visitas sin coste en La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza. Si estás fuera de esa zona, escríbeme igualmente."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://westlinksl.com/#breadcrumbs",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Inicio",
+                "item": "https://westlinksl.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Empleado digital de IA para PYMES en La Rioja",
+                "item": "https://westlinksl.com/#empleado-digital"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://westlinksl.com/#web",
+            "url": "https://westlinksl.com/",
+            "name": "Westlink SL",
+            "inLanguage": "es-ES",
+            "publisher": { "@id": "https://westlinksl.com/#negocio" },
+            "dateModified": "2026-09-10"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- El HTML de aquí dentro se prerenderiza en build (scripts/prerender.mjs)
+         para que los rastreadores de IA lean el contenido sin ejecutar JS.
+         Al cargar React, sustituye este snapshot por la app interactiva. -->
+    <div id="root"><!--APP_HTML--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,72 +1,106 @@
-import { HiOutlineMail, HiPhone } from 'react-icons/hi'
-import { BsArrowRight } from 'react-icons/bs'
+import { HiArrowRight } from 'react-icons/hi'
+
+const WA = 'https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital'
+
+/* Fecha visible de última actualización. Actualizar al tocar contenidos
+   (y también dateModified del JSON-LD en index.html). */
+const ULTIMA_ACTUALIZACION = '10 de septiembre de 2026'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-950 text-gray-500">
-      {/* Top CTA */}
-      <div className="border-b border-gray-800/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-18">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-              ¿Hablamos?
-            </h2>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8">
-              Soy Daniel Balda, fundador de Westlink. Te atiendo en persona, sin comerciales
-              ni bots. Si estás en La Rioja o alrededores, quedamos un día y te lo enseño.
-            </p>
-            <a
-              href="#contacto"
-              className="inline-flex items-center gap-2 gradient-primary text-white px-7 py-3.5 rounded-2xl font-semibold text-sm hover:shadow-xl hover:shadow-indigo-500/25 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Solicita tu visita sin compromiso
-              <BsArrowRight />
+    <footer className="border-t border-white/[0.06]">
+      {/* CTA final */}
+      <div className="sec-tight">
+        <div className="wrap">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-xl">
+              <h2 className="h2">¿Empezamos por tu papeleo?</h2>
+              <p className="body-dim mt-5">
+                Escríbeme y te enseño cómo funcionaría con tus facturas y tus documentos. Sin
+                compromiso y sin comerciales de por medio: hablas conmigo.
+              </p>
+            </div>
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btn-primary shrink-0">
+              Hablar con Dani
+              <HiArrowRight />
             </a>
           </div>
         </div>
       </div>
 
-      {/* Bottom */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-5">
-          {/* Brand */}
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.jpg"
-              alt="Westlink SL"
-              className="w-8 h-8 rounded-lg object-cover shadow-md"
-            />
-            <div>
-              <span className="text-white font-semibold text-sm">Westlink SL</span>
-              <span className="text-gray-600 text-[11px] block leading-tight mt-0.5">IA Privada para PYMES · La Rioja</span>
+      {/* Enlaces */}
+      <div className="border-t border-white/[0.06] py-14">
+        <div className="wrap grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <img src="/logo-westlink.webp" alt="Westlink SL" className="w-8 h-8 rounded-[9px] object-cover" />
+              <span className="text-white text-[15px] font-semibold">Westlink SL</span>
             </div>
-          </div>
-
-          {/* Links */}
-          <div className="flex items-center flex-wrap justify-center gap-x-5 gap-y-2 text-xs">
-            <a href="/aviso-legal.html" className="text-gray-500 hover:text-gray-300 transition-colors">Aviso Legal</a>
-            <a href="/privacidad.html" className="text-gray-500 hover:text-gray-300 transition-colors">Privacidad</a>
-            <a href="mailto:daniel@westlinksl.com" className="flex items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors">
-              <HiOutlineMail className="text-xs" />
-              daniel@westlinksl.com
-            </a>
-            <a href="tel:+34648253217" className="flex items-center gap-1.5 text-gray-500 hover:text-gray-300 transition-colors">
-              <HiPhone className="text-xs" />
-              648 25 32 17
-            </a>
-          </div>
-
-          {/* Coverage */}
-          <div className="text-center md:text-left">
-            <p className="text-[11px] text-gray-600">
-              📍 Cubrimos: La Rioja · Álava · Navarra · Burgos · Soria · Zaragoza · Visitas gratuitas
+            <p className="text-white/40 text-[13.5px] leading-relaxed mt-5">
+              Empleados digitales de IA privada para PYMES. Organizamos facturas, albaranes y
+              documentos por WhatsApp. Desde Villamediana de Iregua, La Rioja.
+            </p>
+            <p className="text-white/40 text-[13.5px] mt-4">
+              <a href="tel:+34648253217" className="hover:text-white/70 transition-colors">648 25 32 17</a>
+              <br />
+              <a href="mailto:daniel@westlinksl.com" className="hover:text-white/70 transition-colors">
+                daniel@westlinksl.com
+              </a>
             </p>
           </div>
 
-          {/* Copyright */}
-          <span className="text-[11px] text-gray-700">
-            © {new Date().getFullYear()} Westlink SL · Villamediana de Iregua, La Rioja
-          </span>
+          <div>
+            <p className="mono-label mb-5">En esta página</p>
+            <ul className="space-y-3 text-[13.5px]">
+              {[
+                ['Cómo funciona', '#como-funciona'],
+                ['Planes y precios', '#precios'],
+                ['Sectores', '#sectores'],
+                ['Opiniones', '#testimonios'],
+                ['Preguntas frecuentes', '#faq'],
+                ['No es para…', '#no-es-para'],
+                ['Contacto', '#contacto'],
+              ].map(([label, href]) => (
+                <li key={href}>
+                  <a href={href} className="text-white/55 hover:text-white transition-colors">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="mono-label mb-5">Por sector</p>
+            <ul className="space-y-3 text-[13.5px]">
+              <li><a href="/para/electricistas" className="text-white/55 hover:text-white transition-colors">IA para electricistas</a></li>
+              <li><a href="/para/gestorias" className="text-white/55 hover:text-white transition-colors">IA para gestorías</a></li>
+              <li><a href="/para/fontaneros" className="text-white/55 hover:text-white transition-colors">IA para fontaneros</a></li>
+              <li><a href="/demo.html" className="text-white/55 hover:text-white transition-colors">Demo del empleado digital</a></li>
+              <li><a href="/llms.txt" className="text-white/55 hover:text-white transition-colors">Información para asistentes de IA</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="mono-label mb-5">Legal</p>
+            <ul className="space-y-3 text-[13.5px]">
+              <li><a href="/aviso-legal.html" className="text-white/55 hover:text-white transition-colors">Aviso legal</a></li>
+              <li><a href="/privacidad.html" className="text-white/55 hover:text-white transition-colors">Privacidad</a></li>
+            </ul>
+            <p className="text-white/35 text-[13px] leading-relaxed mt-6">
+              Zona de servicio: La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom */}
+      <div className="border-t border-white/[0.06] py-7">
+        <div className="wrap flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-white/35 text-[12.5px]">
+            © {new Date().getFullYear()} Westlink SL · Villamediana de Iregua (La Rioja)
+          </p>
+          <p className="text-white/35 text-[12.5px]">
+            Última actualización: <time dateTime="2026-09-10">{ULTIMA_ACTUALIZACION}</time>
+          </p>
         </div>
       </div>
     </footer>

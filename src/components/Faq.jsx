@@ -1,101 +1,137 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useRef } from 'react'
-import { useInView } from 'framer-motion'
 import { HiChevronDown } from 'react-icons/hi'
 
+/* IMPORTANTE: estas 6 preguntas y respuestas están duplicadas en el
+   schema FAQPage de index.html. Si cambias un texto aquí, cámbialo allí. */
 const faqs = [
   {
     q: '¿Cuánto cuesta y qué incluye?',
-    a: 'Desde 49€/mes para el Plan Go (digital, por WhatsApp, sin hardware). Si necesitas hardware local, desde 149€/mes con la Westlink Box incluida. También hay opción de pago único desde 2.300€. Sin permanencia. Sin sorpresas.',
+    a: (
+      <>
+        Desde 49€/mes con el Plan Go (digital, por WhatsApp, sin hardware). Si prefieres el
+        sistema en tu propia oficina, desde 149€/mes con la Westlink Box incluida. También hay
+        opción de pago único desde 2.300€. Sin permanencia y sin sorpresas. Tienes el detalle en{' '}
+        <a href="#precios" className="link">los planes y precios</a>.
+      </>
+    ),
   },
   {
     q: '¿Tengo que instalar algo?',
-    a: 'En el Plan Go no instalas nada — funciona por WhatsApp. Si contratas hardware, nosotros lo instalamos y configuramos todo. No necesitas saber de tecnología.',
+    a: (
+      <>
+        En el Plan Go no instalas nada: funciona por WhatsApp. Si contratas hardware, lo
+        instalamos y lo configuramos nosotros. No necesitas saber de tecnología.
+      </>
+    ),
   },
   {
     q: '¿Y si no funciona para mi negocio?',
-    a: 'Probamos primero. Te enseñamos cómo funciona con tus documentos reales. Si no te convence, no sigues. Sin permanencia, cancelas cuando quieras.',
+    a: (
+      <>
+        Lo probamos primero, con tus documentos reales. Si no te convence, no sigues: sin
+        permanencia y cancelas cuando quieras. Te lo enseño en una visita sin coste.
+      </>
+    ),
   },
   {
-    q: '¿Mis datos están seguros? ¿Y la IA por dónde los procesa?',
-    a: 'En el Plan Go (49€/mes), los documentos se procesan a través de DeepSeek, una IA externa que no almacena ni entrena con tus datos. Es lo que usan miles de empresas hoy en día. Si trabajas con datos muy sensibles, elige un plan con hardware instalado en tu oficina — ahí la IA corre en tu propia red y ni yo tengo acceso.',
+    q: '¿Mis datos están seguros? ¿Por dónde se procesa la IA?',
+    a: (
+      <>
+        En el Plan Go los documentos se procesan con DeepSeek, una IA externa que no almacena ni
+        entrena con tus datos. Si trabajas con información muy sensible, elige un plan con
+        hardware en tu oficina: ahí la IA corre en tu propia red y ni yo tengo acceso.
+      </>
+    ),
   },
   {
     q: '¿Vale para mi sector?',
-    a: 'Funciona en bodegas, gestorías, electricistas, fontaneros, abogados, logística, clínicas, talleres… Si tienes papeles que organizar, sirve. Si no estás seguro, pregúntanos.',
+    a: (
+      <>
+        Funciona en <a href="/para/electricistas" className="link">electricistas</a>,{' '}
+        <a href="/para/gestorias" className="link">gestorías</a>,{' '}
+        <a href="/para/fontaneros" className="link">fontaneros</a>, bodegas, abogados, clínicas,
+        talleres y cualquier negocio con papeles que organizar. Si no estás seguro, pregúntame.
+      </>
+    ),
   },
   {
     q: '¿En qué zonas estáis?',
-    a: 'Estamos en La Rioja (Villamediana de Iregua) y hacemos visitas gratuitas en La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza. Si estás fuera, escríbenos igualmente.',
+    a: (
+      <>
+        Estamos en Villamediana de Iregua (La Rioja) y hacemos visitas sin coste en La Rioja,
+        Álava, Navarra, Burgos, Soria y Zaragoza. Si estás fuera de esa zona, escríbeme igualmente.
+      </>
+    ),
   },
 ]
 
 export default function Faq() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-  const [openIndex, setOpenIndex] = useState(null)
+  const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-white relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Header */}
+    <section id="faq" className="sec border-t border-white/[0.06]">
+      <div className="wrap" ref={ref}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-2xl"
         >
-          <span className="section-badge">FAQ</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4">
-            Preguntas frecuentes
-          </h2>
-          <p className="text-lg text-gray-500 leading-relaxed">
-            Respuestas rápidas a lo que seguro te estás preguntando.
+          <p className="eyebrow mb-5">Preguntas frecuentes</p>
+          <h2 className="h2">Lo que me preguntan antes de empezar</h2>
+          <p className="lead mt-6">
+            Si tu duda no está aquí,{' '}
+            <a
+              href="https://wa.me/34648253217?text=Hola%20Dani%2C%20tengo%20una%20duda%20sobre%20el%20empleado%20digital"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              escríbeme por WhatsApp
+            </a>{' '}
+            y te contesto yo.
           </p>
         </motion.div>
 
-        {/* FAQ items */}
-        <div className="max-w-3xl mx-auto space-y-2.5">
-          {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.3, delay: i * 0.03 }}
-              className={`rounded-2xl border transition-all duration-300 cursor-pointer ${
-                openIndex === i
-                  ? 'border-indigo-100 bg-indigo-50/20 shadow-sm'
-                  : 'border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm'
-              }`}
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            >
-              <div className="flex items-center justify-between px-5 py-4 sm:px-6 sm:py-5">
-                <h3 className="font-semibold text-gray-900 pr-4 text-sm sm:text-[15px] leading-snug">{faq.q}</h3>
-                <HiChevronDown
-                  className={`text-gray-300 shrink-0 transition-transform duration-300 ${
-                    openIndex === i ? 'rotate-180 text-indigo-500' : ''
-                  }`}
-                  size={18}
-                />
-              </div>
-              <AnimatePresence initial={false}>
-                {openIndex === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: 'easeInOut' }}
-                    className="overflow-hidden"
+        <div className="mt-14 max-w-3xl">
+          {faqs.map((faq, i) => {
+            const open = openIndex === i
+            return (
+              <div key={faq.q} className="border-t border-white/[0.08]">
+                <h3>
+                  <button
+                    onClick={() => setOpenIndex(open ? null : i)}
+                    aria-expanded={open}
+                    aria-controls={`faq-panel-${i}`}
+                    className="w-full flex items-start justify-between gap-6 py-6 text-left group"
                   >
-                    <p className="px-5 sm:px-6 pb-4 sm:pb-5 text-sm sm:text-[15px] text-gray-500 leading-relaxed border-t border-gray-100 pt-4">
-                      {faq.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                    <span className="text-[16.5px] text-white font-medium tracking-[-0.3px] leading-snug">
+                      {faq.q}
+                    </span>
+                    <HiChevronDown
+                      className={`text-white/35 shrink-0 mt-1 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                </h3>
+                {/* El texto se queda siempre en el HTML (grid-rows 0fr) para que
+                    los rastreadores de IA puedan leerlo aunque esté plegado. */}
+                <div
+                  id={`faq-panel-${i}`}
+                  className={`grid transition-all duration-300 ease-out ${
+                    open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="text-[15.5px] text-white/60 leading-relaxed pb-7 pr-10">{faq.a}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+          <hr className="hairline" />
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { HiArrowRight, HiPlay, HiPause } from 'react-icons/hi'
 
-/* ── Demo messages ── */
+/* Mensajes de la demo del móvil — copy real del producto */
 const demoMessages = [
   { role: 'user', text: 'Busca la factura de materiales de Salto del mes pasado' },
   { role: 'assistant', text: 'Aquí está. Factura nº F-2026-0842 de Salto Eléctrico — 1.842€ en material. La tengo clasificada en Proveedores/Salto.' },
@@ -14,15 +14,20 @@ const demoMessages = [
   { role: 'assistant', text: '28.430€ en Q2 2026. 12 obras facturadas. La más grande: reforma integral de Finca Miranda (8.200€).' },
 ]
 
+const fade = (delay) => ({
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+})
+
 export default function Hero() {
   const [demoStep, setDemoStep] = useState(0)
   const [demoPlaying, setDemoPlaying] = useState(true)
+  /* La hora se fija en el cliente (evita desajustes al prerenderizar) */
+  const [timeStr, setTimeStr] = useState('')
 
   const advanceDemo = useCallback(() => {
-    setDemoStep((prev) => {
-      if (prev >= demoMessages.length - 1) return 0
-      return prev + 1
-    })
+    setDemoStep((prev) => (prev >= demoMessages.length - 1 ? 0 : prev + 1))
   }, [])
 
   useEffect(() => {
@@ -31,181 +36,152 @@ export default function Hero() {
     return () => clearInterval(timer)
   }, [demoPlaying, advanceDemo])
 
-  const currentMsg = demoMessages[demoStep]
-
-  const now = new Date()
-  const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0')
+  useEffect(() => {
+    const now = new Date()
+    setTimeStr(
+      now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0'),
+    )
+  }, [])
 
   return (
-    <section className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510] px-4 pt-24 pb-12 lg:min-h-screen lg:py-8">
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1A0A0A] via-[#2D1810] to-[#1A1510]" />
-        <div className="absolute top-0 -left-32 w-[600px] h-[600px] bg-amber-500/6 rounded-full blur-[140px]" />
-        <div className="absolute bottom-0 -right-32 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px]" />
-        <div className="absolute inset-0 opacity-[0.02]"
-          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)', backgroundSize: '64px 64px' }}
-        />
+    <section className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
+      {/* Fondo: casi-negro con un halo índigo muy leve */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[520px] rounded-full bg-[#4F46E5]/[0.07] blur-[140px]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-        {/* ── LEFT: Texto breve ── */}
-        <div className="text-center lg:text-left lg:max-w-sm order-1">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-white/8 backdrop-blur-sm border border-white/10 text-amber-200/80 text-[10px] px-3 py-1 rounded-full mb-5 uppercase tracking-widest font-semibold"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            🌄 De La Rioja
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
-          >
-            Menos papeleo.
-            <span className="block mt-1 text-amber-300">Más tiempo para tu negocio.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-sm sm:text-base text-gray-400 mt-4 leading-relaxed max-w-sm mx-auto lg:mx-0"
-          >
-            Soy Dani, fundador de Westlink en Villamediana. Tu empleado digital organiza facturas y documentos por WhatsApp para que los encuentres en segundos.
+      <div className="wrap relative z-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-20 items-center">
+        {/* ── Texto ── */}
+        <div>
+          <motion.p {...fade(0)} className="pill mb-6">
+            <span className="dot" />
+            Villamediana de Iregua · La Rioja
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center gap-3 mt-6"
-          >
+          <motion.h1 {...fade(0.05)} className="h1">
+            Hola, soy Dani.
+            <span className="block mt-3 text-white/95">Menos papeleo.</span>
+            <span className="block text-white/40">Más tiempo para tu negocio.</span>
+          </motion.h1>
+
+          <motion.p {...fade(0.12)} className="lead mt-7 max-w-xl">
+            Monto <strong className="font-medium text-white/90">empleados digitales de IA</strong> para
+            PYMES de La Rioja. Tu documentación —facturas, albaranes, presupuestos, certificados— se
+            organiza sola y la encuentras por WhatsApp en segundos, sin instalar nada.
+            Desde <strong className="font-medium text-white/90">49€/mes</strong>.
+          </motion.p>
+
+          <motion.div {...fade(0.18)} className="mt-9 flex flex-col sm:flex-row gap-3">
             <a
               href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/25 hover:scale-[1.02] active:scale-[0.98]"
+              className="btn btn-primary"
             >
-              <span>Ver cómo funciona</span>
-              <HiArrowRight className="text-base group-hover:translate-x-1 transition-transform" />
+              Hablar con Dani
+              <HiArrowRight />
             </a>
-            <a
-              href="/demo.html"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white px-5 py-3 rounded-2xl text-sm font-medium border border-white/15 hover:border-white/30 transition-all duration-300"
-            >
-              <HiPlay className="text-base" />
-              Ver demo
+            <a href="#como-funciona" className="btn btn-ghost">
+              <HiPlay />
+              Cómo funciona
             </a>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] text-gray-400 mt-6 justify-center lg:justify-start"
-          >
-            <span className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-emerald-400/60" />
-              Funciona por WhatsApp
-            </span>
-            <span className="w-px h-3 bg-white/10" />
-            <span className="flex items-center gap-1.5">
-              <span className="w-1 h-1 rounded-full bg-emerald-400/60" />
-              Desde 49€/mes
-            </span>
-          </motion.div>
+          <motion.dl {...fade(0.24)} className="mt-10 grid grid-cols-3 gap-6 max-w-lg">
+            {[
+              { k: 'Desde 49€', v: 'al mes, sin permanencia' },
+              { k: 'WhatsApp', v: 'sin instalar nada' },
+              { k: 'En 15 min', v: 'configurado contigo' },
+            ].map((s) => (
+              <div key={s.k}>
+                <dt className="text-white text-[15px] font-medium tracking-[-0.2px]">{s.k}</dt>
+                <dd className="text-[12.5px] text-white/45 mt-1 leading-snug">{s.v}</dd>
+              </div>
+            ))}
+          </motion.dl>
+
+          <motion.p {...fade(0.3)} className="mt-9 text-[13.5px] text-white/40">
+            Casos concretos:{' '}
+            <a href="/para/electricistas" className="link">IA para electricistas</a>,{' '}
+            <a href="/para/gestorias" className="link">IA para gestorías</a> y{' '}
+            <a href="/para/fontaneros" className="link">IA para fontaneros</a> en La Rioja.
+          </motion.p>
         </div>
 
-        {/* ── RIGHT: MÓVIL GRANDE ── */}
+        {/* ── Móvil con la demo ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="order-2 w-full max-w-[280px] sm:max-w-sm lg:max-w-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-[330px] mx-auto lg:mx-0 lg:ml-auto"
         >
-          <div className="relative">
-            <div className="absolute -inset-10 bg-gradient-to-br from-amber-500/15 via-orange-500/8 to-transparent rounded-[60px] blur-[80px]" />
-            
-            <div className="relative bg-[#111B28] rounded-[44px] p-3 shadow-2xl shadow-amber-500/5 border border-white/10">
-              {/* Notch */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-[#111B28] rounded-b-[10px] z-10">
-                <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#1E2D3D] rounded-full" />
+          <div className="relative rounded-[36px] border border-white/[0.09] bg-[#101012] p-2.5">
+            <div className="rounded-[28px] overflow-hidden bg-[#0A0A0A] border border-white/[0.06]">
+              {/* Cabecera del chat */}
+              <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/[0.07]">
+                <div className="w-8 h-8 rounded-full bg-[#4F46E5] flex items-center justify-center text-white text-[12px] font-medium shrink-0">
+                  W
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-[13px] font-medium leading-tight">Empleado digital</p>
+                  <p className="text-[11px] text-white/40 flex items-center gap-1.5 leading-tight mt-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80" />
+                    en línea
+                  </p>
+                </div>
+                <button
+                  onClick={() => setDemoPlaying(!demoPlaying)}
+                  className="text-white/30 hover:text-white/70 transition-colors"
+                  aria-label={demoPlaying ? 'Pausar la demo' : 'Reanudar la demo'}
+                >
+                  {demoPlaying ? <HiPause size={15} /> : <HiPlay size={15} />}
+                </button>
               </div>
 
-              {/* Screen */}
-              <div className="bg-[#0B141A] rounded-[32px] overflow-hidden">
-                {/* Header */}
-                <div className="flex items-center gap-2.5 px-4 py-3 bg-[#1F2C38]">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-lg shadow-amber-500/20">W</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-white text-sm font-semibold truncate">Empleado Digital</div>
-                    <div className="text-[10px] text-emerald-400 flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      en línea
+              {/* Mensajes */}
+              <div className="px-3.5 py-4 h-[400px] flex flex-col justify-end gap-2">
+                {demoMessages.slice(0, demoStep + 1).map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[90%] rounded-2xl px-3.5 py-2.5 text-[12.5px] leading-relaxed ${
+                        msg.role === 'user'
+                          ? 'bg-[#4F46E5] text-white rounded-br-md'
+                          : 'bg-white/[0.06] text-white/80 rounded-bl-md'
+                      }`}
+                    >
+                      {msg.text}
                     </div>
+                  </motion.div>
+                ))}
+                {demoStep === 0 && (
+                  <div className="flex items-center justify-center h-24 text-white/25 text-[11px]">
+                    <span className="animate-pulse">Iniciando conversación…</span>
                   </div>
-                  <button onClick={() => setDemoPlaying(!demoPlaying)} className="text-white/30 hover:text-white/60 transition-colors shrink-0" aria-label={demoPlaying ? 'Pausar' : 'Reanudar'}>
-                    {demoPlaying ? <HiPause size={16} /> : <HiPlay size={16} />}
-                  </button>
-                </div>
+                )}
+              </div>
 
-                {/* Messages */}
-                <div className="px-4 py-3 min-h-[260px] sm:min-h-[420px] flex flex-col justify-end gap-1"
-                  style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
-                >
-                  {demoMessages.slice(0, demoStep + 1).map((msg, i) => {
-                    const animDelay = i === demoStep ? (demoPlaying ? 0 : 0.3) : 0
-                    return (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 12, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{ duration: 0.4, delay: animDelay, ease: 'easeOut' }}
-                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div
-                          className={`max-w-[88%] rounded-[10px] px-3.5 py-2.5 text-[14px] leading-relaxed shadow-sm ${
-                            msg.role === 'user'
-                              ? 'bg-[#005C4B] text-white rounded-br-sm'
-                              : 'bg-[#1F2C38] text-gray-100 rounded-bl-sm'
-                          }`}
-                        >
-                          {msg.text}
-                          {i === demoStep && msg.role === 'assistant' && demoPlaying && (
-                            <span className="inline-flex gap-0.5 ml-1">
-                              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                              <span className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                            </span>
-                          )}
-                          <div className="text-[9px] text-white/40 text-right mt-0.5">{timeStr}</div>
-                        </div>
-                      </motion.div>
-                    )
-                  })}
-                  {demoStep === 0 && (
-                    <div className="flex items-center justify-center h-32 text-white/15 text-xs">
-                      <span className="animate-pulse">Iniciando...</span>
-                    </div>
-                  )}
+              {/* Pie de chat */}
+              <div className="flex items-center gap-2 px-3.5 py-3 border-t border-white/[0.07]">
+                <div className="flex-1 rounded-full bg-white/[0.04] px-3.5 py-2 text-[12px] text-white/25">
+                  Escribe un mensaje…
                 </div>
-
-                {/* Input */}
-                <div className="flex items-center gap-2 px-3 py-2.5 bg-[#1F2C38]">
-                  <div className="flex-1 bg-[#2A3942] rounded-lg px-3.5 py-2 text-sm text-white/20">Escribe un mensaje...</div>
-                  <div className="w-10 h-10 rounded-full bg-[#00A884] flex items-center justify-center shrink-0 shadow-md">
-                    <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"/></svg>
-                  </div>
+                <div className="w-8 h-8 rounded-full bg-[#4F46E5] flex items-center justify-center shrink-0">
+                  <svg className="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z" />
+                  </svg>
                 </div>
               </div>
             </div>
           </div>
+          <p className="mt-4 text-center text-[12px] text-white/30">
+            Demo ilustrativa con documentos de ejemplo.
+          </p>
         </motion.div>
       </div>
     </section>

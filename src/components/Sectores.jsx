@@ -1,174 +1,150 @@
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
-import { useInView } from 'framer-motion'
-import { FaWineBottle, FaBalanceScale, FaGavel, FaTruck, FaSeedling, FaTooth, FaHandshake, FaBolt } from 'react-icons/fa'
+import {
+  HiOutlineDocumentSearch, HiOutlineCurrencyEuro, HiOutlineDocumentText,
+  HiOutlineClipboardList, HiOutlineMail, HiOutlineSearch, HiArrowRight,
+} from 'react-icons/hi'
 
 const sectores = [
-  {
-    icon: FaWineBottle,
-    title: 'Bodegas y Viñedos',
-    subtitle: 'DOCa Rioja',
-    desc: 'Trazabilidad de uva, certificaciones DOP, gestión de pedidos internacionales, control de inventarios.',
-    gradient: 'from-rose-500 to-amber-600',
-    light: 'bg-rose-50',
-    iconColor: 'text-rose-600',
-    highlight: true,
-  },
-  {
-    icon: FaBalanceScale,
-    title: 'Gestorías y Asesorías',
-    subtitle: 'Fiscal · Laboral · Contable',
-    desc: 'Automatiza facturas (8 seg vs 30 min), modelos fiscales (5 min vs 2h), conciliaciones bancarias. Verifactu 2027.',
-    gradient: 'from-blue-500 to-indigo-600',
-    light: 'bg-blue-50',
-    iconColor: 'text-blue-600',
-    highlight: true,
-  },
-  {
-    icon: FaGavel,
-    title: 'Despachos de Abogados',
-    subtitle: 'Cumplimiento EU AI Act',
-    desc: 'Automatización documental, revisión de contratos, gestión de expedientes. Cumplimiento normativo garantizado.',
-    gradient: 'from-purple-500 to-violet-600',
-    light: 'bg-purple-50',
-    iconColor: 'text-purple-600',
-    highlight: true,
-  },
-  {
-    icon: FaBolt,
-    title: 'Electricidad y Fontanería',
-    subtitle: 'Instaladores · Autónomos',
-    desc: 'Presupuestos desde obra, certificados de instalación siempre a mano, facturas organizadas. Sin papeleo al llegar a casa.',
-    gradient: 'from-yellow-500 to-amber-600',
-    light: 'bg-yellow-50',
-    iconColor: 'text-yellow-600',
-    highlight: true,
-  },
-  {
-    icon: FaTruck,
-    title: 'Logística y Transporte',
-    subtitle: 'PLAZA Zaragoza · Burgos',
-    desc: 'Gestión de albaranes, optimización de rutas, coordinación de almacenes. Datos protegidos con IA local.',
-    gradient: 'from-amber-500 to-orange-600',
-    light: 'bg-amber-50',
-    iconColor: 'text-amber-600',
-    highlight: true,
-  },
-  {
-    icon: FaSeedling,
-    title: 'Agroalimentario',
-    subtitle: 'Navarra · La Rioja · Aragón',
-    desc: 'Trazabilidad de lotes, etiquetado, control de calidad, gestión de exportaciones. Protegemos tus recetas.',
-    gradient: 'from-emerald-500 to-green-600',
-    light: 'bg-emerald-50',
-    iconColor: 'text-emerald-600',
-    highlight: true,
-  },
-  {
-    icon: FaTooth,
-    title: 'Clínicas y Salud',
-    subtitle: 'Centros médicos privados',
-    desc: 'Historias clínicas, informes, facturación a seguros. Datos sensibles que deben cumplir RGPD. Cero fugas.',
-    gradient: 'from-cyan-500 to-teal-600',
-    light: 'bg-cyan-50',
-    iconColor: 'text-cyan-600',
-    highlight: false,
-  },
-  {
-    icon: FaHandshake,
-    title: 'Consultorías y Despachos',
-    subtitle: 'Arquitectura · Ingeniería',
-    desc: 'Gestión de proyectos, documentación técnica, memorias. Automatiza lo administrativo, dedica tiempo a lo que importa.',
-    gradient: 'from-slate-500 to-gray-600',
-    light: 'bg-slate-50',
-    iconColor: 'text-slate-600',
-    highlight: false,
-  },
+  'Bodegas', 'Gestorías', 'Electricistas', 'Fontaneros', 'Abogados', 'Transporte',
+  'Tiendas', 'Agro', 'Construcción', 'Panaderías', 'Talleres', 'Maquinaria agrícola',
+  'Clínicas', 'Consultorías',
+]
+
+const capacidades = [
+  { icon: HiOutlineCurrencyEuro, title: 'Organiza facturas', desc: 'Las clasifica por cliente, fecha, proveedor e importe. Sin carpetas a mano.' },
+  { icon: HiOutlineDocumentSearch, title: 'Encuentra contratos y facturas', desc: 'Pídeselo en lenguaje normal y te devuelve el documento en segundos.' },
+  { icon: HiOutlineDocumentText, title: 'Prepara presupuestos', desc: 'A partir de plantillas y de trabajos parecidos que ya has hecho.' },
+  { icon: HiOutlineClipboardList, title: 'Clasifica albaranes y certificados', desc: 'Boletines, certificados de instalación, albaranes y contratos, en su sitio.' },
+  { icon: HiOutlineSearch, title: 'Lee tus PDFs', desc: 'Entra en el contenido del documento y te responde con el dato concreto.' },
+  { icon: HiOutlineMail, title: 'Responde dudas', desc: 'Sobre plazos, vencimientos, clientes o lo que tengas guardado.' },
 ]
 
 export default function Sectores() {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  /* Sin fades por scroll: el contenido tiene que verse siempre, también en
+     capturas y para quien no ejecuta JS. El movimiento queda en el hover,
+     en el acordeón del FAQ y en la entrada del hero. */
+  const up = { opacity: 1, y: 0 }
+  const show = { opacity: 1, y: 0 }
 
   return (
-    <section id="sectores" className="py-20 md:py-28 relative overflow-hidden section-subtle">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* ── Imagen de fondo decorativa: bodega ── */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-15 pointer-events-none hidden lg:block">
-          <img
-            src="/images/bodega-ambiente.jpg"
-            alt=""
-            className="w-full h-full object-cover rounded-3xl"
-            loading="lazy"
-          />
-        </div>
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <span className="section-badge">Sectores</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-5 mb-4 text-balance">
-            ¿Tu sector necesita IA privada?
-          </h2>
-          <p className="text-lg text-gray-500 leading-relaxed">
-            Estamos enfocados en PYMES de toda la zona norte de España. Estos son los sectores donde
-            más impacto podemos generar.
+    <section id="sectores" className="sec border-t border-white/[0.06]">
+      <div className="wrap" ref={ref}>
+        <motion.div initial={up} animate={show} transition={{ duration: 0.5 }} className="max-w-2xl">
+          <p className="eyebrow mb-5">Para quién es</p>
+          <h2 className="h2">Da igual tu sector: si tienes papeles, te sirve</h2>
+          <p className="lead mt-6">
+            Funciona en bodegas, gestorías, electricistas, fontaneros, abogados, transporte,
+            clínicas, talleres, panaderías, comercio local, agro y construcción. Cualquier
+            negocio de La Rioja que pierda tiempo con facturas, albaranes y documentos.
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {sectores.map((s, i) => {
-            const Icon = s.icon
+        {/* Sectores */}
+        <motion.div
+          initial={up}
+          animate={show}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          className="mt-10 flex flex-wrap gap-2.5"
+        >
+          {sectores.map((s) => (
+            <span key={s} className="pill">{s}</span>
+          ))}
+        </motion.div>
+
+        {/* Páginas de sector (antes huérfanas — ahora enlazadas desde aquí y desde el FAQ) */}
+        <div className="grid md:grid-cols-3 gap-4 mt-14">
+          {[
+            {
+              href: '/para/electricistas',
+              title: 'IA para electricistas',
+              desc: 'Boletines, certificados de instalación, presupuestos de obra y facturas de material, buscados al momento.',
+            },
+            {
+              href: '/para/gestorias',
+              title: 'IA para gestorías',
+              desc: 'Documentos de clientes clasificados, vencimientos controlados y modelos fiscales con la información a mano.',
+            },
+            {
+              href: '/para/fontaneros',
+              title: 'IA para fontaneros',
+              desc: 'Avisos, albaranes y partes de trabajo ordenados, con las facturas de proveedor localizadas desde el móvil en obra.',
+            },
+          ].map((c, i) => (
+            <motion.a
+              key={c.href}
+              href={c.href}
+              initial={up}
+              animate={show}
+              transition={{ duration: 0.5, delay: 0.12 + i * 0.06 }}
+              className="card card-hover p-7 group flex flex-col"
+            >
+              <h3 className="h3">{c.title}</h3>
+              <p className="body-dim text-[14.5px] mt-3 flex-1">{c.desc}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-[14px] text-[#A5B4FC]">
+                Ver el caso
+                <HiArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Antes / después */}
+        <motion.div
+          initial={up}
+          animate={show}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="grid md:grid-cols-2 gap-4 mt-20"
+        >
+          <div className="card-flat p-7">
+            <span className="mono-label">Antes</span>
+            <p className="mt-4 text-[15px] text-white/55 leading-relaxed">
+              Dos horas cada noche organizando facturas, buscando un presupuesto concreto y
+              montando el informe del trimestre para el gestor. Los viernes, media tarde en el papeleo.
+            </p>
+          </div>
+          <div className="card p-7 card-accent">
+            <span className="mono-label text-[#A5B4FC]">Después</span>
+            <p className="mt-4 text-[15px] text-white/70 leading-relaxed">
+              Cierras, mandas los papeles por WhatsApp y te olvidas. Lo que necesites te lo
+              encuentra después en segundos, desde el móvil, sin abrir un solo archivador.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Capacidades */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-20">
+          {capacidades.map((c, i) => {
+            const Icon = c.icon
             return (
               <motion.div
-                key={s.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className={`group relative bg-white rounded-2xl p-6 border transition-all duration-300 cursor-default shadow-premium shadow-premium-hover ${
-                  s.highlight
-                    ? 'border-indigo-100/60 hover:border-indigo-200'
-                    : 'border-gray-100 hover:border-gray-200'
-                }`}
+                key={c.title}
+                initial={up}
+                animate={show}
+                transition={{ duration: 0.5, delay: 0.06 + i * 0.04 }}
+                className="card p-6"
               >
-                {s.highlight && (
-                  <span className="absolute top-3 right-3 text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full uppercase tracking-wider">
-                    Prioridad
-                  </span>
-                )}
-
-                <div className={`w-12 h-12 rounded-2xl ${s.light} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className={s.iconColor} />
-                </div>
-
-                <h3 className="text-base font-bold text-gray-900 mb-0.5">{s.title}</h3>
-                <span className="text-[11px] font-medium text-gray-400 uppercase tracking-wider">{s.subtitle}</span>
-                <p className="text-sm text-gray-500 mt-3 leading-relaxed">{s.desc}</p>
+                <Icon className="text-[#818CF8] text-[20px]" />
+                <h3 className="h3 mt-5">{c.title}</h3>
+                <p className="body-dim text-[14px] mt-2.5">{c.desc}</p>
               </motion.div>
             )
           })}
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center mt-10"
-        >
-          <p className="text-sm text-gray-400">
-            ¿No ves tu sector?{' '}
-            <a href="#contacto" className="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
-              Háblanos igualmente
-            </a>{' '}
-            — casi seguro que podemos ayudarte.
-          </p>
-        </motion.div>
+        <div className="mt-14 flex flex-col sm:flex-row gap-3">
+          <a
+            href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+          >
+            Hablar con Dani
+            <HiArrowRight />
+          </a>
+          <a href="#precios" className="btn btn-ghost">Ver planes y precios</a>
+        </div>
       </div>
     </section>
   )

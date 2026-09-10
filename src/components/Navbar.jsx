@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react'
-import { HiMenu, HiX, HiPhone } from 'react-icons/hi'
+import { HiMenu, HiX } from 'react-icons/hi'
 
 const links = [
-  { label: 'Plan Go', href: '#plan-go' },
-  { label: 'Demo', href: '/demo.html' },
-  { label: 'Para quién', href: '#para-quien' },
-  { label: 'Precios', href: '#hardware' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Cómo funciona', href: '#como-funciona' },
+  { label: 'Precios', href: '#precios' },
+  { label: 'Sectores', href: '#sectores' },
+  { label: 'Preguntas', href: '#faq' },
   { label: 'Contacto', href: '#contacto' },
 ]
+
+const WA = 'https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => setScrolled(window.scrollY > 12)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -23,124 +24,83 @@ export default function Navbar() {
   const close = () => setOpen(false)
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'glass-strong shadow-premium border-b border-gray-200/40'
-          : 'bg-transparent'
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        scrolled || open
+          ? 'bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/[0.08]'
+          : 'border-b border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="relative">
-              <img
-                src="/logo.jpg"
-                alt="Westlink SL"
-                className="w-9 h-9 md:w-10 md:h-10 rounded-xl object-cover shadow-lg group-hover:shadow-xl transition-all duration-300"
-              />
-              <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-primary/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity -z-10 blur-sm" />
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-base font-bold text-gray-900 leading-none">Westlink</span>
-              <span className="text-[10px] text-gray-400 block leading-tight mt-0.5 font-medium">IA Privada · La Rioja</span>
-            </div>
-          </a>
+      <nav className="wrap flex items-center justify-between h-16 md:h-[72px]" aria-label="Navegación principal">
+        {/* Marca */}
+        <a href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Westlink SL — inicio">
+          <img src="/logo-westlink.webp" alt="Westlink SL" className="w-8 h-8 rounded-[9px] object-cover" />
+          <span className="text-[15px] font-semibold text-white tracking-[-0.3px]">Westlink</span>
+        </a>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-1">
-            {links.slice(0, -1).map((l) => (
+        {/* Navegación escritorio */}
+        <div className="hidden lg:flex items-center gap-1">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="px-3 py-2 text-[14px] text-white/60 hover:text-white rounded-lg transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="hidden lg:flex items-center gap-3">
+          <a href="tel:+34648253217" className="text-[14px] text-white/60 hover:text-white transition-colors">
+            648 25 32 17
+          </a>
+          <a href={WA} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">
+            Hablar con Dani
+          </a>
+        </div>
+
+        {/* Móvil */}
+        <div className="flex lg:hidden items-center gap-2">
+          <a href="tel:+34648253217" className="text-[13px] text-white/60" aria-label="Llamar al 648 25 32 17">
+            648 25 32 17
+          </a>
+          <button
+            onClick={() => setOpen(!open)}
+            className="p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={open}
+          >
+            {open ? <HiX size={20} /> : <HiMenu size={20} />}
+          </button>
+        </div>
+      </nav>
+
+      {open && (
+        <div className="lg:hidden border-t border-white/[0.08] bg-[#0A0A0A]/95 backdrop-blur-xl">
+          <div className="wrap py-4 flex flex-col gap-1">
+            {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="px-3 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 rounded-xl hover:bg-gray-50 transition-all duration-200"
+                onClick={close}
+                className="px-3 py-3 rounded-lg text-[15px] text-white/70 hover:text-white hover:bg-white/5 transition-colors"
               >
                 {l.label}
               </a>
             ))}
             <a
-              href="tel:+34648253217"
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 rounded-xl hover:bg-indigo-50 transition-all duration-200"
-            >
-              <HiPhone className="text-sm" />
-              648 25 32 17
-            </a>
-            <a
-              href="/demo.html"
-              className="ml-2 bg-white text-sky-600 border-2 border-sky-500 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-sky-50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Ver demo
-            </a>
-            <a
-              href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
+              href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="gradient-primary text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ml-2"
+              onClick={close}
+              className="btn btn-primary mt-3"
             >
               Hablar con Dani
             </a>
           </div>
-
-          {/* Mobile teléfono + hamburger */}
-          <div className="flex lg:hidden items-center gap-1">
-            <a
-              href="tel:+34648253217"
-              className="flex items-center gap-1 px-2.5 py-2 rounded-xl text-sm font-semibold text-indigo-600 hover:bg-indigo-50 transition-all active:scale-95"
-              aria-label="Llamar al 648 25 32 17"
-            >
-              <HiPhone className="text-base" />
-              <span className="hidden sm:inline">648 25 32 17</span>
-            </a>
-            <button
-              onClick={() => setOpen(!open)}
-              className="p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors"
-              aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-            >
-            {open ? <HiX size={22} /> : <HiMenu size={22} />}
-          </button>
-          </div>
         </div>
-      </div>
-
-      {/* Mobile menu — sin animación para que el scroll a secciones funcione */}
-      {open && (
-        <div className="lg:hidden glass-strong border-t border-gray-200/40 shadow-xl">
-            <div className="px-4 py-4 space-y-1 max-h-[70vh] overflow-y-auto">
-              <a href="tel:+34648253217" onClick={close} className="flex items-center gap-2 px-4 py-2 mb-2 rounded-xl text-sm font-semibold text-indigo-600 bg-indigo-50/50">
-                <HiPhone className="text-sm" /> 648 25 32 17
-              </a>
-              {links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={close}
-                  className="block px-4 py-3 rounded-xl text-gray-600 font-medium hover:bg-primary/5 hover:text-primary transition-all text-sm"
-                >
-                  {l.label}
-                </a>
-              ))}
-              <div className="pt-2 space-y-2">
-                <a
-                  href="/demo.html"
-                  onClick={close}
-                  className="block bg-white text-sky-600 border-2 border-sky-500 px-4 py-3 rounded-xl text-center font-bold text-sm"
-                >
-                  Ver demo
-                </a>
-                <a
-                  href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={close}
-                  className="block gradient-primary text-white px-4 py-3 rounded-xl text-center font-semibold text-sm"
-                >
-                  Hablar con Dani
-                </a>
-              </div>
-            </div>
-          </div>
       )}
-    </nav>
+    </header>
   )
 }

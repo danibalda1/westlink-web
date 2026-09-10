@@ -1,61 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IA para electricistas en Logroño y La Rioja | Westlink</title>
-  <meta name="description" content="Empleado digital de IA para electricistas en Logroño y La Rioja. Organiza facturas, presupuestos y certificados por WhatsApp. Desde 49€/mes." />
+  <title>IA para electricistas en La Rioja | Westlink</title>
+  <meta name="description" content="Organiza facturas, boletines, certificados de instalación y presupuestos por WhatsApp. Para electricistas de La Rioja. Desde 49€/mes, sin instalar nada." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
   <link rel="canonical" href="https://westlinksl.com/para/electricistas" />
-  <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+  <link rel="icon" type="image/webp" href="/logo-westlink.webp" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta name="geo.region" content="ES-RI" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Westlink SL" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:url" content="https://westlinksl.com/para/electricistas" />
+  <meta property="og:title" content="IA para electricistas en La Rioja" />
+  <meta property="og:description" content="Organiza facturas, boletines, certificados de instalación y presupuestos por WhatsApp. Para electricistas de La Rioja. Desde 49€/mes, sin instalar nada." />
+  <meta property="og:image" content="https://westlinksl.com/images/westlink-box.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { background:#0A0A0A; color:#e2e8f0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; line-height:1.7; }
-    .wrap { max-width:720px; margin:0 auto; padding:48px 24px; }
-    h1 { font-size:32px; margin-bottom:16px; background:linear-gradient(135deg,#f59e0b,#f97316); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    h2 { font-size:22px; margin:40px 0 12px; color:#fbbf24; }
-    p { color:#94a3b8; margin-bottom:16px; font-size:15px; }
-    ul { color:#94a3b8; margin-bottom:20px; padding-left:20px; }
-    li { margin-bottom:8px; font-size:15px; }
-    .cta { display:inline-block; background:linear-gradient(135deg,#f59e0b,#f97316); color:white; padding:14px 32px; border-radius:12px; text-decoration:none; font-weight:600; margin:24px 0; }
-    .cta:hover { transform:scale(1.05); }
-    .footer { margin-top:48px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.08); font-size:13px; color:#64748b; }
-    .footer a { color:#fbbf24; text-decoration:none; }
-    @media (max-width:600px) { h1 { font-size:26px; } .wrap { padding:24px 16px; } }
-  </style>
+  :root{--ink:#0A0A0A;--card:#131314;--line:rgba(255,255,255,.08);--dim:rgba(255,255,255,.6);--accent:#4F46E5;--accent-soft:#A5B4FC}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--ink);color:var(--dim);font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  a{color:var(--accent-soft);text-decoration:none;border-bottom:1px solid rgba(165,180,252,.35)}
+  a:hover{color:#C7D2FE}
+  header.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .top-in{max-width:1120px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;border:0;color:#fff;font-weight:600;font-size:15px;letter-spacing:-.3px}
+  .brand img{width:32px;height:32px;border-radius:9px;object-fit:cover;display:block}
+  .top-nav{display:none;gap:22px;font-size:14px}
+  .top-nav a{border:0;color:rgba(255,255,255,.6)}
+  .top-nav a:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;padding:11px 20px;border-radius:11px;border:0;font-weight:500;font-size:.94rem;transition:background-color .2s ease}
+  .btn:hover{background:#4338CA;color:#fff}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.85)}
+  .btn-ghost:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.24);color:#fff}
+  main{max-width:760px;margin:0 auto;padding:0 24px}
+  .crumbs{padding:36px 0 0;font-size:13px;color:rgba(255,255,255,.4)}
+  .crumbs a{border:0;color:rgba(255,255,255,.55)}
+  .crumbs span[aria-current]{color:rgba(255,255,255,.85)}
+  h1{font-size:clamp(2.1rem,5.4vw,3.1rem);line-height:1.06;letter-spacing:-1.5px;font-weight:600;color:#fff;margin:26px 0 0;text-wrap:balance}
+  h2{font-size:1.5rem;line-height:1.15;letter-spacing:-.7px;font-weight:600;color:#fff;margin:72px 0 18px}
+  h3{font-size:1.06rem;letter-spacing:-.3px;font-weight:600;color:#fff;margin:0 0 8px}
+  p{margin-bottom:18px}
+  .lead{font-size:1.12rem;line-height:1.65;color:rgba(255,255,255,.6);margin-top:22px}
+  ul{list-style:none;margin:0 0 24px}
+  li{position:relative;padding-left:24px;margin-bottom:14px}
+  li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:99px;background:var(--accent)}
+  strong{color:rgba(255,255,255,.9);font-weight:500}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;margin:28px 0}
+  .card-accent{border-color:rgba(79,70,229,.45)}
+  .price{display:flex;align-items:baseline;gap:8px;margin:12px 0 4px}
+  .price b{font-size:2rem;letter-spacing:-1px;color:#fff;font-weight:600}
+  .muted{font-size:13.5px;color:rgba(255,255,255,.4)}
+  .grid{display:grid;gap:16px;grid-template-columns:1fr;margin:28px 0}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 8px}
+  details{border-top:1px solid var(--line);padding:18px 0}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;color:#fff;font-weight:500;font-size:15.5px;letter-spacing:-.2px}
+  details p{margin:14px 0 0;font-size:15.5px}
+  .also{border-top:1px solid var(--line);margin-top:64px;padding-top:28px}
+  footer{border-top:1px solid var(--line);margin-top:72px;padding:36px 0 48px;font-size:13.5px}
+  footer .wrap-f{max-width:760px;margin:0 auto;padding:0 24px}
+  footer a{border:0;color:rgba(255,255,255,.55)}
+  footer a:hover{color:#fff}
+  @media(min-width:760px){ .top-nav{display:flex} .grid.two{grid-template-columns:1fr 1fr} }
+</style>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "LocalBusiness", "@id": "https://westlinksl.com/#negocio", "name": "Westlink SL", "url": "https://westlinksl.com/", "telephone": "+34648253217", "email": "daniel@westlinksl.com", "image": "https://westlinksl.com/images/westlink-box.jpg", "priceRange": "€€", "address": {"@type": "PostalAddress", "addressLocality": "Villamediana de Iregua", "addressRegion": "La Rioja", "addressCountry": "ES"}, "areaServed": ["La Rioja", "Álava", "Navarra", "Burgos", "Soria", "Zaragoza"], "founder": {"@type": "Person", "name": "Daniel Balda"}}, {"@type": "Service", "@id": "https://westlinksl.com/para/electricistas#servicio", "name": "Empleado digital de IA para electricistas en La Rioja", "serviceType": "Empleado digital de inteligencia artificial para electricistas", "description": "Empleado digital de IA para empresas de instalaciones eléctricas en La Rioja: organiza facturas, albaranes, boletines y certificados de instalación, prepara presupuestos y responde consultas sobre los documentos por WhatsApp.", "url": "https://westlinksl.com/para/electricistas", "provider": {"@id": "https://westlinksl.com/#negocio"}, "areaServed": [{"@type": "AdministrativeArea", "name": "La Rioja"}, {"@type": "AdministrativeArea", "name": "Álava"}, {"@type": "AdministrativeArea", "name": "Navarra"}, {"@type": "AdministrativeArea", "name": "Burgos"}, {"@type": "AdministrativeArea", "name": "Soria"}, {"@type": "AdministrativeArea", "name": "Zaragoza"}], "audience": {"@type": "BusinessAudience", "audienceType": "Electricistas, empresas de instalaciones eléctricas, autónomos del sector eléctrico en La Rioja y alrededores"}, "offers": [{"@type": "Offer", "name": "Plan Go", "price": "49.00", "priceCurrency": "EUR", "description": "Empleado digital por WhatsApp, sin hardware ni instalación.", "url": "https://westlinksl.com/#precios"}, {"@type": "Offer", "name": "Plan Start", "price": "149.00", "priceCurrency": "EUR", "description": "Con Westlink Box en cesión e IA mediante APIs externas.", "url": "https://westlinksl.com/#precios"}, {"@type": "Offer", "name": "Plan Private", "price": "199.00", "priceCurrency": "EUR", "description": "Modelos de IA locales: los datos se quedan en tu oficina.", "url": "https://westlinksl.com/#precios"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Necesito un ordenador?", "acceptedAnswer": {"@type": "Answer", "text": "No. Funciona por WhatsApp desde el móvil que ya tienes. Si algún día quieres el panel web, también está, pero no es obligatorio para nada."}}, {"@type": "Question", "name": "¿Me sirve si trabajo con boletines y certificados?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, es uno de los usos más habituales: guarda los boletines y certificados de instalación, los clasifica por cliente y te avisa de cuáles están pendientes de firma o de presentar."}}, {"@type": "Question", "name": "¿Mis datos están seguros?", "acceptedAnswer": {"@type": "Answer", "text": "En el Plan Go los documentos se procesan con DeepSeek, una IA externa que no almacena ni entrena con tus datos. Si trabajas con información sensible, el Plan Private hace funcionar la IA dentro de tu oficina y ni yo tengo acceso."}}, {"@type": "Question", "name": "¿Puedo probarlo antes de pagar?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Te lo enseño en 10 minutos con tus documentos reales, sin compromiso y sin permanencia: si no te convence, no sigues."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://westlinksl.com/"}, {"@type": "ListItem", "position": 2, "name": "Sectores", "item": "https://westlinksl.com/#sectores"}, {"@type": "ListItem", "position": 3, "name": "IA para electricistas", "item": "https://westlinksl.com/para/electricistas"}]}]}</script>
 </head>
 <body>
-  <div class="wrap">
-    <h1>🤖 IA para electricistas en Logroño y La Rioja</h1>
-    <p>Si eres electricista en Logroño, Haro, Calahorra, Arnedo o cualquier pueblo de La Rioja, sabes perfectamente lo que pesa el papeleo. Facturas, presupuestos, certificados, albaranes... horas perdidas que podrías estar usando para trabajar.</p>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="/"><img src="/logo-westlink.webp" alt="Westlink SL" />Westlink</a>
+      <nav class="top-nav" aria-label="Navegación">
+        <a href="/#como-funciona">Cómo funciona</a>
+        <a href="/#precios">Precios</a>
+        <a href="/#sectores">Sectores</a>
+        <a href="/#faq">Preguntas</a>
+      </nav>
+      <a class="btn" href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital" target="_blank" rel="noopener noreferrer">Hablar con Dani</a>
+    </div>
+  </header>
 
-    <h2>¿Qué hace un empleado digital para electricistas?</h2>
+  <main>
+    <nav class="crumbs" aria-label="Migas de pan">
+      <a href="/">Inicio</a> › <a href="/#sectores">Sectores</a> ›
+      <span aria-current="page">IA para electricistas</span>
+    </nav>
+
+    <h1>IA para electricistas en La Rioja</h1>
+    <p class="lead">Boletines, certificados de instalación, albaranes de proveedor y presupuestos. Si eres electricista en Logroño, Haro, Calahorra, Arnedo o cualquier pueblo de La Rioja, sabes la de tardes que se van en papeleo. Un empleado digital de IA te lo organiza por WhatsApp, sin instalar nada.</p>
+
+    <div class="cta-row">
+      <a class="btn" href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital" target="_blank" rel="noopener noreferrer">Hablar con Dani</a>
+      <a class="btn btn-ghost" href="/#como-funciona">Ver cómo funciona</a>
+    </div>
+
+    <h2>Qué hace por ti un empleado digital</h2>
     <ul>
-      <li><strong>Organiza facturas</strong> — Mandas una foto por WhatsApp y la clasifica automáticamente por cliente y fecha</li>
-      <li><strong>Busca documentos</strong> — "Enséñame la factura de Salto del mes pasado" y aparece al segundo</li>
-      <li><strong>Prepara presupuestos</strong> — Basados en tus precios anteriores, sin tener que empezar de cero</li>
-      <li><strong>Controla cobros</strong> — Te avisa de facturas pendientes y vencimientos</li>
-      <li><strong>Responde dudas</strong> — Pregúntale cualquier cosa sobre tus documentos</li>
+      <li><strong>Organiza facturas y albaranes</strong> — le mandas una foto por WhatsApp y los clasifica por cliente, proveedor y fecha.</li>
+      <li><strong>Encuentra el boletín o el certificado</strong> — «el boletín de la reforma de la calle Mayor» y te lo devuelve en segundos.</li>
+      <li><strong>Prepara presupuestos</strong> — partiendo de trabajos parecidos que ya has hecho, sin empezar de cero.</li>
+      <li><strong>Controla cobros y vencimientos</strong> — te avisa de facturas pendientes y de lo que tienes sin firmar.</li>
+      <li><strong>Cuadra el material</strong> — cuánto has facturado este trimestre, cuánto te ha costado el material, por obra.</li>
     </ul>
 
-    <h2>¿Cuánto cuesta?</h2>
-    <p><strong>Plan Go:</strong> 49€/mes — funciona por WhatsApp, sin instalar nada. Para empezar hoy.</p>
-    <p><strong>Plan Private:</strong> 149€/mes — todo en tu propia oficina, máxima privacidad.</p>
+    <div class="card">
+      <h3>Un caso típico</h3>
+      <p style="margin-bottom:0">Instalador eléctrico de Logroño. Antes: media hora para encontrar la factura de un proveedor y los viernes por la tarde en el despacho. Ahora: manda los papeles por WhatsApp desde la furgoneta y pregunta lo que necesita desde el móvil. El caso real lo tienes también contado para gestorías y fontaneros.</p>
+    </div>
 
-    <a href="/" class="cta">👋 Hablar con Dani</a>
+    <h2>Cuánto cuesta</h2>
+    <p>Los mismos planes que en el resto de negocios, sin versión «especial» más cara:</p>
+    <ul>
+      <li><strong>Plan Go · 49€/mes</strong> — funciona por WhatsApp, sin instalar nada. Es el que eligen casi todos para empezar.</li>
+      <li><strong>Plan Start · 149€/mes</strong> — con la Westlink Box en cesión, si prefieres el sistema en tu oficina.</li>
+      <li><strong>Plan Private · 199€/mes</strong> — modelos de IA locales: ningún dato sale de tu red.</li>
+    </ul>
+    <p class="muted">Sin permanencia. Precios sin IVA. Puedes ver el detalle en
+      <a href="/#precios">planes y precios</a>.</p>
 
     <h2>Preguntas frecuentes</h2>
-    <p><strong>¿Necesito un ordenador?</strong> No. Funciona por WhatsApp desde tu móvil.</p>
-    <p><strong>¿Mis datos están seguros?</strong> Usamos IA externa que no almacena tus datos. Y si quieres privacidad total, está el plan con hardware en tu oficina.</p>
-    <p><strong>¿Puedo probarlo antes?</strong> Sí. Te lo enseño en 10 minutos sin compromiso. Solo tienes que escribirme.</p>
+    <details><summary>¿Necesito un ordenador?</summary><p>No. Funciona por WhatsApp desde el móvil que ya tienes. Si algún día quieres el panel web, también está, pero no es obligatorio para nada.</p></details>
+    <details><summary>¿Me sirve si trabajo con boletines y certificados?</summary><p>Sí, es uno de los usos más habituales: guarda los boletines y certificados de instalación, los clasifica por cliente y te avisa de cuáles están pendientes de firma o de presentar.</p></details>
+    <details><summary>¿Mis datos están seguros?</summary><p>En el Plan Go los documentos se procesan con DeepSeek, una IA externa que no almacena ni entrena con tus datos. Si trabajas con información sensible, el Plan Private hace funcionar la IA dentro de tu oficina y ni yo tengo acceso.</p></details>
+    <details><summary>¿Puedo probarlo antes de pagar?</summary><p>Sí. Te lo enseño en 10 minutos con tus documentos reales, sin compromiso y sin permanencia: si no te convence, no sigues.</p></details>
 
-    <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08)">
-      <p style="font-size:13px;color:#64748b">📂 También te puede interesar:</p>
-      <p style="font-size:13px"><a href="/para/gestorias" style="color:#fbbf24">IA para gestorías</a> · <a href="/para/fontaneros" style="color:#fbbf24">IA para fontaneros</a></p>
+    <div class="card card-accent">
+      <h3>¿Lo vemos con tus documentos?</h3>
+      <p>Te lo enseño en 10 minutos, con tus facturas y tus documentos de verdad, para que veas si te sirve
+        antes de decidir nada. Sin compromiso.</p>
+      <div class="cta-row" style="margin-bottom:0">
+        <a class="btn" href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital" target="_blank" rel="noopener noreferrer">Hablar con Dani</a>
+        <a class="btn btn-ghost" href="/#contacto">Déjame tus datos</a>
+      </div>
     </div>
 
-    <div class="footer">
-      <p><a href="/">Westlink SL</a> — Villamediana de Iregua, La Rioja — <a href="tel:+34648253217">648 25 32 17</a> — <a href="mailto:daniel@westlinksl.com">daniel@westlinksl.com</a></p>
+    <div class="also">
+      <p class="muted" style="margin-bottom:10px">También te puede interesar:</p>
+      <p style="font-size:14px"><a href="/para/gestorias">Caso completo de IA para gestorías</a> · <a href="/para/fontaneros">IA para fontaneros</a> · <a href="/demo.html">La demo del empleado digital</a> · <a href="/#faq">Preguntas frecuentes</a> · <a href="/#como-funciona">Cómo funciona paso a paso</a></p>
     </div>
-  </div>
+  </main>
+
+  <footer>
+    <div class="wrap-f">
+      <p><a href="/">Westlink SL</a> · Villamediana de Iregua, La Rioja · <a href="tel:+34648253217">648 25 32 17</a> ·
+        <a href="mailto:daniel@westlinksl.com">daniel@westlinksl.com</a></p>
+      <p class="muted" style="margin-top:8px">Zona de servicio: La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza.
+        Última actualización: <time datetime="2026-09-10">10 de septiembre de 2026</time>.</p>
+    </div>
+  </footer>
 </body>
 </html>

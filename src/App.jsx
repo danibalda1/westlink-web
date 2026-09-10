@@ -1,103 +1,49 @@
-import { Helmet } from 'react-helmet-async'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
-import PlanGo from './components/PlanGo.jsx'
-import QuienLoUsa from './components/QuienLoUsa.jsx'
-import Hardware from './components/Hardware.jsx'
+import ComoFunciona from './components/ComoFunciona.jsx'
+import Sectores from './components/Sectores.jsx'
+import Planes from './components/Planes.jsx'
+import Testimonios from './components/Testimonios.jsx'
 import Faq from './components/Faq.jsx'
+import Alcance from './components/Alcance.jsx'
 import Contacto from './components/Contacto.jsx'
 import Footer from './components/Footer.jsx'
 
+/* El <head> (title, description, OG, JSON-LD) vive en index.html para que
+   los rastreadores de IA lo lean sin ejecutar JavaScript. Aquí solo la app. */
 export default function App() {
   return (
     <>
-      <Helmet>
-        <html lang="es" />
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#4F46E5" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://westlinksl.com" />
-        <link rel="icon" type="image/jpeg" href="/logo.jpg" />
-
-        <title>Westlink SL — Empleado digital IA para PYMES en La Rioja | desde 49€/mes</title>
-        <meta name="description" content="Empleado digital de IA para PYMES en La Rioja. Organiza facturas, busca documentos, responde dudas por WhatsApp. Sin instalar nada, desde 49€/mes. Creado por Dani, en Villamediana." />
-        <meta name="keywords" content="IA para PYMES La Rioja, empleado digital Logroño, inteligencia artificial para empresas, automatizar facturas, organizar documentos, WhatsApp business, asistente IA, digitalización PYMES" />
-
-        <meta property="og:title" content="Westlink SL — Empleado digital IA para PYMES en La Rioja" />
-        <meta property="og:description" content="Olvídate del papeleo. Un empleado digital que organiza facturas por WhatsApp. Desde 49€/mes. Creado por Dani en Villamediana." />
-        <meta property="og:url" content="https://westlinksl.com" />
-        <meta property="og:site_name" content="Westlink SL" />
-        <meta property="og:locale" content="es_ES" />
-        <meta property="og:image" content="https://westlinksl.com/logo.jpg" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Westlink SL — IA para PYMES en La Rioja" />
-        <meta name="twitter:description" content="Empleado digital por WhatsApp. Organiza facturas, busca documentos. Desde 49€/mes. La Rioja." />
-
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Westlink SL",
-            "description": "Implantación de IA privada en PYMES. Empleado digital que organiza facturas y documentos por WhatsApp.",
-            "url": "https://westlinksl.com",
-            "email": "daniel@westlinksl.com",
-            "telephone": "+34648253217",
-            "image": "https://westlinksl.com/logo.jpg",
-            "areaServed": ["La Rioja", "Álava", "Navarra", "Burgos", "Soria", "Zaragoza"],
-            "priceRange": "€€",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Villamediana de Iregua",
-              "addressRegion": "La Rioja",
-              "addressCountry": "ES"
-            },
-            "openingHours": "Mo-Su 00:00-24:00",
-            "founder": {
-              "@type": "Person",
-              "name": "Daniel Balda"
-            },
-            "offers": {
-              "@type": "Offer",
-              "name": "Plan Go",
-              "price": "49.00",
-              "priceCurrency": "EUR",
-              "description": "Empleado digital por WhatsApp desde 49€/mes"
-            }
-          })}
-        </script>
-      </Helmet>
-
       <a href="#main-content" className="skip-link">Saltar al contenido</a>
 
       <Navbar />
+
       <main id="main-content">
         <Hero />
-        <PlanGo />
-        <QuienLoUsa />
-        <Hardware />
+        <ComoFunciona />
+        <Sectores />
+        <Planes />
+        <Testimonios />
         <Faq />
+        <Alcance />
         <Contacto />
       </main>
+
       <Footer />
 
-      {/* ── WhatsApp flotante ── */}
+      {/* CTA flotante */}
       <a
         href="https://wa.me/34648253217?text=Hola%20Dani%2C%20quiero%20ver%20c%C3%B3mo%20funciona%20el%20empleado%20digital"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-50 w-14 h-14 bg-green-500 rounded-full shadow-xl hover:bg-green-600 hover:scale-110 transition-all duration-300 flex items-center justify-center group"
-        aria-label="Chatear por WhatsApp"
-        >
-        <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+        className="fixed bottom-5 right-5 z-40 flex items-center gap-2.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white pl-4 pr-5 py-3 rounded-full transition-colors"
+        aria-label="Hablar con Dani por WhatsApp"
+      >
+        <svg className="w-[18px] h-[18px] fill-white" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
-        <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
-          <span className="animate-ping w-4 h-4 bg-red-500 rounded-full absolute opacity-75" />
-          <span className="relative text-white text-[8px] font-bold">1</span>
-        </span>
-        </a>
+        <span className="text-[14px] font-medium hidden sm:inline">Hablar con Dani</span>
+      </a>
     </>
   )
 }
