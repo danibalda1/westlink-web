@@ -75,6 +75,7 @@ export default function Footer() {
               <li><a href="/para/gestorias" className="text-white/55 hover:text-white transition-colors">IA para gestorías</a></li>
               <li><a href="/para/fontaneros" className="text-white/55 hover:text-white transition-colors">IA para fontaneros</a></li>
               <li><a href="/demo.html" className="text-white/55 hover:text-white transition-colors">Demo del empleado digital</a></li>
+              <li><a href="/apps.html" className="text-white/55 hover:text-white transition-colors">Nuestras apps (Fe Diaria y Luna Huerto)</a></li>
               <li><a href="/llms.txt" className="text-white/55 hover:text-white transition-colors">Información para asistentes de IA</a></li>
             </ul>
           </div>
@@ -84,6 +85,8 @@ export default function Footer() {
             <ul className="space-y-3 text-[13.5px]">
               <li><a href="/aviso-legal.html" className="text-white/55 hover:text-white transition-colors">Aviso legal</a></li>
               <li><a href="/privacidad.html" className="text-white/55 hover:text-white transition-colors">Privacidad</a></li>
+              <li><a href="/privacidad-fe-diaria.html" className="text-white/55 hover:text-white transition-colors">Privacidad · Fe Diaria</a></li>
+              <li><a href="/privacidad-luna-huerto.html" className="text-white/55 hover:text-white transition-colors">Privacidad · Luna Huerto</a></li>
             </ul>
             <p className="text-white/35 text-[13px] leading-relaxed mt-6">
               Zona de servicio: La Rioja, Álava, Navarra, Burgos, Soria y Zaragoza.
