@@ -67,6 +67,16 @@ Entrada: "apunta a Electricidad López, teléfono 649 11 22 33, está en Haro"
 Salida: {"tipo":"cliente","confianza":0.93,"cliente":"Electricidad López","clienteNuevo":true,"notas":"Teléfono 649 11 22 33. Dirección: Haro","dudas":["Para guardar teléfono y dirección de verdad usa el formulario"]}`;
 
 export default async function handler(req, res) {
+  // CORS — la app funciona en Android (donde no aplica) y en web (donde sí).
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-app-token');
+  res.setHeader('Access-Control-Max-Age', '86400');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
